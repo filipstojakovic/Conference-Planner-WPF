@@ -1,0 +1,8 @@
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\ConferenceApp.csproj.AssemblyReference.cache
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\resources\styles\Default.baml
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\resources\styles\invert.baml
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\src\MainWindow.g.cs
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\ConferenceApp_Content.g.cs
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\ConferenceApp_MarkupCompile.cache
+C:\Users\filip\source\repos\ConferenceApp\ConferenceApp\obj\Debug\net7.0-windows\ConferenceApp_MarkupCompile.lref
