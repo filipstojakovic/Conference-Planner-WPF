@@ -1,4 +1,3 @@
-
 ## Conference Planner
 
 Welcome to the Conference Planner program! This program allows you to easily create and manage conferences, including

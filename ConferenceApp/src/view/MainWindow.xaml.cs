@@ -1,77 +1,85 @@
-﻿using ConferenceApp.model.dao;
-using ConferenceApp.model.entity;
-using ConferenceApp.view.usercontrol.ViewModel;
-using MaterialDesignThemes.Wpf;
-using ConferenceApp.view.usercontrol;
-using System;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ConferenceApp.model.dao;
+using ConferenceApp.model.entity;
 using ConferenceApp.view.login;
+using ConferenceApp.view.usercontrol;
+using ConferenceApp.view.usercontrol.ViewModel;
+using MaterialDesignThemes.Wpf;
 
 namespace ConferenceApp.view
 {
 	public partial class MainWindow : Window
-    {
-        public MainWindow() // Need to get user to know isAdmin or !
-        {
-            InitializeComponent();
+	{
+		private User logedInUser;
 
-            UserDao userDao = new UserDao();
-            User user = userDao.getUserById(11);
+		public MainWindow(User user) : this()
+		{
+			this.logedInUser = user;
+		}
 
-            Console.WriteLine();
+		public MainWindow() // TODO: check if login user isAdmin or !isAdmin
+		{
+			InitializeComponent();
 
-            var userControl = new ItemMenu("Register", PackIconKind.Register, new UserControlCustomers());
-            var emplyeControl = new ItemMenu("Employees", PackIconKind.Connection, new UserControlProviders());
+			UserDao userDao = new UserDao();
+			//User user = userDao.getUserByUsername("admin");
+			List<User> users = userDao.getAllUsers();
 
-            LeftMenuListView.Items.Add(emplyeControl);
-            LeftMenuListView.Items.Add(userControl);
-            LeftMenuListView.Items.Add(emplyeControl);
-            LeftMenuListView.Items.Add(userControl);
-            LeftMenuListView.Items.Add(emplyeControl);
-            LeftMenuListView.Items.Add(userControl);
+			RoleDao roleDao = new RoleDao();
+			Role role = roleDao.findRoleByName("admin");
 
-            HeaderMenuListView.Items.Add(new ItemMenu("Settings",PackIconKind.Settings,new SettingsControl()));
-            HeaderMenuListView.Items.Add(userControl);
-            HeaderMenuListView.Items.Add(emplyeControl);
-            HeaderMenuListView.Items.Add(userControl);
+			//TODO: TESTING
 
-            LeftMenuListView.SelectedIndex = 0; // select first menu item by default
-        }
+			var userControl = new ItemMenu("Register", PackIconKind.Register, new UserControlCustomers());
+			var emplyeControl = new ItemMenu("Employees", PackIconKind.Connection, new UserControlProviders());
 
-        //Selection changed in left menu
-        private void LeftMenuListView_MouseLeftButtonUp(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedItem = ((ListView)sender).SelectedItem;
-            SwitchScreen((ItemMenu)selectedItem);
-            HeaderMenuListView.SelectedItems.Clear();
-        }
+			// Drawer items
+			LeftMenuListView.Items.Add(emplyeControl);
+			LeftMenuListView.Items.Add(userControl);
 
-        private void HeaderMenuListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var selectedItem = ((ListView)sender).SelectedItem;
-            var itemMenu = selectedItem as ItemMenu;
-            if (itemMenu == null)
-            {
-                new LoginWindow().Show();
-                this.Close();
-                return;
-            }
-            SwitchScreen(itemMenu);
-            LeftMenuListView.SelectedItems.Clear();
-        }
+			// Header items
+			HeaderMenuListView.Items.Add(new ItemMenu("Settings", PackIconKind.Settings, new SettingsControl()));
+			HeaderMenuListView.Items.Add(userControl);
+			HeaderMenuListView.Items.Add(emplyeControl);
+			//TODO: add logout button
 
-        internal void SwitchScreen(ItemMenu sender)
-        {
-            if (sender == null || sender.Screen == null)
-                return;
+			LeftMenuListView.SelectedIndex = 0; // select first menu item by default
+		}
 
-            var screen = sender.Screen;
-            DockPanelMain.Children.Clear();
-            DockPanelMain.Children.Add(screen);
+		//Selection changed in left menu
+		private void LeftMenuListView_MouseLeftButtonUp(object sender, SelectionChangedEventArgs e)
+		{
+			var selectedItem = ((ListView)sender).SelectedItem;
+			SwitchScreen((ItemMenu)selectedItem);
+			HeaderMenuListView.SelectedItems.Clear();
+		}
 
-            HeaderBar.Text = sender.Header;
-        }
-    }
+		private void HeaderMenuListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		{
+			var selectedItem = ((ListView)sender).SelectedItem;
+			var itemMenu = selectedItem as ItemMenu;
+			if (itemMenu == null)
+			{
+				new LoginWindow().Show();
+				this.Close();
+				return;
+			}
+			SwitchScreen(itemMenu);
+			LeftMenuListView.SelectedItems.Clear();
+		}
+
+		internal void SwitchScreen(ItemMenu sender)
+		{
+			if (sender == null || sender.Screen == null)
+				return;
+
+			var screen = sender.Screen;
+			DockPanelMain.Children.Clear();
+			DockPanelMain.Children.Add(screen);
+			HeaderBar.Text = sender.Header;
+		}
+	}
 }

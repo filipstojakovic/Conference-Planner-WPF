@@ -7,12 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="resources\calendar_background.jpg" />
-    <None Remove="resources\calendar_background.webp" />
-    <None Remove="resources\calendar_icon.png" />
-    <None Remove="resources\calendar_icon.webp" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="resources\calendar_background.jpg" />
+		<None Remove="resources\calendar_background.webp" />
+		<None Remove="resources\calendar_icon.png" />
+		<None Remove="resources\calendar_icon.webp" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Haley.MVVM" Version="6.3.0" />

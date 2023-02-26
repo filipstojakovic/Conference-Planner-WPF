@@ -17,6 +17,7 @@ namespace ConferenceApp.database
 				mySqlSingleton = new MySqlSingleton();
 				var settings = new MySqlConnectionStringBuilder()
 				{
+					//TODO: maybe make propertie file 
 					Server = "localhost",
 					UserID = "root",
 					Password = "root",
