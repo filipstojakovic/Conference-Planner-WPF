@@ -4,7 +4,7 @@
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:ConferenceApp"
              Exit="App_OnExit"
-             StartupUri="/src/MainWindow.xaml">
+             StartupUri="/src/view/MainWindow.xaml">
 	<!-- TODO: here we change default startup screen -->
 	<!-- StartupUri="src/view/login/LoginWindow.xaml" -->
 	<Application.Resources>
