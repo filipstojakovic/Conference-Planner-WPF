@@ -1,4 +1,4 @@
-﻿namespace ConferenceApp.src.utils
+﻿namespace ConferenceApp.utils
 {
 	public class Base64Util
 	{

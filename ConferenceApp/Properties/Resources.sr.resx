@@ -147,4 +147,16 @@
   <data name="invert" xml:space="preserve">
     <value>Obrnuta</value>
   </data>
+  <data name="register" xml:space="preserve">
+    <value>Registracija</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Potvrdi lozinku</value>
+  </data>
 </root>

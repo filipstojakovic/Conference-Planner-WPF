@@ -19,35 +19,44 @@
 			<Image Source="/resources/images/calendar-background.jpg"></Image>
 		</StackPanel>
 
-		<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center">
-			<StackPanel>
-				<RadioButton Name="en"
+		<StackPanel Grid.Row="1" Grid.Column="1">
+			<RadioButton Name="en"
+                             IsChecked="True"
+                             Margin="10,0,0,5"
+                             Checked="Language_ToggleButton_OnChecked"
+                             Foreground="White"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Content="{hm:Lang en}">
+			</RadioButton>
+
+			<RadioButton Name="sr"
+                         Checked="Language_ToggleButton_OnChecked"
+                         Margin="10,0,0,5"
+                         Foreground="White"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Content="{hm:Lang sr}" />
+
+			<RadioButton Name="login"
                              IsChecked="True"
                              Margin="10,0,0,5"
                              Checked="ToggleButton_OnChecked"
                              Foreground="White"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             Content="{hm:Lang en}">
-				</RadioButton>
+                             Content="login">
+			</RadioButton>
 
-				<RadioButton Name="sr"
+			<RadioButton Name="register"
                          Checked="ToggleButton_OnChecked"
                          Margin="10,0,0,5"
                          Foreground="White"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Content="{hm:Lang sr}" />
-			</StackPanel>
-
-			<Label Content="{hm:Lang login}" Foreground="White" FontSize="25" HorizontalAlignment="Center" />
-			<Separator></Separator>
-			<Label Content="{hm:Lang username}" Foreground="White" />
-			<TextBox MinWidth="300" Name="txtUsername" Style="{StaticResource TextBoxStyle}" />
-			<Label Content="{hm:Lang password}" Foreground="White" />
-			<PasswordBox MinWidth="300" Name="txtPassword" Style="{StaticResource PasswordBoxStyle}" />
-			<Button Name="btnSubmit" Style="{StaticResource ButtonStyle}" Click="Login_Click" Content="{hm:Lang submit}" Margin="60 20"/>
+                         Content="register" />
 		</StackPanel>
+		<DockPanel Grid.Row="1" Grid.Column="1" x:Name="DockPanelMain" HorizontalAlignment="Stretch" Margin="8"/>
 
 	</Grid>
 </Window>
