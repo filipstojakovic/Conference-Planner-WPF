@@ -18,7 +18,7 @@ public partial class LoginWindow : Window
 		InitializeComponent();
 
 		DockPanelMain.Children.Clear();
-		DockPanelMain.Children.Add(new LoginUserControl());
+		DockPanelMain.Children.Add(new LoginUserControl(closeWindow));
 
 		var frame = Application.Current;
 	}
@@ -32,6 +32,11 @@ public partial class LoginWindow : Window
 		appSettings.changeLang("en" == radioButton.Name ? "en" : "sr");
 	}
 
+	private void closeWindow()
+	{
+		this.Close();
+	}
+
 	private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
 	{
 		var radioButton = sender as RadioButton;
@@ -41,11 +46,11 @@ public partial class LoginWindow : Window
 		DockPanelMain.Children.Clear();
 		if ("login" == radioButton.Name)
 		{
-			DockPanelMain.Children.Add(new LoginUserControl());
+			DockPanelMain.Children.Add(new LoginUserControl(closeWindow));
 		}
 		else
 		{
-			DockPanelMain.Children.Add(new RegistrationUserControl());
+			DockPanelMain.Children.Add(new RegistrationUserControl(closeWindow));
 
 		}
 	}

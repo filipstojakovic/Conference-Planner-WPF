@@ -37,7 +37,7 @@ namespace ConferenceApp.model.dao
 			{
 				command.Parameters.AddWithValue("@id", id);
 				List<User> users = extractUsersData(command);
-				user = getFirstOrThrowException(users);
+				user = getFirstOrNull(users);
 			}
 
 			return user;
@@ -56,13 +56,19 @@ namespace ConferenceApp.model.dao
 			{
 				command.Parameters.AddWithValue("@username", username);
 				List<User> users = extractUsersData(command);
-				user = getFirstOrThrowException(users);
+				user = getFirstOrNull(users);
 			}
 
 			return user;
 		}
 
-		private User getFirstOrThrowException(List<User> users)
+		public User insertUser(User user)
+		{
+
+			return user;
+		}
+
+		private User getFirstOrNull(List<User> users)
 		{
 			User user = null;
 			if (users.Count == 1)

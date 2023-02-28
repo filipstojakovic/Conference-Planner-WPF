@@ -29,7 +29,6 @@ namespace ConferenceApp.view
 			List<User> users = userDao.getAllUsers();
 
 			RoleDao roleDao = new RoleDao();
-			Role role = roleDao.findRoleByName("admin");
 
 			//TODO: TESTING
 

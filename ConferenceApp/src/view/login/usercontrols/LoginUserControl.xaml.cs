@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
@@ -13,18 +14,15 @@ namespace ConferenceApp.view.login
 	{
 		private AppSettings appSettings;
 		private UserDao userDao;
+		private Action closeAction;
 
-
-		public LoginUserControl()
+		public LoginUserControl(Action closeAction)
 		{
 			appSettings = AppSettings.getInstance();
 			userDao = new UserDao();
+			this.closeAction = closeAction;
 			InitializeComponent();
 
-			//if ("sr" == lang)
-			//	sr.IsChecked = true;
-			//else
-			//	en.IsChecked = true;
 		}
 
 		private void Login_Click(object sender, RoutedEventArgs e)
@@ -38,12 +36,12 @@ namespace ConferenceApp.view.login
 			if (checkIfUsernameAndPasswordValid(user, username, password))
 			{
 				new MainWindow(user).Show();
-				//this.Close();
+				closeAction();
 			}
 			if ("a" == username && "a" == password)
 			{
 				new MainWindow().Show(); // TODO: send logged in user
-										 //this.Close();
+				closeAction();
 			}
 			else
 			{

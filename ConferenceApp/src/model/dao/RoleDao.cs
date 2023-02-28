@@ -2,6 +2,7 @@
 using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
+
 namespace ConferenceApp.model.dao
 {
 	public class RoleDao : BaseDao
@@ -27,6 +28,33 @@ namespace ConferenceApp.model.dao
 				}
 			}
 			return role;
+		}
+
+		public Role insertRole(string roleName)
+		{
+			String sql = "INSERT INTO role(name) VALUES(@name)";
+
+			Role role = null;
+			MySqlTransaction transaction = connection.BeginTransaction();
+			try
+			{
+				using (var command = new MySqlCommand(sql, connection, transaction))
+				{
+					command.Parameters.AddWithValue("@name", roleName);
+					command.ExecuteNonQuery();
+					int roleId = (int)command.LastInsertedId;
+					role = new Role { Id = roleId, Name = roleName };
+				}
+
+				transaction.Commit();
+			}
+			catch (Exception ex)
+			{
+				transaction.Rollback();
+			}
+
+			return role;
+
 		}
 	}
 }

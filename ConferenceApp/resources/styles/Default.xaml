@@ -10,7 +10,7 @@
     <!-- pozadina polja -->
 
     <SolidColorBrush x:Key="CustomDarkBlue" Color="#16375f"></SolidColorBrush>
-    <SolidColorBrush x:Key="CustomLightBlue" Color="#0963ba"></SolidColorBrush>
+	<SolidColorBrush x:Key="CustomLightBlue" Color="#2196f3"></SolidColorBrush>
 
     <!-- STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES -->
 

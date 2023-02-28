@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ConferenceApp.view.login
@@ -8,9 +9,12 @@ namespace ConferenceApp.view.login
 	/// </summary>
 	public partial class RegistrationUserControl : UserControl
 	{
-		public RegistrationUserControl()
+		private Action closeAction;
+
+		public RegistrationUserControl(Action closeAction)
 		{
 			InitializeComponent();
+			this.closeAction = closeAction;
 		}
 
 		private void Register_Click(object sender, RoutedEventArgs e)
@@ -18,8 +22,8 @@ namespace ConferenceApp.view.login
 			var firstName = this.txtFirstName.Text.Trim();
 			var password = this.txtPassword.Password.Trim();
 
-			//new MainWindow().Show(); 
-			//this.Close();
+			new MainWindow().Show();
+			closeAction();
 		}
 	}
 }

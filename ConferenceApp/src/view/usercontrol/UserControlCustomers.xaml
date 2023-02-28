@@ -3,33 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <!-- <Grid.ColumnDefinitions> -->
-        <!--     <ColumnDefinition Width="*" /> -->
-        <!--     <ColumnDefinition Width="*" /> -->
-        <!--     <ColumnDefinition Width="*" /> -->
-        <!--     <ColumnDefinition Width="*" /> -->
-        <!-- </Grid.ColumnDefinitions> -->
-        <!-- <Grid.RowDefinitions> -->
-        <!--     <RowDefinition Height="150" /> -->
-        <!--     <RowDefinition Height="*" /> -->
-        <!-- </Grid.RowDefinitions> -->
-        
-        <Calendar Grid.Row="0" Grid.Column="0" Name="calendar" SelectionMode="MultipleRange" >
+             mc:Ignorable="d">
+    <Viewbox HorizontalAlignment="Right">
+        <Calendar x:Name="calendar"
+                  SelectionMode="MultipleRange"
+                  FirstDayOfWeek="Monday"
+                  SelectedDatesChanged="calendar_SelectedDatesChanged"
+                  DisplayDateChanged="calendar_DisplayDateChanged">
         </Calendar>
-        <!-- <Border Margin="5" Grid.Column="0" Background="#FFC5C5C5" VerticalAlignment="Stretch" CornerRadius="12"> -->
-        <!-- -->
-        <!-- </Border> -->
-        <!-- <Border Margin="5" Grid.Column="1" Background="#FF7C54A0" VerticalAlignment="Stretch" CornerRadius="12"> -->
-        <!-- -->
-        <!-- </Border> -->
-        <!-- <Border Margin="5" Grid.Column="2" Background="#FF83CD80" VerticalAlignment="Stretch" CornerRadius="12"> -->
-        <!-- -->
-        <!-- </Border> -->
-        <!-- <Border Margin="5" Grid.Column="3" Background="#FFEE9246" VerticalAlignment="Stretch" CornerRadius="12"> -->
-        <!-- </Border> -->
-        
-    </Grid>
+    </Viewbox>
 </UserControl>
