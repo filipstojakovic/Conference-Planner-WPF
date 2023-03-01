@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,7 +24,9 @@ namespace ConferenceApp.view
 
 		public MainWindow() // TODO: check if login user isAdmin or !isAdmin
 		{
+			Trace.WriteLine("before init MainWindow");
 			InitializeComponent();
+			Trace.WriteLine("after init MainWindow");
 
 			UserDao userDao = new UserDao();
 			//User user = userDao.getUserByUsername("admin");

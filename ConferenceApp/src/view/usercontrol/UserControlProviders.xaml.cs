@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -12,7 +13,10 @@ namespace ConferenceApp.view.usercontrol
 	{
 		public UserControlProviders()
 		{
+			Trace.WriteLine("before init UserControlProviders");
 			InitializeComponent();
+			Trace.WriteLine("after init UserControlProviders");
+
 			List<User> data = new List<User>
 			{
 				new()
