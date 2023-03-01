@@ -1,4 +1,5 @@
-﻿using ConferenceApp.utils;
+﻿using System.Diagnostics;
+using ConferenceApp.utils;
 using System.Windows.Controls;
 
 namespace ConferenceApp.view.usercontrol
@@ -11,8 +12,10 @@ namespace ConferenceApp.view.usercontrol
         private readonly AppSettings appSettings;
         public SettingsControl()
         {
+            Trace.WriteLine("before init AppSettings");
             appSettings = AppSettings.getInstance();
             InitializeComponent();
+            Trace.WriteLine("after init AppSettings");
 
             langComboBox.SelectedItem = langComboBox.FindName(appSettings[AppSettings.LANG]);
             themeComboBox.SelectedItem = themeComboBox.FindName(appSettings[AppSettings.THEME]);

@@ -3,13 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d">
-    <Viewbox HorizontalAlignment="Right">
-        <Calendar x:Name="calendar"
-                  SelectionMode="MultipleRange"
-                  FirstDayOfWeek="Monday"
-                  SelectedDatesChanged="calendar_SelectedDatesChanged"
-                  DisplayDateChanged="calendar_DisplayDateChanged">
-        </Calendar>
-    </Viewbox>
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        
+        <DockPanel Grid.Column="0">
+            <TextBox Background="White"
+                     DockPanel.Dock="Top" Margin="0,0,0,10"
+                     materialDesign:HintAssist.Hint="Filter result..."
+                     Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+
+            <DataGrid Name="usersList" AutoGenerateColumns="False" ColumnWidth="*"
+                      VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding email}" />
+                    <!-- <DataGridTemplateColumn Header="Icon"> -->
+                    <!--     <DataGridTemplateColumn.CellTemplate> -->
+                    <!--         <DataTemplate> -->
+                    <!--             <Image Height="50" Width="50" -->
+                    <!--                    Source="{Binding pic, Converter={StaticResource convert}}" /> -->
+                    <!--         </DataTemplate> -->
+                    <!--     </DataGridTemplateColumn.CellTemplate> -->
+                    <!-- </DataGridTemplateColumn> -->
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+            <Calendar x:Name="calendar"
+                      SelectionMode="MultipleRange"
+                      FirstDayOfWeek="Monday"
+                      SelectedDatesChanged="calendar_SelectedDatesChanged"
+                      DisplayDateChanged="calendar_DisplayDateChanged">
+            </Calendar>
+        </Viewbox>
+    </Grid>
 </UserControl>
