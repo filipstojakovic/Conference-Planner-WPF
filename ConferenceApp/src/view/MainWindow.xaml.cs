@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.view.login;
 using ConferenceApp.view.usercontrol;
@@ -21,6 +18,7 @@ namespace ConferenceApp.view
 		public MainWindow(User user) : this()
 		{
 			this.logedInUser = user;
+			HeaderUserText.Text = user.FirstName + " " + user.LastName;
 		}
 
 		public MainWindow() // TODO: check if login user isAdmin or !isAdmin
@@ -29,29 +27,22 @@ namespace ConferenceApp.view
 			InitializeComponent();
 			Trace.WriteLine("after init MainWindow");
 
-			UserDao userDao = new UserDao();
-			//User user = userDao.getUserByUsername("admin");
-			List<User> users = userDao.getAllUsers();
-
-			RoleDao roleDao = new RoleDao();
-
 			//TODO: TESTING
-
-			var userControl = new ItemMenu("Register", PackIconKind.Register, new UserControlCustomers());
-			var emplyeControl = new ItemMenu("Employees", PackIconKind.Connection, new UsersControl());
+			var userControl = new ItemMenu("Conferences", PackIconKind.Register, new ConferenceControl());
 			var menuControl = new ItemMenu("Menu Control", PackIconKind.About, new MenuControl());
+			var usersControl = new ItemMenu("Users", PackIconKind.Connection, new UsersControl());
 
 
 			// Drawer items
-			LeftMenuListView.Items.Add(emplyeControl);
 			LeftMenuListView.Items.Add(userControl);
 			LeftMenuListView.Items.Add(menuControl);
+			LeftMenuListView.Items.Add(usersControl);
 
 
 			// Header items
 			HeaderMenuListView.Items.Add(new ItemMenu("Settings", PackIconKind.Settings, new SettingsControl()));
 			HeaderMenuListView.Items.Add(userControl);
-			HeaderMenuListView.Items.Add(emplyeControl);
+			HeaderMenuListView.Items.Add(usersControl);
 			//TODO: add logout button
 
 			LeftMenuListView.SelectedIndex = 0; // select first menu item by default

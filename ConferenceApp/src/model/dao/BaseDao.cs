@@ -9,6 +9,5 @@ namespace ConferenceApp.model.dao
 		protected MySqlConnection connection;
 
 		protected BaseDao() => connection = MySqlSingleton.getInstance().connection;
-
 	}
 }

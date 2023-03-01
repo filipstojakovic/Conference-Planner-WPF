@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConferenceApp.src.model.entity
+namespace ConferenceApp.model.entity
 {
-	public class Conference
+	public class Conference : Geathering
 	{
+		public string Name { get; set; }
+		public DateTime StartDate { get; set; }
+		public DateTime EndDate { get; set; }
 	}
 }

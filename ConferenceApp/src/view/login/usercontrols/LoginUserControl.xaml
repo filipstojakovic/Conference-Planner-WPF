@@ -11,9 +11,9 @@
 			<Label Content="{hm:Lang login}" Foreground="White" FontSize="25" HorizontalAlignment="Center" />
 			<Separator></Separator>
 			<Label Content="{hm:Lang username}" Foreground="White" />
-			<TextBox MinWidth="300" Name="txtUsername" Style="{StaticResource TextBoxStyle}" />
+			<TextBox MinWidth="300" Name="txtUsername" Style="{StaticResource TextBoxStyle}" PreviewKeyUp="TextBox_PreviewKeyUp" />
 			<Label Content="{hm:Lang password}" Foreground="White" />
-			<PasswordBox MinWidth="300" Name="txtPassword" Style="{StaticResource PasswordBoxStyle}" />
+			<PasswordBox MinWidth="300" Name="txtPassword" Style="{StaticResource PasswordBoxStyle}" PreviewKeyUp="TextBox_PreviewKeyUp"/>
 			<Button Name="btnSubmit" Style="{StaticResource ButtonStyle}" Click="Login_Click" Content="{hm:Lang submit}" Margin="60 20"/>
 		</StackPanel>
 	</Grid>

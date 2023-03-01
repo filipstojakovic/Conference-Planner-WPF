@@ -8,7 +8,7 @@ namespace ConferenceApp.model.dao
 {
 	public class UserDao : BaseDao
 	{
-		public List<User> getAllUsers()
+		public List<User> findAll()
 		{
 			String sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
@@ -24,7 +24,7 @@ namespace ConferenceApp.model.dao
 			return users;
 		}
 
-		public User getUserById(int id)
+		public User findById(int id)
 		{
 			User user;
 			String sql = @"
@@ -43,7 +43,7 @@ namespace ConferenceApp.model.dao
 			return user;
 		}
 
-		public User getUserByUsername(string username)
+		public User findByUsername(string username)
 		{
 			User user = null;
 			String sql = @"
@@ -61,13 +61,6 @@ namespace ConferenceApp.model.dao
 
 			return user;
 		}
-
-		public User insertUser(User user)
-		{
-
-			return user;
-		}
-
 		private User getFirstOrNull(List<User> users)
 		{
 			User user = null;

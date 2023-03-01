@@ -6,7 +6,7 @@
              Exit="App_OnExit"
 	StartupUri="/src/view/MainWindow.xaml"
 			 >
-	<!-- StartupUri="src/view/login/LoginWindow.xaml" -->
+	<!--StartupUri="src/view/login/LoginWindow.xaml"-->
 	<!-- TODO: here we change default startup screen -->
 
 	<Application.Resources>

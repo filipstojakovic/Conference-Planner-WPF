@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace ConferenceApp.utils
+namespace ConferenceApp.converter
 {
 	//convert imagePath to image. Used in DataGrid to show images in columns
 	public class ConvertTextToImage : IValueConverter

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
@@ -32,13 +33,13 @@ namespace ConferenceApp.view.login
 
 			//TODO: check if normal user or admin
 
-			User user = userDao.getUserByUsername(username);
+			User user = userDao.findByUsername(username);
 			if (checkIfUsernameAndPasswordValid(user, username, password))
 			{
 				new MainWindow(user).Show();
 				closeAction();
 			}
-			if ("a" == username && "a" == password)
+			else if ("a" == username && "a" == password)
 			{
 				new MainWindow().Show(); // TODO: send logged in user
 				closeAction();
@@ -59,5 +60,12 @@ namespace ConferenceApp.view.login
 			return user.UserName == username && encodedPassword == user.Password;
 		}
 
+		private void TextBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				Login_Click(sender, e); // valjda nisu bitni argument
+			}
+		}
 	}
 }

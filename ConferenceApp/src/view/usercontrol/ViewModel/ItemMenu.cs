@@ -15,5 +15,7 @@ namespace ConferenceApp.view.usercontrol.ViewModel
             Icon = icon;
             Screen = screen;
         }
+        
+        
     }
 }

@@ -7,7 +7,7 @@ namespace ConferenceApp.model.dao
 {
 	public class RoleDao : BaseDao
 	{
-		public Role findRoleByName(string roleName)
+		public Role findByName(string roleName)
 		{
 			String sql = @"
 				SELECT * FROM role
@@ -30,7 +30,7 @@ namespace ConferenceApp.model.dao
 			return role;
 		}
 
-		public Role insertRole(string roleName)
+		public Role insert(string roleName)
 		{
 			String sql = "INSERT INTO role(name) VALUES(@name)";
 
@@ -48,7 +48,7 @@ namespace ConferenceApp.model.dao
 
 				transaction.Commit();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				transaction.Rollback();
 			}

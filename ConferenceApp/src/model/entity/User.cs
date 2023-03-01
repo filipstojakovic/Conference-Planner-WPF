@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 
 namespace ConferenceApp.model.entity
 {
@@ -17,5 +18,18 @@ namespace ConferenceApp.model.entity
 		{
 			Roles = new BindingList<Role>();
 		}
+
+		public User(User user) : base()
+		{
+			Id = user.Id;
+			FirstName = user.FirstName;
+			LastName = user.LastName;
+			Email = user.Email;
+			UserName = user.UserName;
+			Password = user.Password;
+			if (user.Roles != null)
+				Roles = new BindingList<Role>(user.Roles.ToList());
+		}
+
 	}
 }
