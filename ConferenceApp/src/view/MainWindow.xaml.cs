@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ConferenceApp.model;
+using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.view.login;
 using ConferenceApp.view.usercontrol;
@@ -19,6 +22,19 @@ namespace ConferenceApp.view
 		{
 			this.logedInUser = user;
 			HeaderUserText.Text = user.FirstName + " " + user.LastName;
+
+
+			Conference conference = new Conference
+			{
+				Name = "conference",
+				Description = "cool desc",
+				StartDate = DateTime.Now,
+				EndDate = DateTime.Now.AddDays(2),
+			};
+			UserGeatheringRoleDao userGeatheringRoleDao = new UserGeatheringRoleDao();
+			var test = userGeatheringRoleDao.insertUserConferenceConferenceRole(logedInUser, conference, GeatheringRoleEnum.Organizer);
+			Trace.WriteLine("before init MainWindow");
+
 		}
 
 		public MainWindow() // TODO: check if login user isAdmin or !isAdmin
@@ -26,6 +42,7 @@ namespace ConferenceApp.view
 			Trace.WriteLine("before init MainWindow");
 			InitializeComponent();
 			Trace.WriteLine("after init MainWindow");
+
 
 			//TODO: TESTING
 			var userControl = new ItemMenu("Conferences", PackIconKind.Register, new ConferenceControl());

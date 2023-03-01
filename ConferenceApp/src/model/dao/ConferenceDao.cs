@@ -30,13 +30,20 @@ namespace ConferenceApp.model.dao
 			{
 				while (reader.Read())
 				{
+					var id = reader.GetInt32(reader.GetOrdinal("id"));
+					var name = reader.GetString(reader.GetOrdinal("name"));
+					var desc = reader.GetString(reader.GetOrdinal("description"));
+					var start = reader.GetDateTime(reader.GetOrdinal("start_date"));
+					var end = reader.GetDateTime(reader.GetOrdinal("end_date"));
+
+
 					Conference conference = new Conference
 					{
-						Id = reader.GetInt32(reader.GetOrdinal("id")),
-						Name = reader.GetString(reader.GetOrdinal("name")),
-						Description = reader.GetString(reader.GetOrdinal("description")),
-						StartDate = reader.GetDateTime(reader.GetOrdinal("start_date")),
-						EndDate = reader.GetDateTime(reader.GetOrdinal("end_date")),
+						Id = id,
+						Name = name,
+						Description = desc,
+						StartDate = start,
+						EndDate = end,
 					};
 					conferences.Add(conference);
 				}
