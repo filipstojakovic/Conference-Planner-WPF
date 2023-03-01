@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace ConferenceApp.view.dialog
+namespace ConferenceApp.converter
 {
 	public class BoolToVisibilityConverter : IValueConverter
 	{
