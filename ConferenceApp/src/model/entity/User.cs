@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 
 namespace ConferenceApp.model.entity
 {
@@ -12,11 +11,11 @@ namespace ConferenceApp.model.entity
 		public string UserName { get; set; }
 		public string Password { get; set; }
 
-		public List<Role> Roles { get; set; }
+		public BindingList<Role> Roles { get; set; }
 
 		public User()
 		{
-			Roles = new List<Role>();
+			Roles = new BindingList<Role>();
 		}
 	}
 }

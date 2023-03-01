@@ -7,6 +7,7 @@ using ConferenceApp.model.entity;
 using ConferenceApp.view.login;
 using ConferenceApp.view.usercontrol;
 using ConferenceApp.view.usercontrol.ViewModel;
+using GenSpark.WPFAccordionMenu;
 using MaterialDesignThemes.Wpf;
 
 namespace ConferenceApp.view
@@ -33,11 +34,15 @@ namespace ConferenceApp.view
 			//TODO: TESTING
 
 			var userControl = new ItemMenu("Register", PackIconKind.Register, new UserControlCustomers());
-			var emplyeControl = new ItemMenu("Employees", PackIconKind.Connection, new UserControlProviders());
+			var emplyeControl = new ItemMenu("Employees", PackIconKind.Connection, new UsersControl());
+			var menuControl = new ItemMenu("Menu Control", PackIconKind.About, new MenuControl());
+
 
 			// Drawer items
 			LeftMenuListView.Items.Add(emplyeControl);
 			LeftMenuListView.Items.Add(userControl);
+			LeftMenuListView.Items.Add(menuControl);
+
 
 			// Header items
 			HeaderMenuListView.Items.Add(new ItemMenu("Settings", PackIconKind.Settings, new SettingsControl()));
