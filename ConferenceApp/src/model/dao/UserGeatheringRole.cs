@@ -24,18 +24,19 @@ namespace ConferenceApp.model.dao
 				INSERT INTO user_geathering_role (user_id, geathering_role_id, geathering_id) 
 				VALUES (@userId, @geatheringRoleId, @geatheringId)";
 
+
+			MySqlTransaction transaction = connection.BeginTransaction();
 			GeatheringRole geatheringRole = geatheringRoleDao.findByName(geatheringRoleEnum.ToString());
-			Conference inseredConference = conferenceDao.insertConference(conference);
+			Conference inseredConference = conferenceDao.insertConference(conference, transaction);
 
 			UserGeatheringRole userGeatheringRole = null;
-			MySqlTransaction transaction = connection.BeginTransaction();
 			try
 			{
 				using (var command = new MySqlCommand(userGeatheringRoleSql, connection, transaction))
 				{
-					command.Parameters.AddWithValue("@userId", user.Id);
-					command.Parameters.AddWithValue("@geatheringRoleId", geatheringRole.Id);
-					command.Parameters.AddWithValue("@geatheringId", inseredConference.Id);
+					command.Parameters.AddWithValue("@userId", 1);//user.Id);
+					command.Parameters.AddWithValue("@geatheringId", 1);// inseredConference.Id);
+					command.Parameters.AddWithValue("@geatheringRoleId", geatheringRole.Id); //Fk
 
 					command.ExecuteNonQuery();
 				}
@@ -51,6 +52,8 @@ namespace ConferenceApp.model.dao
 			catch (Exception ex)
 			{
 				transaction.Rollback();
+				userGeatheringRole = null;
+				//TODO: handle exception
 			}
 
 

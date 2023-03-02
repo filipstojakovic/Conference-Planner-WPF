@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
@@ -51,39 +49,28 @@ namespace ConferenceApp.model.dao
 			return conferences;
 		}
 
-		public Conference insertConference(Conference conference)
+		public Conference insertConference(Conference conference, MySqlTransaction transaction)
 		{
 			string geatheringSql = @"INSERT INTO geathering (description) VALUES (@description)";
 			string conferenceSql = @"INSERT INTO conference (geathering_id, name, start_date, end_date) VALUES (@id, @name, @startDate, @endDate)";
 
-			MySqlTransaction transaction = connection.BeginTransaction();
-
-			try
+			int geatheringId;
+			using (var command = new MySqlCommand(geatheringSql, connection, transaction))
 			{
-				int geatheringId;
-				using (var command = new MySqlCommand(geatheringSql, connection, transaction))
-				{
-					command.Parameters.AddWithValue("@description", conference.Description);
-					command.ExecuteNonQuery();
-					geatheringId = (int)command.LastInsertedId;
-				}
-				using (var command = new MySqlCommand(conferenceSql, connection, transaction))
-				{
-					command.Parameters.AddWithValue("@id", geatheringId);
-					command.Parameters.AddWithValue("@name", conference.Name);
-					command.Parameters.AddWithValue("@startDate", conference.StartDate);
-					command.Parameters.AddWithValue("@endDate", conference.EndDate);
-					command.ExecuteNonQuery();
-				}
-
-				transaction.Commit();
-				conference.Id = geatheringId;
+				command.Parameters.AddWithValue("@description", conference.Description);
+				command.ExecuteNonQuery();
+				geatheringId = (int)command.LastInsertedId;
 			}
-			catch (Exception ex)
+			using (var command = new MySqlCommand(conferenceSql, connection, transaction))
 			{
-				transaction.Rollback();
-				Trace.WriteLine(ex.ToString());
+				command.Parameters.AddWithValue("@id", geatheringId);
+				command.Parameters.AddWithValue("@name", conference.Name);
+				command.Parameters.AddWithValue("@startDate", conference.StartDate);
+				command.Parameters.AddWithValue("@endDate", conference.EndDate);
+				command.ExecuteNonQuery();
 			}
+
+			conference.Id = geatheringId;
 			return conference;
 		}
 	}
