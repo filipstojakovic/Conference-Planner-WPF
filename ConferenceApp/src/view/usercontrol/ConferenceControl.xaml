@@ -21,7 +21,7 @@
                      materialDesign:HintAssist.Hint="Filter result..."
                      Name="txtFilter" TextChanged="txtFilter_TextChanged" />
 
-			<DataGrid	Name="conferenceList" 
+			<DataGrid	Name="conferenceListDataGrid" 
 						AutoGenerateColumns="False" 
 						ColumnWidth="*"
 						VerticalScrollBarVisibility="Auto"

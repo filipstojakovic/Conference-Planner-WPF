@@ -1,118 +1,204 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
 {
-	public class UserDao : BaseDao
-	{
-		public List<User> findAll()
-		{
-			const string sql = @"
+    public class UserDao : BaseDao
+    {
+        private readonly UserRoleDao userRoleDao;
+
+
+        public UserDao()
+        {
+            this.userRoleDao = new UserRoleDao();
+        }
+
+        public List<User> findAll()
+        {
+            const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id";
 
-			List<User> users;
-			using (var command = new MySqlCommand(sql, connection))
-			{
-				users = extractUsersData(command);
-			}
+            List<User> users;
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                users = extractUsersData(command);
+            }
 
-			return users;
-		}
+            return users;
+        }
 
-		public User findById(int id)
-		{
-			User user;
-			const string sql = @"
+        public User findById(int id)
+        {
+            User user;
+            const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id
 				WHERE user_id = @id";
 
-			using (var command = new MySqlCommand(sql, connection))
-			{
-				command.Parameters.AddWithValue("@id", id);
-				List<User> users = extractUsersData(command);
-				user = getFirstOrNull(users);
-			}
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                List<User> users = extractUsersData(command);
+                user = getFirstOrNull(users);
+            }
 
-			return user;
-		}
+            return user;
+        }
 
-		public User findByUsername(string username)
-		{
-			User user = null;
-			const string sql = @"
+        public User findByUsername(string username)
+        {
+            User user = null;
+            const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id
 				WHERE username = @username";
 
-			using (var command = new MySqlCommand(sql, connection))
-			{
-				command.Parameters.AddWithValue("@username", username);
-				List<User> users = extractUsersData(command);
-				user = getFirstOrNull(users);
-			}
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@username", username);
+                List<User> users = extractUsersData(command);
+                user = getFirstOrNull(users);
+            }
 
-			return user;
-		}
-		private User getFirstOrNull(List<User> users)
-		{
-			User user = null;
-			if (users.Count == 1)
-			{
-				user = users[0];
-			}
-			return user;
-		}
+            return user;
+        }
 
-		private List<User> extractUsersData(MySqlCommand command)
-		{
-			List<User> users = new List<User>();
-			using (var reader = command.ExecuteReader())
-			{
-				while (reader.Read())
-				{
-					User user = new User
-					{
-						Id = reader.GetInt32(reader.GetOrdinal("user_id")),
-						FirstName = reader.GetString(reader.GetOrdinal("first_name")),
-						LastName = reader.GetString(reader.GetOrdinal("last_name")),
-						Email = reader.GetString(reader.GetOrdinal("email")),
-						UserName = reader.GetString(reader.GetOrdinal("username")),
-						Password = reader.GetString(reader.GetOrdinal("password"))
-					};
-					Role role = null;
-					if (!reader.IsDBNull(reader.GetOrdinal("role_id")))
-					{
-						role = new Role
-						{
-							Id = reader.GetInt32(reader.GetOrdinal("role_id")),
-							Name = reader.GetString(reader.GetOrdinal("name")),
-						};
-						user.Roles.Add(role);
-					}
+        private User getFirstOrNull(List<User> users)
+        {
+            User user = null;
+            if (users.Count == 1)
+            {
+                user = users[0];
+            }
 
-					// if the user is not yet in the list, add them
-					if (!users.Any(u => u.Id == user.Id))
-					{
-						users.Add(user);
-					}
-					// otherwise, add the role to the existing user
-					else if (role != null)
-					{
-						var existingUser = users.First(u => u.Id == user.Id);
-						existingUser.Roles.Add(role);
-					}
-				}
-			}
-			return users;
-		}
+            return user;
+        }
 
-	}
+        private List<User> extractUsersData(MySqlCommand command)
+        {
+            List<User> users = new List<User>();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    User user = new User
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("user_id")),
+                        FirstName = reader.GetString(reader.GetOrdinal("first_name")),
+                        LastName = reader.GetString(reader.GetOrdinal("last_name")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Username = reader.GetString(reader.GetOrdinal("username")),
+                        Password = reader.GetString(reader.GetOrdinal("password"))
+                    };
+                    Role role = null;
+                    if (!reader.IsDBNull(reader.GetOrdinal("role_id")))
+                    {
+                        role = new Role
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("role_id")),
+                            Name = reader.GetString(reader.GetOrdinal("name")),
+                        };
+                        user.Roles.Add(role);
+                    }
+
+                    // if the user is not yet in the list, add them
+                    if (!users.Any(u => u.Id == user.Id))
+                    {
+                        users.Add(user);
+                    }
+                    // otherwise, add the role to the existing user
+                    else if (role != null)
+                    {
+                        var existingUser = users.First(u => u.Id == user.Id);
+                        existingUser.Roles.Add(role);
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        public User update(User user)
+        {
+            const string updateUserSql = @"
+                UPDATE user 
+                SET 
+                    first_name = @firstName, 
+                    last_name = @lastName,
+                    username = @username,
+                    email = @email,
+                    password = @password
+                WHERE id = @id";
+
+            MySqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                userRoleDao.deleteUserRole(user.Id, transaction);
+                userRoleDao.insertUserRole(user, transaction);
+                using (var command = new MySqlCommand(updateUserSql, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@firstName", user.FirstName);
+                    command.Parameters.AddWithValue("@lastName", user.LastName);
+                    command.Parameters.AddWithValue("@username", user.Username);
+                    command.Parameters.AddWithValue("@email", user.Email);
+                    command.Parameters.AddWithValue("@password", user.Password);
+
+                    command.Parameters.AddWithValue("@id", user.Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Trace.WriteLine(ex.Message);
+            }
+
+            return user;
+        }
+
+        public void delete(int? userId)
+        {
+            string deleteUserRole = $"DELETE FROM user_has_role WHERE user_id = {userId}";
+            string userGatheringRole = $"DELETE FROM user_gathering_role WHERE user_id = {userId}";
+            string deleteUserSql = $"DELETE FROM user WHERE id = {userId}";
+            //TODO: conference check
+
+            MySqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                using (var command = new MySqlCommand(deleteUserRole, connection, transaction))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                using (var command = new MySqlCommand(userGatheringRole, connection, transaction))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                using (var command = new MySqlCommand(deleteUserSql, connection, transaction))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Trace.WriteLine(ex.Message);
+            }
+        }
+    }
 }

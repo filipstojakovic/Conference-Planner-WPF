@@ -13,15 +13,19 @@
     </UserControl.Resources>
 
     <DockPanel>
-        <TextBox Background="White"
-                 DockPanel.Dock="Top" Margin="0,0,0,10"
-                 materialDesign:HintAssist.Hint="Filter result..."
-                 Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+        <TextBox
+            Name="txtFilter"
+            FontSize="18"
+            TextChanged="txtFilter_TextChanged"
+            Background="White"
+            DockPanel.Dock="Top" Margin="0,0,0,10"
+            materialDesign:HintAssist.Hint="Filter result..." />
 
-        <DataGrid Name="usersList" 
-                  AutoGenerateColumns="False" 
+        <DataGrid Name="usersList"
+                  AutoGenerateColumns="False"
                   ColumnWidth="*"
                   VerticalScrollBarVisibility="Auto"
+                  DockPanel.Dock="Bottom"
                   IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>

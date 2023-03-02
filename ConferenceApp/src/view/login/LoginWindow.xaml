@@ -9,8 +9,7 @@
         MinHeight="520"
         MinWidth="400"
 		>
-	<Grid Background="{StaticResource DarkGray}" ShowGridLines="True"
-    >
+	<Grid Background="{StaticResource DarkGray}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition></ColumnDefinition>
 			<ColumnDefinition MinWidth="400" Width="Auto"></ColumnDefinition>

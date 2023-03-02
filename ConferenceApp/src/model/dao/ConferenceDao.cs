@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
@@ -72,6 +73,11 @@ namespace ConferenceApp.model.dao
 
 			conference.Id = gatheringId;
 			return conference;
+		}
+
+		public void deleteConference(int geatheringId, MySqlTransaction transaction)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
