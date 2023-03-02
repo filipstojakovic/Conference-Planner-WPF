@@ -3,11 +3,10 @@ using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
 {
-	public class BaseDao
-	{
-		public static string SELECT_SCALAR = "; SELECT CAST(scope_identity() AS int)";
-		protected MySqlConnection connection;
+    public class BaseDao
+    {
+        protected MySqlConnection connection { get; }
 
-		protected BaseDao() => connection = MySqlSingleton.getInstance().connection;
-	}
+        protected BaseDao() => connection = MySqlSingleton.getInstance().connection;
+    }
 }

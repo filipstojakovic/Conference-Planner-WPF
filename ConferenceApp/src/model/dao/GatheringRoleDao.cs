@@ -8,7 +8,7 @@ namespace ConferenceApp.model.dao
 	{
 		public GatheringRole findByName(string gatheringRoleName)
 		{
-			String sql = @"
+			const string sql = @"
 				SELECT * FROM gathering_role
 				WHERE name = @name";
 

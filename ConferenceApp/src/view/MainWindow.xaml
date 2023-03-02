@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
         Title="Conference planner"
-        Height="550" Width="1200"
+        Height="600" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,10 +35,8 @@
                                       ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
                                       MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
                                 <ListView.ItemTemplate>
-                                    
 					
-				Every card menu item
-				
+				//Every card menu item
 					
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

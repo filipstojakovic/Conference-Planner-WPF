@@ -9,7 +9,7 @@ namespace ConferenceApp.model.dao
 	{
 		public Role findByName(string roleName)
 		{
-			String sql = @"
+			const string sql = @"
 				SELECT * FROM role
 				WHERE name = @name";
 
@@ -32,7 +32,7 @@ namespace ConferenceApp.model.dao
 
 		public Role insert(string roleName)
 		{
-			String sql = "INSERT INTO role(name) VALUES(@name)";
+			const string sql = "INSERT INTO role(name) VALUES(@name)";
 
 			Role role = null;
 			MySqlTransaction transaction = connection.BeginTransaction();
