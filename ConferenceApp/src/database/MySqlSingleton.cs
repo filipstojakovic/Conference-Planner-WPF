@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.database
 {
@@ -15,16 +16,8 @@ namespace ConferenceApp.database
 			if (mySqlSingleton == null)
 			{
 				mySqlSingleton = new MySqlSingleton();
-				var settings = new MySqlConnectionStringBuilder()
-				{
-					//TODO: maybe make property file 
-					Server = "localhost",
-					UserID = "root",
-					Password = "root",
-					Database = "conferencedb",
-					Port = 3306
-				};
-				mySqlSingleton.connection = new MySqlConnection(settings.ConnectionString);
+				var connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+				mySqlSingleton.connection = new MySqlConnection(connectionString);
 				mySqlSingleton.connection.Open();
 			}
 			return mySqlSingleton;

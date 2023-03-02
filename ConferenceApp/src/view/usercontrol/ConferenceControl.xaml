@@ -27,6 +27,13 @@
 						VerticalScrollBarVisibility="Auto"
 						IsReadOnly="True"
                       >
+				<DataGrid.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+						<MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+						<MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+					</ContextMenu>
+				</DataGrid.ContextMenu>
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Name" Binding="{Binding Name}" />
 					<DataGridTextColumn Header="Description" Binding="{Binding Description}" />
