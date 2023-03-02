@@ -9,7 +9,7 @@ namespace ConferenceApp.model.dao
 		public GatheringRole findByName(string gatheringRoleName)
 		{
 			String sql = @"
-				SELECT * FROM geathering_role
+				SELECT * FROM gathering_role
 				WHERE name = @name";
 
 			GatheringRole gatheringRole = null;
@@ -32,7 +32,7 @@ namespace ConferenceApp.model.dao
 		public GatheringRole findById(int gatheringRoleId)
 		{
 			const string sql = @"
-				SELECT * FROM geathering_role
+				SELECT * FROM gathering_role
 				WHERE id = @id";
 
 			GatheringRole gatheringRole = null;

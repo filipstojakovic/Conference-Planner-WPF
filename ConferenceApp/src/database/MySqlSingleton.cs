@@ -17,7 +17,7 @@ namespace ConferenceApp.database
 				mySqlSingleton = new MySqlSingleton();
 				var settings = new MySqlConnectionStringBuilder()
 				{
-					//TODO: maybe make propertie file 
+					//TODO: maybe make property file 
 					Server = "localhost",
 					UserID = "root",
 					Password = "root",
@@ -25,7 +25,7 @@ namespace ConferenceApp.database
 					Port = 3306
 				};
 				mySqlSingleton.connection = new MySqlConnection(settings.ConnectionString);
-				// mySqlSingleton.connection.Open();
+				mySqlSingleton.connection.Open();
 			}
 			return mySqlSingleton;
 		}

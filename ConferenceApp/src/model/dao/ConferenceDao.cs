@@ -10,7 +10,7 @@ namespace ConferenceApp.model.dao
 		{
 			var sql = @"
 				SELECT * FROM conference c
-				JOIN geathering g ON g.id = c.geathering_id";
+				JOIN gathering g ON g.id = c.gathering_id";
 
 			List<Conference> list;
 			using (var command = new MySqlCommand(sql, connection))
@@ -51,8 +51,8 @@ namespace ConferenceApp.model.dao
 
 		public Conference insertConference(Conference conference, MySqlTransaction transaction)
 		{
-			const string gatheringSql = @"INSERT INTO geathering (description) VALUES (@description)";
-			const string conferenceSql = @"INSERT INTO conference (geathering_id, name, start_date, end_date) VALUES (@id, @name, @startDate, @endDate)";
+			const string gatheringSql = @"INSERT INTO gathering (description) VALUES (@description)";
+			const string conferenceSql = @"INSERT INTO conference (gathering_id, name, start_date, end_date) VALUES (@gathering_id, @name, @startDate, @endDate)";
 
 			int gatheringId;
 			using (var command = new MySqlCommand(gatheringSql, connection, transaction))
@@ -63,7 +63,7 @@ namespace ConferenceApp.model.dao
 			}
 			using (var command = new MySqlCommand(conferenceSql, connection, transaction))
 			{
-				command.Parameters.AddWithValue("@id", gatheringId);
+				command.Parameters.AddWithValue("@gathering_id", gatheringId);
 				command.Parameters.AddWithValue("@name", conference.Name);
 				command.Parameters.AddWithValue("@startDate", conference.StartDate);
 				command.Parameters.AddWithValue("@endDate", conference.EndDate);
