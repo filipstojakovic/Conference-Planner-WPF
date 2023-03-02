@@ -25,7 +25,7 @@ namespace ConferenceApp.database
 					Port = 3306
 				};
 				mySqlSingleton.connection = new MySqlConnection(settings.ConnectionString);
-				mySqlSingleton.connection.Open();
+				// mySqlSingleton.connection.Open();
 			}
 			return mySqlSingleton;
 		}

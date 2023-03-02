@@ -2,7 +2,7 @@
 
 namespace ConferenceApp.model.entity
 {
-	public class Conference : Geathering
+	public class Conference : Gathering
 	{
 		public string Name { get; set; }
 		public DateTime StartDate { get; set; }

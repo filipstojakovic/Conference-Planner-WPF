@@ -6,98 +6,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
         Title="Conference planner"
         Height="550" Width="1200"
         WindowStartupLocation="CenterScreen">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="250" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-		<materialDesign:ColorZone Padding="10" Background="DodgerBlue" Foreground="White" Mode="PrimaryMid"
+        <materialDesign:ColorZone Padding="10" Background="DodgerBlue" Foreground="White" Mode="PrimaryMid"
                                   Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch">
-			<Grid>
-				<TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 5" FontSize="17" />
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-					<TextBlock x:Name="HeaderUserText" VerticalAlignment="Center"  Padding="5 5" FontSize="17" />
-					<materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"
-                                         PopupMode="Click"
-                                         Style="{StaticResource MyPopupBoxStyle}">
-						<StackPanel>
-							<ListView x:Name="HeaderMenuListView"
-                                  Background="{x:Null}" BorderThickness="0"
-                                  ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
-                                  MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
-								<ListView.ItemTemplate>
-									<!--Every card menu item-->
-									<DataTemplate>
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-											<materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="15" Height="15"
-                                                                 Margin="10 10" />
-											<TextBlock Text="{Binding Path=Header}" VerticalAlignment="Center"
-                                                   Padding="5 5" FontSize="17" />
-										</StackPanel>
-									</DataTemplate>
-								</ListView.ItemTemplate>
-							</ListView>
-							<ListView MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
-								<Separator></Separator>
-								<ListViewItem>
-									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-										<materialDesign:PackIcon Kind="Logout" Width="15" Height="15" Margin="10 10" />
-										<TextBlock Text="Logout" VerticalAlignment="Center" Padding="5 5" FontSize="17" />
-									</StackPanel>
-								</ListViewItem>
-							</ListView>
-						</StackPanel>
-					</materialDesign:PopupBox>
-				</StackPanel>
-			</Grid>
-		</materialDesign:ColorZone>
-		<Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="DodgerBlue">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="70" />
-				<RowDefinition Height="326*" />
-			</Grid.RowDefinitions>
-			<Grid Grid.Row="0" Background="Transparent">
-				<Image Source="/resources/images/calendar-icon.png" />
-			</Grid>
-			<ScrollViewer HorizontalAlignment="Stretch"
+            <Grid>
+                <TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 5" FontSize="17" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock x:Name="HeaderUserText" VerticalAlignment="Center" Padding="5 5" FontSize="17" />
+                    <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"
+                                             PopupMode="Click"
+                                             Style="{StaticResource MyPopupBoxStyle}">
+                        <StackPanel>
+                            <ListView x:Name="HeaderMenuListView"
+                                      Background="{x:Null}" BorderThickness="0"
+                                      ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
+                                      MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
+                                <ListView.ItemTemplate>
+                                    <!--Every card menu item-->
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="15" Height="15"
+                                                                     Margin="10 10" />
+                                            <TextBlock Text="{Binding Path=Header}" VerticalAlignment="Center"
+                                                       Padding="5 5" FontSize="17" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <ListView MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
+                                <Separator></Separator>
+                                <ListViewItem>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Logout" Width="15" Height="15" Margin="10 10" />
+                                        <TextBlock Text="{hm:Lang username}" VerticalAlignment="Center" Padding="5 5" FontSize="17" />
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </StackPanel>
+            </Grid>
+        </materialDesign:ColorZone>
+        <Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="DodgerBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="326*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Transparent">
+                <Image Source="/resources/images/calendar-icon.png" />
+            </Grid>
+            <ScrollViewer HorizontalAlignment="Stretch"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
-				<StackPanel>
-					<ListView x:Name="LeftMenuListView"
+                <StackPanel>
+                    <ListView x:Name="LeftMenuListView"
                               Background="{x:Null}"
                               BorderThickness="0"
                               ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
                               Foreground="White"
-							  Margin="0,10,0,0"
+                              Margin="0,10,0,0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               SelectionChanged="LeftMenuListView_MouseLeftButtonUp">
 
-						<ListView.ItemContainerStyle>
-							<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-						</ListView.ItemContainerStyle>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
+                        </ListView.ItemContainerStyle>
 
-						<ListView.ItemTemplate>
-							<!--Every card menu item-->
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-									<materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="15" Height="15"
+                        <ListView.ItemTemplate>
+                            <!--Every card menu item-->
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="15" Height="15"
                                                              Margin="10 10" Foreground="White" />
-									<TextBlock Text="{Binding Path=Header}" VerticalAlignment="Center" Padding="5 5"
+                                    <TextBlock Text="{Binding Path=Header}" VerticalAlignment="Center" Padding="5 5"
                                                FontSize="17" />
-								</StackPanel>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-					</ListView>
-				</StackPanel>
-			</ScrollViewer>
-		</Grid>
-		<DockPanel x:Name="DockPanelMain" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
-	</Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
+            <ListView Grid.Row="2" MouseLeftButtonUp="HeaderMenuListView_MouseLeftButtonUp">
+                <ListViewItem>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Logout" Width="15" Height="15"
+                                                 Margin="10 10" Foreground="White" />
+                        <TextBlock Text="{hm:Lang logout}" VerticalAlignment="Center" Padding="5 5"
+                                   FontSize="17" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </Grid>
+        <DockPanel x:Name="DockPanelMain" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
+    </Grid>
 </Window>

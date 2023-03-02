@@ -5,59 +5,63 @@ using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
 {
-	public class UserGeatheringRoleDao : BaseDao
-	{
-		private readonly UserDao userDao;
-		private readonly ConferenceDao conferenceDao;
-		private readonly GeatheringRoleDao geatheringRoleDao;
+    public class UserGatheringRoleDao : BaseDao
+    {
+        private readonly UserDao userDao;
+        private readonly ConferenceDao conferenceDao;
+        private readonly GatheringRoleDao gatheringRoleDao;
 
-		public UserGeatheringRoleDao()
-		{
-			userDao = new UserDao();
-			conferenceDao = new ConferenceDao();
-			geatheringRoleDao = new GeatheringRoleDao();
-		}
+        public UserGatheringRoleDao()
+        {
+            userDao = new UserDao();
+            conferenceDao = new ConferenceDao();
+            gatheringRoleDao = new GatheringRoleDao();
+        }
 
-		public UserGeatheringRole insertUserConferenceConferenceRole(User user, Conference conference, GeatheringRoleEnum geatheringRoleEnum)
-		{
-			string userGeatheringRoleSql = @"
+        public UserGatheringRole insertUserConferenceConferenceRole(User user, Conference conference,
+            GatheringRoleEnum gatheringRoleEnum)
+        {
+            const string userGatheringRoleSql = @"
 				INSERT INTO user_geathering_role (user_id, geathering_role_id, geathering_id) 
 				VALUES (@userId, @geatheringRoleId, @geatheringId)";
 
+            MySqlTransaction transaction = connection.BeginTransaction();
+            GatheringRole gatheringRole = gatheringRoleDao.findByName(gatheringRoleEnum.ToString());
+            Conference insertedConference;
+            if (conference.Id == null)
+                insertedConference = conferenceDao.insertConference(conference, transaction);
+            else
+                insertedConference = conference;
 
-			MySqlTransaction transaction = connection.BeginTransaction();
-			GeatheringRole geatheringRole = geatheringRoleDao.findByName(geatheringRoleEnum.ToString());
-			Conference inseredConference = conferenceDao.insertConference(conference, transaction);
+            UserGatheringRole userGatheringRole = null;
+            try
+            {
+                using (var command = new MySqlCommand(userGatheringRoleSql, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@userId", 1); //user.Id);
+                    command.Parameters.AddWithValue("@geatheringId", 1); // inseredConference.Id); //TODO: typo gathering
+                    command.Parameters.AddWithValue("@geatheringRoleId", gatheringRole.Id); //Fk
 
-			UserGeatheringRole userGeatheringRole = null;
-			try
-			{
-				using (var command = new MySqlCommand(userGeatheringRoleSql, connection, transaction))
-				{
-					command.Parameters.AddWithValue("@userId", 1);//user.Id);
-					command.Parameters.AddWithValue("@geatheringId", 1);// inseredConference.Id);
-					command.Parameters.AddWithValue("@geatheringRoleId", geatheringRole.Id); //Fk
+                    command.ExecuteNonQuery();
+                }
 
-					command.ExecuteNonQuery();
-				}
-
-				transaction.Commit();
-				userGeatheringRole = new UserGeatheringRole
-				{
-					UserId = user.Id,
-					GeatheringId = inseredConference.Id,
-					GeatheringRoleId = geatheringRole.Id
-				};
-			}
-			catch (Exception ex)
-			{
-				transaction.Rollback();
-				userGeatheringRole = null;
-				//TODO: handle exception
-			}
+                transaction.Commit();
+                userGatheringRole = new UserGatheringRole
+                {
+                    UserId = user.Id,
+                    GatheringId = insertedConference.Id,
+                    GatheringRoleId = gatheringRole.Id
+                };
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                userGatheringRole = null;
+                //TODO: handle exception
+            }
 
 
-			return userGeatheringRole;
-		}
-	}
+            return userGatheringRole;
+        }
+    }
 }

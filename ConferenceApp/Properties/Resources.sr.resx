@@ -159,4 +159,7 @@
   <data name="confirmPassword" xml:space="preserve">
     <value>Potvrdi lozinku</value>
   </data>
+  <data name="logout" xml:space="preserve">
+    <value>Odjava</value>
+  </data>
 </root>

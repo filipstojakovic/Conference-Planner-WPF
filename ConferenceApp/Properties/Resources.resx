@@ -159,4 +159,7 @@
   <data name="confirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
 </root>

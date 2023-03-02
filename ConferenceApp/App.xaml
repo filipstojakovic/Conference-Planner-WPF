@@ -4,37 +4,36 @@
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:ConferenceApp"
              Exit="App_OnExit"
-	StartupUri="src/view/login/LoginWindow.xaml"
-			 >
-	<!-- TODO: here we change default startup screen -->
-	<!--StartupUri="/src/view/MainWindow.xaml"-->
+             StartupUri="/src/view/MainWindow.xaml">
+    <!-- TODO: here we change default startup screen -->
+    <!-- StartupUri="src/view/login/LoginWindow.xaml" -->
 
-	<Application.Resources>
+    <Application.Resources>
 
-		<ResourceDictionary x:Name="myResourceDict">
-			<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary x:Name="myResourceDict">
+            <ResourceDictionary.MergedDictionaries>
 
-				<ResourceDictionary Source="/resources/styles/default.xaml" />
-				<ResourceDictionary
+                <ResourceDictionary Source="/resources/styles/default.xaml" />
+                <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
 
-				<ResourceDictionary
+                <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Calendar.xaml" />
 
-				<ResourceDictionary
+                <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-				<ResourceDictionary
+                <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-				<ResourceDictionary
-                Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.blue.xaml" />
-				<ResourceDictionary
-                Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
-				<ResourceDictionary
-                Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 
 
-	</Application.Resources>
+    </Application.Resources>
 </Application>

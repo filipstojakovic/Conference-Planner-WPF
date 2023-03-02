@@ -51,26 +51,26 @@ namespace ConferenceApp.model.dao
 
 		public Conference insertConference(Conference conference, MySqlTransaction transaction)
 		{
-			string geatheringSql = @"INSERT INTO geathering (description) VALUES (@description)";
-			string conferenceSql = @"INSERT INTO conference (geathering_id, name, start_date, end_date) VALUES (@id, @name, @startDate, @endDate)";
+			const string gatheringSql = @"INSERT INTO geathering (description) VALUES (@description)";
+			const string conferenceSql = @"INSERT INTO conference (geathering_id, name, start_date, end_date) VALUES (@id, @name, @startDate, @endDate)";
 
-			int geatheringId;
-			using (var command = new MySqlCommand(geatheringSql, connection, transaction))
+			int gatheringId;
+			using (var command = new MySqlCommand(gatheringSql, connection, transaction))
 			{
 				command.Parameters.AddWithValue("@description", conference.Description);
 				command.ExecuteNonQuery();
-				geatheringId = (int)command.LastInsertedId;
+				gatheringId = (int)command.LastInsertedId;
 			}
 			using (var command = new MySqlCommand(conferenceSql, connection, transaction))
 			{
-				command.Parameters.AddWithValue("@id", geatheringId);
+				command.Parameters.AddWithValue("@id", gatheringId);
 				command.Parameters.AddWithValue("@name", conference.Name);
 				command.Parameters.AddWithValue("@startDate", conference.StartDate);
 				command.Parameters.AddWithValue("@endDate", conference.EndDate);
 				command.ExecuteNonQuery();
 			}
 
-			conference.Id = geatheringId;
+			conference.Id = gatheringId;
 			return conference;
 		}
 	}

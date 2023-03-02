@@ -10,7 +10,7 @@ namespace ConferenceApp.model.dao
 	{
 		public List<User> findAll()
 		{
-			String sql = @"
+			const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id";
@@ -27,7 +27,7 @@ namespace ConferenceApp.model.dao
 		public User findById(int id)
 		{
 			User user;
-			String sql = @"
+			const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id
@@ -46,7 +46,7 @@ namespace ConferenceApp.model.dao
 		public User findByUsername(string username)
 		{
 			User user = null;
-			String sql = @"
+			const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user
 				JOIN user_has_role ON user.id = user_has_role.user_id
 				JOIN role ON role.id = user_has_role.role_id

@@ -4,52 +4,52 @@ using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
 {
-	public class GeatheringRoleDao : BaseDao
+	public class GatheringRoleDao : BaseDao
 	{
-		public GeatheringRole findByName(string geatheringRoleName)
+		public GatheringRole findByName(string gatheringRoleName)
 		{
 			String sql = @"
 				SELECT * FROM geathering_role
 				WHERE name = @name";
 
-			GeatheringRole geatheringRole = null;
+			GatheringRole gatheringRole = null;
 			using (var command = new MySqlCommand(sql, connection))
 			{
-				command.Parameters.AddWithValue("@name", geatheringRoleName);
+				command.Parameters.AddWithValue("@name", gatheringRoleName);
 				using var reader = command.ExecuteReader();
 				while (reader.Read())
 				{
-					geatheringRole = new GeatheringRole
+					gatheringRole = new GatheringRole
 					{
 						Id = reader.GetInt32(reader.GetOrdinal("id")),
 						Name = reader.GetString(reader.GetOrdinal("name")),
 					};
 				}
 			}
-			return geatheringRole;
+			return gatheringRole;
 		}
 
-		public GeatheringRole findById(int geatheringRoleId)
+		public GatheringRole findById(int gatheringRoleId)
 		{
-			String sql = @"
+			const string sql = @"
 				SELECT * FROM geathering_role
 				WHERE id = @id";
 
-			GeatheringRole geatheringRole = null;
+			GatheringRole gatheringRole = null;
 			using (var command = new MySqlCommand(sql, connection))
 			{
-				command.Parameters.AddWithValue("@id", geatheringRoleId);
+				command.Parameters.AddWithValue("@id", gatheringRoleId);
 				using var reader = command.ExecuteReader();
 				while (reader.Read())
 				{
-					geatheringRole = new GeatheringRole
+					gatheringRole = new GatheringRole
 					{
 						Id = reader.GetInt32(reader.GetOrdinal("id")),
 						Name = reader.GetString(reader.GetOrdinal("name")),
 					};
 				}
 			}
-			return geatheringRole;
+			return gatheringRole;
 		}
 	}
 }

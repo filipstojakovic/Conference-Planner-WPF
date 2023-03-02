@@ -19,16 +19,17 @@ namespace ConferenceApp.view.usercontrol
 			InitializeComponent();
 			Trace.WriteLine("after init UserControlCustomers");
 
-			conferenceDao = new ConferenceDao();
-			var conferences = conferenceDao.findAll();
-			conferenceBindingList = new BindingList<Conference>(conferences);
-			conferenceList.ItemsSource = conferenceBindingList;
-
-
-			conferences.ForEach(conference =>
-			{
-				calendar.BlackoutDates.Add(new CalendarDateRange(conference.StartDate, conference.EndDate));
-			});
+			//TODO: uncomment me
+			// conferenceDao = new ConferenceDao();
+			// var conferences = conferenceDao.findAll();
+			// conferenceBindingList = new BindingList<Conference>(conferences);
+			// conferenceList.ItemsSource = conferenceBindingList;
+			//
+			//
+			// conferences.ForEach(conference =>
+			// {
+			// 	calendar.BlackoutDates.Add(new CalendarDateRange(conference.StartDate, conference.EndDate));
+			// });
 
 		}
 

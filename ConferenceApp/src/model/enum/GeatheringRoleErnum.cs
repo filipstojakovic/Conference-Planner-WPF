@@ -1,6 +1,6 @@
 ﻿namespace ConferenceApp.model
 {
-	public enum GeatheringRoleEnum
+	public enum GatheringRoleEnum
 	{
 		Organizer,
 		Visitor,
