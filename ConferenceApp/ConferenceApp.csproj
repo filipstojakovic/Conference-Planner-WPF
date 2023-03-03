@@ -24,11 +24,13 @@
 
   <ItemGroup>
     <None Remove="resources\images\calendar-icon.png" />
+    <Resource Include="resources\images\calendar-background.jpg" />
     <Resource Include="resources\images\calendar-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Remove="resources\images\calendar-background.jpg" />
-    <Resource Include="resources\images\calendar-background.jpg">
+    <None Remove="resources\images\calendar-background2.jpg" />
+    <Resource Include="resources\images\calendar-background2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

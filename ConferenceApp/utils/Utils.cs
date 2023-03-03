@@ -8,7 +8,7 @@ namespace ConferenceApp.utils
 {
     class Utils
     {
-        public const string EmailRegexPattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
+        public const string EmailRegexPattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,5}$";
 
         public static void createFileIfNotExists(string path)
         {

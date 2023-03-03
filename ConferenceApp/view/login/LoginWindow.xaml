@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
 		Height="600"
 		Width="1000"
-        MinHeight="520"
+        MinHeight="600"
         MinWidth="400"
 		>
 	<Grid Background="{StaticResource DarkGray}">

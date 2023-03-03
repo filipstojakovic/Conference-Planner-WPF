@@ -28,18 +28,26 @@ namespace ConferenceApp.view.login
             var firstName = txtFirstName.Text.Trim();
             var lastName = txtLastName.Text.Trim();
             var email = txtEmail.Text.Trim();
+            var username = txtUsername.Text.Trim();
             var password = txtPassword.Password;
             var rePassword = txtRePassword.Password;
 
             if (isAnyFieldEmpty())
             {
-                if (areFieldsValid(email, password, rePassword))
+                if (!areFieldsValid(email, username, password, rePassword)) return;
+
+                User user = new User
                 {
-                    User user = new User
-                        { FirstName = firstName, LastName = lastName, Email = email, Password = password };
-                    //TODO: insert user
-                    
+                    FirstName = firstName, LastName = lastName, Email = email, Username = username, Password = password
+                };
+                user = userDao.insert(user);
+                if (user == null)
+                {
+                    MessageBox.Show("Failed to insert user", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
+
+                action();
             }
             else
             {
@@ -47,11 +55,16 @@ namespace ConferenceApp.view.login
             }
         }
 
-        private bool areFieldsValid(string email, string password, string rePassword)
+        private bool areFieldsValid(string email, string username, string password, string rePassword)
         {
-            if (Utils.IsValidEmailAddress(email))
+            if (!Utils.IsValidEmailAddress(email))
             {
                 MessageBox.Show("Email not valid", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (isUsernameFieldTaken(username))
+            {
+                MessageBox.Show("Username already in use", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -85,10 +98,11 @@ namespace ConferenceApp.view.login
             var firstName = txtFirstName.Text.Trim();
             var lastName = txtLastName.Text.Trim();
             var email = txtEmail.Text.Trim();
+            var username = txtUsername.Text.Trim();
             var password = txtPassword.Password;
             var rePassword = txtRePassword.Password;
 
-            return firstName != "" && lastName != "" && email != "" && password != ""
+            return firstName != "" && lastName != "" && email != "" && username != "" && password != ""
                    && rePassword != "";
         }
     }

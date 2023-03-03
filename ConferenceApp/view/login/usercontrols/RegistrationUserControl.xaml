@@ -21,6 +21,9 @@
 
 			<Label Content="{hm:Lang email}" Foreground="White" />
 			<TextBox MinWidth="300" Name="txtEmail" Style="{StaticResource TextBoxStyle}" />
+			
+			<Label Content="{hm:Lang username}" Foreground="White" />
+			<TextBox MinWidth="300" Name="txtUsername" Style="{StaticResource TextBoxStyle}" />
 
 			<Label Content="{hm:Lang password}" Foreground="White" />
 			<PasswordBox MinWidth="300" Name="txtPassword" Style="{StaticResource PasswordBoxStyle}" />

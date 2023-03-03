@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using ConferenceApp.model.entity;
+using ConferenceApp.utils;
+using Microsoft.VisualBasic.CompilerServices;
 using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
@@ -32,7 +34,7 @@ namespace ConferenceApp.model.dao
             return users;
         }
 
-        public User findById(int id)
+        public User findById(int? id)
         {
             User user;
             const string sql = @"
@@ -127,9 +129,35 @@ namespace ConferenceApp.model.dao
 
         public User insert(User user)
         {
-            //TODO: insert not implemented
-            //const string insertUserSql = @"INSERT "
-            return null;
+            string insertSql = @"
+                INSERT INTO user (username, password, first_name, last_name, email) 
+                VALUES (@username, @password, @firstName, @lastName, @email)";
+            var encodedPassword = Base64Util.Base64Encode(user.Password);
+
+            var transaction = startTransaction();
+            try
+            {
+                using (var command = new MySqlCommand(insertSql, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@username", user.Username);
+                    command.Parameters.AddWithValue("@password", encodedPassword);
+                    command.Parameters.AddWithValue("@firstName", user.FirstName);
+                    command.Parameters.AddWithValue("@lastName", user.LastName);
+                    command.Parameters.AddWithValue("@email", user.Email);
+                    command.ExecuteNonQuery();
+                    user.Id = (int)command.LastInsertedId;
+                }
+
+                userRoleDao.insertUserRole(user, transaction);
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                return null;
+            }
+
+            return findById(user.Id);
         }
 
         public User update(User user)
