@@ -9,12 +9,12 @@ namespace ConferenceApp.view.login
 	/// </summary>
 	public partial class RegistrationUserControl : UserControl
 	{
-		private Action closeAction;
+		private Action action;
 
-		public RegistrationUserControl(Action closeAction)
+		public RegistrationUserControl(Action action)
 		{
 			InitializeComponent();
-			this.closeAction = closeAction;
+			this.action = action;
 		}
 
 		private void Register_Click(object sender, RoutedEventArgs e)
@@ -22,8 +22,8 @@ namespace ConferenceApp.view.login
 			var firstName = this.txtFirstName.Text.Trim();
 			var password = this.txtPassword.Password.Trim();
 
-			new MainWindow().Show();
-			closeAction();
+			//TODO: show success/fail register message
+			action();
 		}
 	}
 }

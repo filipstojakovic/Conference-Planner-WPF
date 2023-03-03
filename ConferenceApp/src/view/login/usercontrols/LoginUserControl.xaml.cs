@@ -15,13 +15,13 @@ namespace ConferenceApp.view.login
     {
         private AppSettings appSettings;
         private UserDao userDao;
-        private Action closeAction;
+        private Action action;
 
-        public LoginUserControl(Action closeAction)
+        public LoginUserControl(Action action)
         {
             appSettings = AppSettings.getInstance();
             userDao = new UserDao();
-            this.closeAction = closeAction;
+            this.action = action;
             InitializeComponent();
         }
 
@@ -34,13 +34,13 @@ namespace ConferenceApp.view.login
             if (checkIfUsernameAndPasswordValid(user, username, password))
             {
                 new MainWindow(user).Show();
-                closeAction();
+                action();
             }
             else if ("" == username && "" == password)  // TODO: delete me
             {
                 user = userDao.findByUsername("admin");
                 new MainWindow(user).Show(); 
-                closeAction();
+                action();
             }
             else
             {

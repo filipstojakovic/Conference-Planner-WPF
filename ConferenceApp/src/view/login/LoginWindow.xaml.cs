@@ -37,6 +37,12 @@ public partial class LoginWindow : Window
 		this.Close();
 	}
 
+	private void goToLoginScene()
+	{
+		DockPanelMain.Children.Clear();
+		DockPanelMain.Children.Add(new LoginUserControl(closeWindow));
+	}
+
 	private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
 	{
 		var radioButton = sender as RadioButton;
@@ -44,14 +50,14 @@ public partial class LoginWindow : Window
 			return;
 
 		DockPanelMain.Children.Clear();
-		if ("login" == radioButton.Name)
+		var radioButtonName = radioButton.Name;
+		if ("login" == radioButtonName)
 		{
 			DockPanelMain.Children.Add(new LoginUserControl(closeWindow));
 		}
 		else
 		{
-			DockPanelMain.Children.Add(new RegistrationUserControl(closeWindow));
-
+			DockPanelMain.Children.Add(new RegistrationUserControl(goToLoginScene));
 		}
 	}
 }

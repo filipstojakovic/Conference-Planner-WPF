@@ -16,7 +16,7 @@ namespace ConferenceApp.view.usercontrol
 		private List<Conference> conferenceList;
 		private BindingList<Conference> conferenceBindingList;
 
-		public ConferenceControl()
+		public ConferenceControl(User currentUser)
 		{
 			Trace.WriteLine("before init UserControlCustomers");
 			InitializeComponent();

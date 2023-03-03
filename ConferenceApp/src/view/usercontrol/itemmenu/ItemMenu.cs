@@ -1,9 +1,9 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
 
-namespace ConferenceApp.view.usercontrol.ViewModel
+namespace ConferenceApp.view.usercontrol
 {
-	public class ItemMenu
+    public class ItemMenu
     {
         public string Header { get; private set; }
         public PackIconKind Icon { get; private set; }
@@ -15,7 +15,5 @@ namespace ConferenceApp.view.usercontrol.ViewModel
             Icon = icon;
             Screen = screen;
         }
-        
-        
     }
 }
