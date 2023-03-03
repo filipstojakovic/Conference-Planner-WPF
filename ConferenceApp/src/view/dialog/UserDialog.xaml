@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:ConferenceApp.converter"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
         Title="ConferenceDialog"
@@ -11,6 +12,7 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converter:ConvertListToString x:Key="listToString" />
     </Window.Resources>
 
     <Grid Margin="10">
@@ -20,6 +22,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -38,10 +42,26 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Email:" Margin="5" />
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Role:" Margin="5" />
+        <ComboBox Grid.Row="4" Grid.Column="1"
+                  Name="RoleComboBox"
+                  IsTextSearchEnabled="False"
+                  IsEditable="False"
+                  IsSynchronizedWithCurrentItem="True"
+                  ItemsSource="{Binding AllRoles}"
+                  SelectedItem="{Binding Path=SelectedRole, UpdateSourceTrigger=PropertyChanged}"
+                  >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" >
-            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80"/>
-            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80"/>
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
 
             <!-- <Button Content="Edit" -->
             <!--         x:Name="editBtn" -->
