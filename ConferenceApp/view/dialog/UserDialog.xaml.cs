@@ -22,8 +22,8 @@ namespace ConferenceApp.view.dialog
             InitializeComponent();
             Edit = edit;
             this.UserDialogData = new User(user);
-            Button.Content = edit ? "Edit" : "Create";
-            this.Title = (edit ? "Edit" : "Create") + " user";
+            Button.Content = edit ? "Save" : "Create";
+            this.Title = (edit ? "Save" : "Create") + " user";
 
             Role userRole = UserDialogData.Roles
                 .Where(role => role.Name.ToLower() == "user")
@@ -43,12 +43,6 @@ namespace ConferenceApp.view.dialog
             // editBtn.DataContext = this;
         }
 
-        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-            Close();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             UserDialogData.Roles = new BindingList<Role> { SelectedRole };
@@ -60,5 +54,12 @@ namespace ConferenceApp.view.dialog
             DialogResult = true;
             Close();
         }
+        
+        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
     }
 }

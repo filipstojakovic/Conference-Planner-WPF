@@ -43,15 +43,16 @@ namespace ConferenceApp.view.login
                 user = userDao.insert(user);
                 if (user == null)
                 {
-                    MessageBox.Show("Failed to insert user", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Failed to insert user.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
+                Utils.InfoBox("Account has been successfully created.");
                 action();
             }
             else
             {
-                MessageBox.Show("Please insert all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please insert all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -59,24 +60,25 @@ namespace ConferenceApp.view.login
         {
             if (!Utils.IsValidEmailAddress(email))
             {
-                MessageBox.Show("Email not valid", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email not valid.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+
             if (isUsernameFieldTaken(username))
             {
-                MessageBox.Show("Username already in use", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Username already in use.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (isEmailFieldTaken(email))
             {
-                MessageBox.Show("Email already in use", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email already in use.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (password != rePassword)
             {
-                MessageBox.Show("Passwords do not match", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Passwords do not match.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

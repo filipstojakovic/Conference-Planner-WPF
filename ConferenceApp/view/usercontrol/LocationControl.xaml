@@ -30,8 +30,8 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName,Mode=TwoWay}" />
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName,Mode=TwoWay}" />
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email,Mode=TwoWay}" />
             </DataGrid.Columns>
         </DataGrid>

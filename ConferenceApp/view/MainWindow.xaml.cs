@@ -63,8 +63,8 @@ namespace ConferenceApp.view
             Conference conference = Generate.conference();
             UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
             User user = (new UserDao()).findById(2);
-            userGatheringRoleDao.insertUserConferenceConferenceRole(this.currentUser, conference,
-                GatheringRoleEnum.Organizer);
+            // userGatheringRoleDao.insertUserConferenceConferenceRole(this.currentUser, conference,
+            //     GatheringRoleEnum.Organizer);
         }
 
         //Selection changed in left menu

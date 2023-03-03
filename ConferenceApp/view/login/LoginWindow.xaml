@@ -4,31 +4,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" FontSize="14"
         WindowStartupLocation="CenterScreen"
-		Height="600"
-		Width="1000"
+        Height="600"
+        Width="1000"
         MinHeight="600"
-        MinWidth="400"
-		>
-	<Grid Background="{StaticResource DarkGray}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition></ColumnDefinition>
-			<ColumnDefinition MinWidth="400" Width="Auto"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
+        MinWidth="400">
+    <Grid Background="{StaticResource DarkGray}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition MinWidth="400" Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-		<StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"></StackPanel>
-		<StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<Image Source="/resources/images/calendar-background.jpg"></Image>
-		</StackPanel>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"></StackPanel>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="/resources/images/calendar-background.jpg"></Image>
+        </StackPanel>
 
-		<Grid Grid.Column="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" VerticalAlignment="Center">
-				<RadioButton Name="en"
+            <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                <RadioButton Name="en"
                              IsChecked="True"
                              Margin="10,0,0,5"
                              Checked="Language_ToggleButton_OnChecked"
@@ -36,38 +35,39 @@
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
                              Content="{hm:Lang en}">
-				</RadioButton>
+                </RadioButton>
 
-				<RadioButton Name="sr"
-                         Checked="Language_ToggleButton_OnChecked"
-                         Margin="10,0,0,5"
-                         Foreground="White"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Content="{hm:Lang sr}" />
-			</StackPanel>
+                <RadioButton Name="sr"
+                             Checked="Language_ToggleButton_OnChecked"
+                             Margin="10,0,0,5"
+                             Foreground="White"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Content="{hm:Lang sr}" />
+            </StackPanel>
 
-			<StackPanel Grid.Row="1" VerticalAlignment="Center">
-				<RadioButton Name="login"
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <RadioButton Name="login"
                              IsChecked="True"
                              Margin="10,0,0,5"
                              Checked="ToggleButton_OnChecked"
                              Foreground="White"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             Content="login">
-				</RadioButton>
+                             Content="{hm:Lang login}">
+                </RadioButton>
 
-				<RadioButton Name="register"
-                         Checked="ToggleButton_OnChecked"
-                         Margin="10,0,0,5"
-                         Foreground="White"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Content="register" />
-			</StackPanel>
-			<DockPanel Grid.Row="2" x:Name="DockPanelMain" Margin="8" HorizontalAlignment="center" VerticalAlignment="Center"/>
-		</Grid>
+                <RadioButton Name="register"
+                             Checked="ToggleButton_OnChecked"
+                             Margin="10,0,0,5"
+                             Foreground="White"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Content="{hm:Lang register}" />
+            </StackPanel>
+            <DockPanel Grid.Row="2" x:Name="DockPanelMain" Margin="8" HorizontalAlignment="center"
+                       VerticalAlignment="Center" />
+        </Grid>
 
-	</Grid>
+    </Grid>
 </Window>

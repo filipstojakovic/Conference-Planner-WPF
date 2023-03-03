@@ -30,9 +30,6 @@
     </Resource>
     <None Remove="resources\images\calendar-background.jpg" />
     <None Remove="resources\images\calendar-background2.jpg" />
-    <Resource Include="resources\images\calendar-background2.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>

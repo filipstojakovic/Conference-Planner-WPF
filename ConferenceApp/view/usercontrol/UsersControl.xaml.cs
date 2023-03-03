@@ -70,10 +70,6 @@ namespace ConferenceApp.view.usercontrol
                 userDao.update(user);
                 CollectionViewSource.GetDefaultView(usersList.ItemsSource).Refresh();
             }
-            else
-            {
-                var test = dialog.UserDialogData;
-            }
         }
 
         private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)

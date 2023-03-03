@@ -4,61 +4,71 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:utils="clr-namespace:ConferenceApp.utils"
              mc:Ignorable="d"
-             >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="auto"/>
-		</Grid.ColumnDefinitions>
+             d:DesignHeight="400" d:DesignWidth="800">
 
-		<DockPanel Grid.Column="0">
-			<TextBox Background="White"
-                     DockPanel.Dock="Top" Margin="0,0,0,10"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <Button Name="Button" Click="NewConference_Button_Click" Margin="12" MinWidth="80">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
+                                             VerticalAlignment="Stretch" Margin="0,0,2,0"/>
+                    <TextBlock Text="Create conference" />
+                </StackPanel>
+            </Button>
+            <TextBox Background="White"
+                     Margin="0,0,0,10"
                      materialDesign:HintAssist.Hint="Filter result..."
                      Name="txtFilter" TextChanged="txtFilter_TextChanged" />
 
-			<DataGrid	Name="conferenceListDataGrid" 
-						AutoGenerateColumns="False" 
-						ColumnWidth="*"
-						VerticalScrollBarVisibility="Auto"
-						IsReadOnly="True"
-                      >
-				<DataGrid.ContextMenu>
-					<ContextMenu>
-						<MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-						<MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
-						<MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
-					</ContextMenu>
-				</DataGrid.ContextMenu>
-				<DataGrid.Columns>
-					<DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-					<DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-					<DataGridTextColumn Header="Start date" Binding="{Binding StartDate, StringFormat={}{0:HH:mm dd.MM.yy}}" />
-					<DataGridTextColumn Header="End date" Binding="{Binding EndDate, StringFormat={}{0:HH:mm dd.MM.yy}}" />
-				</DataGrid.Columns>
-			</DataGrid>
-		</DockPanel>
-		<Viewbox Grid.Column="1" HorizontalAlignment="Right">
-			<Calendar x:Name="calendar"
+            <DataGrid Name="conferenceListDataGrid"
+                      AutoGenerateColumns="False"
+                      ColumnWidth="*"
+                      VerticalScrollBarVisibility="Auto"
+                      IsReadOnly="True">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+                        <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+                        <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                    <DataGridTextColumn Header="Start date"
+                                        Binding="{Binding StartDate, StringFormat={}{0:HH:mm dd.MM.yy}}" />
+                    <DataGridTextColumn Header="End date"
+                                        Binding="{Binding EndDate, StringFormat={}{0:HH:mm dd.MM.yy}}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+            <Calendar x:Name="calendar"
                       SelectionMode="MultipleRange"
                       FirstDayOfWeek="Monday"
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
-
                       DisplayDateChanged="calendar_DisplayDateChanged">
-				<Calendar.CalendarDayButtonStyle>
-					<Style TargetType="CalendarDayButton" BasedOn="{StaticResource {x:Type CalendarDayButton}}">
-						<Style.Triggers>
-							<Trigger Property="IsBlackedOut" Value="True">
-								<Setter Property="Background" Value="Transparent"/>
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</Calendar.CalendarDayButtonStyle>
-			</Calendar>
-		</Viewbox>
-	</Grid>
+                <Calendar.CalendarDayButtonStyle>
+                    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                        <Style.Triggers>
+                            <Trigger Property="IsBlackedOut" Value="True">
+                                <Setter Property="Background" Value="#2196f3" />
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="TextBlock.Opacity" Value="1"></Setter>
+                                <Setter Property="TextBox.Opacity" Value="1"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Calendar.CalendarDayButtonStyle>
+            </Calendar>
+        </Viewbox>
+    </Grid>
 </UserControl>
