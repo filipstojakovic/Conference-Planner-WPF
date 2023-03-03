@@ -75,9 +75,14 @@ namespace ConferenceApp.model.dao
 			return conference;
 		}
 
-		public void deleteConference(int geatheringId, MySqlTransaction transaction)
+		public void deleteConference(int gatheringId)
 		{
-			throw new NotImplementedException();
+			string deleteConferenceSql = $"DELETE FROM gathering WHERE id = {gatheringId}";
+
+			using (var command = new MySqlCommand(deleteConferenceSql, connection))
+			{
+				command.ExecuteNonQuery();
+			}
 		}
 	}
 }

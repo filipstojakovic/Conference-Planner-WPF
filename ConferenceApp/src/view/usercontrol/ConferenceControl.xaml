@@ -47,6 +47,7 @@
                       SelectionMode="MultipleRange"
                       FirstDayOfWeek="Monday"
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
+
                       DisplayDateChanged="calendar_DisplayDateChanged">
 				<Calendar.CalendarDayButtonStyle>
 					<Style TargetType="CalendarDayButton" BasedOn="{StaticResource {x:Type CalendarDayButton}}">

@@ -33,8 +33,6 @@
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Roles"
-                                    Binding="{Binding Roles,Mode=TwoWay, Converter={StaticResource listToString}}" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

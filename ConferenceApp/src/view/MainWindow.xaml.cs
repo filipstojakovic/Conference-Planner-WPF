@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using ConferenceApp.view.login;
 using ConferenceApp.view.usercontrol;
 using GenSpark.WPFAccordionMenu;
 using MaterialDesignThemes.Wpf;
+using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.view
 {
@@ -18,36 +20,51 @@ namespace ConferenceApp.view
     {
         private User currentUser;
 
-        public MainWindow(User user)
+        public MainWindow(User currentUser)
         {
             Trace.WriteLine("before init MainWindow");
             InitializeComponent();
             Trace.WriteLine("after init MainWindow");
-            this.currentUser = user;
-            HeaderUserText.Text = Utils.CapitalizeFirstLetter(user.FirstName) + " " +
-                                  Utils.CapitalizeFirstLetter(user.LastName);
+            this.currentUser = currentUser;
+            HeaderUserText.Text = Utils.CapitalizeFirstLetter(currentUser.FirstName) + " " +
+                                  Utils.CapitalizeFirstLetter(currentUser.LastName);
 
-            Drawer_MenuListView.Items.Add(new ItemMenu("Conferences", PackIconKind.Register, 
-                new ConferenceControl(currentUser)));
+            Drawer_MenuListView.Items.Add(new ItemMenu("Conferences", PackIconKind.Register,
+                new ConferenceControl(this.currentUser)));
             Drawer_MenuListView.Items.Add(new ItemMenu("Sessions", PackIconKind.Connection,
-                new SessionControl(currentUser)));
+                new SessionControl(this.currentUser)));
             Drawer_MenuListView.Items.Add(new ItemMenu("Events", PackIconKind.Connection,
-                new EventControl(currentUser)));
-            
+                new EventControl(this.currentUser)));
+
             //TODO: viska, ali necemu ce sluziti
             Drawer_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About, new MenuControl()));
 
             //if user has admin role
-            if (user.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
+            if (currentUser.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
             {
                 Drawer_MenuListView.Items.Add(new ItemMenu("Locations", PackIconKind.Map,
                     new LocationControl()));
                 Drawer_MenuListView.Items.Add(new ItemMenu("Users", PackIconKind.User,
-                    new UsersControl(currentUser)));
+                    new UsersControl(this.currentUser)));
             }
 
             Drawer_MenuListView.SelectedIndex = 0; // select first menu item by default
             DrawerBottom_MenuListView.Items.Add(new ItemMenu("Settings", PackIconKind.Settings, new SettingsControl()));
+
+
+            
+          // test();
+          // ConferenceDao conferenceDao = new ConferenceDao();
+          // conferenceDao.deleteConference(2);
+        }
+
+        void test()
+        {
+            Conference conference = Generate.conference();
+            UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
+            User user = (new UserDao()).findById(2);
+            userGatheringRoleDao.insertUserConferenceConferenceRole(this.currentUser, conference,
+                GatheringRoleEnum.Organizer);
         }
 
         //Selection changed in left menu
@@ -73,7 +90,7 @@ namespace ConferenceApp.view
             Drawer_MenuListView.SelectedItems.Clear();
         }
 
-        internal void SwitchScreen(ItemMenu sender)
+        private void SwitchScreen(ItemMenu sender)
         {
             if (sender == null || sender.Screen == null)
                 return;

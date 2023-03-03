@@ -8,5 +8,10 @@ namespace ConferenceApp.model.dao
         protected MySqlConnection connection { get; }
 
         protected BaseDao() => connection = MySqlSingleton.getInstance().connection;
+
+        public MySqlTransaction startTransaction()
+        {
+            return connection.BeginTransaction();
+        }
     }
 }

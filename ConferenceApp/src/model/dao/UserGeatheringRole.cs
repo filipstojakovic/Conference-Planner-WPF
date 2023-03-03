@@ -1,6 +1,6 @@
 ﻿using System;
 using ConferenceApp.model.entity;
-using ConferenceApp.src.model.entity;
+using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao

@@ -40,7 +40,7 @@ namespace ConferenceApp.view.usercontrol
 
 		private bool ConferenceFilter(object item)
 		{
-			if (String.IsNullOrEmpty(txtFilter.Text))
+			if (string.IsNullOrEmpty(txtFilter.Text))
 				return true;
 
 			return (item as Conference).Name.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0;

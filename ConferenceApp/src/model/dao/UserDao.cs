@@ -11,7 +11,6 @@ namespace ConferenceApp.model.dao
     {
         private readonly UserRoleDao userRoleDao;
 
-
         public UserDao()
         {
             this.userRoleDao = new UserRoleDao();
@@ -126,6 +125,13 @@ namespace ConferenceApp.model.dao
             return users;
         }
 
+        public User insert(User user)
+        {
+            //TODO: insert not implemented
+            //const string insertUserSql = @"INSERT "
+            return null;
+        }
+
         public User update(User user)
         {
             const string updateUserSql = @"
@@ -169,35 +175,12 @@ namespace ConferenceApp.model.dao
 
         public void delete(int? userId)
         {
-            string deleteUserRole = $"DELETE FROM user_has_role WHERE user_id = {userId}";
-            string userGatheringRole = $"DELETE FROM user_gathering_role WHERE user_id = {userId}";
             string deleteUserSql = $"DELETE FROM user WHERE id = {userId}";
             //TODO: conference check
 
-            MySqlTransaction transaction = connection.BeginTransaction();
-            try
+            using (var command = new MySqlCommand(deleteUserSql, connection))
             {
-                using (var command = new MySqlCommand(deleteUserRole, connection, transaction))
-                {
-                    command.ExecuteNonQuery();
-                }
-
-                using (var command = new MySqlCommand(userGatheringRole, connection, transaction))
-                {
-                    command.ExecuteNonQuery();
-                }
-
-                using (var command = new MySqlCommand(deleteUserSql, connection, transaction))
-                {
-                    command.ExecuteNonQuery();
-                }
-
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                Trace.WriteLine(ex.Message);
+                command.ExecuteNonQuery();
             }
         }
     }

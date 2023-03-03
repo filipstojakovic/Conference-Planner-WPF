@@ -12,16 +12,13 @@ public partial class LocationControl : UserControl
 
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
     }
 
     private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
     }
 
     private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
     {
-        throw new System.NotImplementedException();
     }
 }

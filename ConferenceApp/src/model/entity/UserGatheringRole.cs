@@ -1,4 +1,4 @@
-﻿namespace ConferenceApp.src.model.entity
+﻿namespace ConferenceApp.model.entity
 {
 	public class UserGatheringRole
 	{
