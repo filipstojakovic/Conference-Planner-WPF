@@ -18,7 +18,7 @@ namespace ConferenceApp.model.dao
             this.userRoleDao = new UserRoleDao();
         }
 
-        public List<User> findAll()
+        public List<User> findAllUsersAndRoles()
         {
             const string sql = @"
 				SELECT user.id as user_id, role.id as role_id, user.*, role.* FROM user

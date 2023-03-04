@@ -3,10 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ConferenceApp.view.usercontrol"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:editors="http://wpfcontrols.com/"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="600">
+    <DockPanel>
+        <ComboBox Grid.Row="4" Grid.Column="1"
+                  Name="ComboBox"
+                  DockPanel.Dock="Top" Margin="0,0,0,10"
+                  IsTextSearchEnabled="False"
+                  IsEditable="False"
+                  FontSize="18"
+                  materialDesign:HintAssist.Hint="Select conference"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="ComboBox_OnSelectionChanged"
+                  ItemsSource="{Binding conferenceBindingList}"
+                  SelectedItem="{Binding Path=SelectedConference, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <DataGrid Name="SessionDataGrid"
+                  AutoGenerateColumns="False"
+                  ColumnWidth="*"
+                  VerticalScrollBarVisibility="Auto"
+                  DockPanel.Dock="Bottom"
+                  IsReadOnly="True">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+                    <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+                    <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Session Name" Binding="{Binding Name,Mode=TwoWay}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Start date"
+                                    Binding="{Binding StartDate, StringFormat=d}" />
+                <DataGridTextColumn Header="End date"
+                                    Binding="{Binding EndDate, StringFormat=d}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </UserControl>

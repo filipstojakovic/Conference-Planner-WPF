@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows;
+using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.utils
 {
@@ -38,6 +39,38 @@ namespace ConferenceApp.utils
         {
             Regex regex = new Regex(EmailRegexPattern);
             return regex.IsMatch(s);
+        }
+
+        public static bool DateRangesOverlap(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        {
+            if (start1 <= end2 && end1 >= start2)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool isColumnNull(MySqlDataReader reader, string columnName)
+        {
+            var columnOrdinal = reader.GetOrdinal("columnName");
+            return reader.IsDBNull(columnOrdinal);
+        }
+
+        public static T readerGetValue<T>(MySqlDataReader reader, string columnName)
+
+        {
+            int columnIndex = reader.GetOrdinal(columnName); // Get the index of the column by name
+
+            if (reader.IsDBNull(columnIndex)) // Check if the value is null
+            {
+                return default(T);
+            }
+            else
+            {
+                object value = reader.GetValue(columnIndex); // Get the value of the column as an object
+                return (T)value;
+            }
         }
 
         public static void ErrorBox(string message)

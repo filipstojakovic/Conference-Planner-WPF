@@ -24,6 +24,7 @@
             </Button>
             <TextBox Background="White"
                      Margin="0,0,0,10"
+                     FontSize="18"
                      materialDesign:HintAssist.Hint="Filter result..."
                      Name="txtFilter" TextChanged="txtFilter_TextChanged" />
 

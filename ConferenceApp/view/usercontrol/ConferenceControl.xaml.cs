@@ -107,7 +107,7 @@ namespace ConferenceApp.view.usercontrol
         private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
-            var dialog = new ConferenceDialog(conference, true);
+            var dialog = new ConferenceDialog(conference, conferenceBindingList, true);
             if (dialog.ShowDialog() == true)
             {
                 try
@@ -156,7 +156,7 @@ namespace ConferenceApp.view.usercontrol
 
         private void NewConference_Button_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new ConferenceDialog();
+            var dialog = new ConferenceDialog(null, conferenceBindingList);
             if (dialog.ShowDialog() == true)
             {
                 var transaction = conferenceDao.startTransaction();

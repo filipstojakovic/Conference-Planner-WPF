@@ -19,7 +19,7 @@ namespace ConferenceApp.view.login
         {
             InitializeComponent();
             userDao = new UserDao();
-            users = userDao.findAll();
+            users = userDao.findAllUsersAndRoles();
             this.action = action;
         }
 

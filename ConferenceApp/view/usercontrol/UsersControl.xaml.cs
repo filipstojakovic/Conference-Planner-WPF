@@ -29,7 +29,7 @@ namespace ConferenceApp.view.usercontrol
 
         private void loadData()
         {
-            List<User> users = userDao.findAll();
+            List<User> users = userDao.findAllUsersAndRoles();
             userBindingList = new BindingList<User>(users);
             usersList.ItemsSource = userBindingList;
         }

@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using ConferenceApp.model.entity;
@@ -13,7 +16,10 @@ public partial class ConferenceDialog : Window
     public Role SelectedRole { get; set; }
     public bool Edit { get; set; }
 
-    public ConferenceDialog(Conference conference = null, bool edit = false)
+    private readonly BindingList<Conference> conferenceListForChecking;
+
+    public ConferenceDialog(Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
+        bool edit = false)
     {
         CultureInfo culture = new CultureInfo(LangUtils.CurrentCulture.Name);
         Thread.CurrentThread.CurrentCulture = culture;
@@ -28,6 +34,7 @@ public partial class ConferenceDialog : Window
             ConferenceDialogData = new Conference();
         }
 
+        this.conferenceListForChecking = conferenceListForChecking;
         DataContext = ConferenceDialogData;
     }
 
@@ -45,6 +52,19 @@ public partial class ConferenceDialog : Window
             return;
         }
 
+        if (conferenceListForChecking != null)
+        {
+            var hasOverLap = conferenceListForChecking.Any(conference => Utils.DateRangesOverlap(conference.StartDate,
+                conference.EndDate, ConferenceDialogData.StartDate, ConferenceDialogData.EndDate));
+            if (hasOverLap)
+            {
+                Utils.ErrorBox("Already have conference in that time period!");
+                return;
+            }
+        }
+
+
+        //TODO: ceheck if conference already in date time line
         DialogResult = true;
         Close();
     }
