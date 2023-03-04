@@ -7,8 +7,8 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-        Width="500"
-        >
+        Width="500">
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -35,16 +35,18 @@
                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
+                 MaxLength="255"
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
         <Label Grid.Row="2" Grid.Column="0" Content="Start Date:" Margin="5" />
         <DatePicker Grid.Row="2" Grid.Column="1"
-                           Text="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                    Text="{Binding StartDate}"
+                    Margin="5" />
 
         <Label Grid.Row="3" Grid.Column="0" Content="End Date:" Margin="5" />
         <DatePicker Grid.Row="3" Grid.Column="1"
-                    Text="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding EndDate}"
                     Margin="5" />
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"

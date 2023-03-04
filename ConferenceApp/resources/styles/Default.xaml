@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    >
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
     <SolidColorBrush x:Key="DarkGray" Color="#2e3137"></SolidColorBrush>
@@ -10,7 +9,7 @@
     <!-- pozadina polja -->
 
     <SolidColorBrush x:Key="CustomDarkBlue" Color="#16375f"></SolidColorBrush>
-	<SolidColorBrush x:Key="CustomLightBlue" Color="#2196f3"></SolidColorBrush>
+    <SolidColorBrush x:Key="CustomLightBlue" Color="#2196f3"></SolidColorBrush>
 
     <!-- STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES -->
 
@@ -43,7 +42,6 @@
         </Setter>
     </Style>
 
-
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="Red" />
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="Red" />
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="Blue" />
@@ -53,12 +51,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                     <Border x:Name="Bd"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <!--MenuItem Content presenter-->
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <!--MouseOver menu item-->
@@ -67,9 +65,9 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd"
-                                            Value="{DynamicResource Item.MouseOver.Background}" />
+                                    Value="{DynamicResource Item.MouseOver.Background}" />
                             <Setter Property="BorderBrush" TargetName="Bd"
-                                            Value="{DynamicResource Item.MouseOver.Border}" />
+                                    Value="{DynamicResource Item.MouseOver.Border}" />
                         </MultiTrigger>
 
                         <!--MainWindow not in focus-->
@@ -79,9 +77,9 @@
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd"
-                                            Value="{DynamicResource Item.SelectedActive.Background}" />
+                                    Value="{DynamicResource Item.SelectedActive.Background}" />
                             <Setter Property="BorderBrush" TargetName="Bd"
-                                            Value="{DynamicResource Item.SelectedActive.Border}" />
+                                    Value="{DynamicResource Item.SelectedActive.Border}" />
                         </MultiTrigger>
 
                         <!--Selected menu item-->
@@ -91,9 +89,9 @@
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd"
-                                            Value="{DynamicResource Item.SelectedActive.Background}" />
+                                    Value="{DynamicResource Item.SelectedActive.Background}" />
                             <Setter Property="BorderBrush" TargetName="Bd"
-                                            Value="{DynamicResource Item.SelectedActive.Border}" />
+                                    Value="{DynamicResource Item.SelectedActive.Border}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -103,8 +101,8 @@
 
     <!--TESTING-->
     <Style x:Key="MyPopupBoxStyle" TargetType="{x:Type materialDesign:PopupBox}">
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 
 </ResourceDictionary>

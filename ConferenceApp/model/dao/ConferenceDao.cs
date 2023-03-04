@@ -75,7 +75,7 @@ namespace ConferenceApp.model.dao
 			return conference;
 		}
 
-		public void deleteConference(int gatheringId)
+		public void deleteConference(int? gatheringId)
 		{
 			string deleteConferenceSql = $"DELETE FROM gathering WHERE id = {gatheringId}";
 

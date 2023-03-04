@@ -10,6 +10,9 @@ namespace ConferenceApp.model.entity
 
         public Conference()
         {
+            Name = "";
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddDays(1);
         }
 
         public Conference(Conference conference)

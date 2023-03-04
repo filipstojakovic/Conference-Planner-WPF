@@ -49,5 +49,14 @@ namespace ConferenceApp.utils
         {
             MessageBox.Show(message, "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        public static bool confirmAction(string message)
+        {
+            MessageBoxResult result =
+                MessageBox.Show(message, "Confirmation",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            return result == MessageBoxResult.Yes;
+        }
     }
 }

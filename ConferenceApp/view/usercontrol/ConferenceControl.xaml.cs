@@ -16,10 +16,9 @@ namespace ConferenceApp.view.usercontrol
 {
     public partial class ConferenceControl : UserControl
     {
-        private ConferenceDao conferenceDao;
-        private List<Conference> conferenceList;
         private BindingList<Conference> conferenceBindingList;
-        private User currentUser;
+        private readonly User currentUser;
+        private readonly ConferenceDao conferenceDao;
 
         public ConferenceControl(User currentUser)
         {
@@ -35,14 +34,21 @@ namespace ConferenceApp.view.usercontrol
 
         private void loadData()
         {
-            conferenceList = conferenceDao.findAll();
+            List<Conference> conferenceList = conferenceDao.findAll();
             conferenceBindingList = new BindingList<Conference>(conferenceList);
+            conferenceBindingList.ListChanged += ConferenceBindingListOnListChanged;
             conferenceListDataGrid.ItemsSource = conferenceBindingList;
 
-            conferenceList.ForEach(conference =>
+            ConferenceBindingListOnListChanged(null, null);
+        }
+
+        private void ConferenceBindingListOnListChanged(object? sender, ListChangedEventArgs e)
+        {
+            calendar.BlackoutDates.Clear();
+            foreach (var conference in conferenceBindingList)
             {
                 calendar.BlackoutDates.Add(new CalendarDateRange(conference.StartDate, conference.EndDate));
-            });
+            }
         }
 
         private bool ConferenceFilter(object item)
@@ -102,8 +108,12 @@ namespace ConferenceApp.view.usercontrol
         private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
-            //Remove the toDeleteFromBindedList object from your ObservableCollection
+            var yes = Utils.confirmAction($"Are you sure you want to delete {conference.Name}");
+            if (!yes)
+                return;
+            conferenceDao.deleteConference(conference.Id);
             conferenceBindingList.Remove(conference);
+            CollectionViewSource.GetDefaultView(conferenceListDataGrid.ItemsSource).Refresh();
         }
 
 
@@ -145,8 +155,7 @@ namespace ConferenceApp.view.usercontrol
                     Utils.ErrorBox("Unable to insert conference!");
                 }
 
-
-                CollectionViewSource.GetDefaultView(conferenceListDataGrid.ItemsSource).Refresh();
+                CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
             }
             else
             {

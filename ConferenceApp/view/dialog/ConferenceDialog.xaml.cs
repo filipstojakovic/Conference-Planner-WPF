@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using ConferenceApp.model.entity;
+using ConferenceApp.utils;
 
 namespace ConferenceApp.view.dialog;
 
@@ -9,7 +10,7 @@ public partial class ConferenceDialog : Window
     public Role SelectedRole { get; set; }
     public bool Edit { get; set; }
 
-    public ConferenceDialog(Conference? conference = null, bool edit = false)
+    public ConferenceDialog(Conference conference = null, bool edit = false)
     {
         InitializeComponent();
         Button.Content = edit ? "Save" : "Create";
@@ -27,6 +28,18 @@ public partial class ConferenceDialog : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+        if (ConferenceDialogData.Name == "")
+        {
+            Utils.ErrorBox("Conference name is missing");
+            return;
+        }
+
+        if (ConferenceDialogData.StartDate > ConferenceDialogData.EndDate)
+        {
+            Utils.ErrorBox("Start date is after end date");
+            return;
+        }
+
         DialogResult = true;
         Close();
     }
