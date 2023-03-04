@@ -82,7 +82,8 @@ public class AppSettings
         var styleDictionary = Application.Current
             .Resources
             .MergedDictionaries
-            .FirstOrDefault(resourceDictionary => resourceDictionary.Source.OriginalString.Contains("resources/styles"));
+            .FirstOrDefault(resourceDictionary =>
+                resourceDictionary.Source.OriginalString.Contains("resources/styles"));
 
         styleDictionary.Source = themeUri;
     }

@@ -17,6 +17,11 @@ namespace ConferenceApp.model.entity
 
         public Conference(Conference conference)
         {
+            copy(conference);
+        }
+
+        public void copy(Conference conference)
+        {
             Id = conference.Id;
             Name = conference.Name;
             Description = conference.Description;

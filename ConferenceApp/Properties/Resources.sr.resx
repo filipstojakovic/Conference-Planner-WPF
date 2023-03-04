@@ -162,4 +162,28 @@
   <data name="logout" xml:space="preserve">
     <value>Odjava</value>
   </data>
+  <data name="name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="desc" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="start_date" xml:space="preserve">
+    <value>Datum početka</value>
+  </data>
+  <data name="end_date" xml:space="preserve">
+    <value>Datum završetka</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Kreiraj</value>
+  </data>
+  <data name="conference" xml:space="preserve">
+    <value>Konferencija</value>
+  </data>
+  <data name="error_insert_conference" xml:space="preserve">
+    <value>Greška pri kreiranju konferencije</value>
+  </data>
+  <data name="error_update_conference" xml:space="preserve">
+    <value>Greška pri ažuriranju konferencije</value>
+  </data>
 </root>

@@ -18,7 +18,7 @@
             <Button Name="Button" Click="NewConference_Button_Click" Margin="12" MinWidth="80">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
-                                             VerticalAlignment="Stretch" Margin="0,0,2,0"/>
+                                             VerticalAlignment="Stretch" Margin="0,0,2,0" />
                     <TextBlock Text="Create conference" />
                 </StackPanel>
             </Button>
@@ -43,9 +43,10 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                     <DataGridTextColumn Header="Start date"
-                                        Binding="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" />
+                                        Binding="{Binding StartDate, StringFormat=d}" />
                     <DataGridTextColumn Header="End date"
-                                        Binding="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" />
+                                        Binding="{Binding EndDate, StringFormat=d}" 
+                                        />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

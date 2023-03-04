@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,6 +13,7 @@ using ConferenceApp.utils;
 using ConferenceApp.view.login;
 using ConferenceApp.view.usercontrol;
 using GenSpark.WPFAccordionMenu;
+using Haley.Utils;
 using MaterialDesignThemes.Wpf;
 using MySql.Data.MySqlClient;
 
@@ -22,6 +25,8 @@ namespace ConferenceApp.view
 
         public MainWindow(User currentUser)
         {
+            CultureInfo culture = new CultureInfo(LangUtils.CurrentCulture.Name);
+            Thread.CurrentThread.CurrentCulture = culture;
             Trace.WriteLine("before init MainWindow");
             InitializeComponent();
             Trace.WriteLine("after init MainWindow");
@@ -36,7 +41,7 @@ namespace ConferenceApp.view
             Drawer_MenuListView.Items.Add(new ItemMenu("Events", PackIconKind.Connection,
                 new EventControl(this.currentUser)));
 
-            //TODO: viska, ali necemu ce sluziti
+            //TODO: used for testing
             Drawer_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About, new MenuControl()));
 
             //if user has admin role

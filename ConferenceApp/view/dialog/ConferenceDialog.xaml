@@ -4,11 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ConferenceApp.view.dialog"
+        xmlns:converter="clr-namespace:ConferenceApp.converter"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
         Width="500">
-
+    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,12 +42,12 @@
 
         <Label Grid.Row="2" Grid.Column="0" Content="Start Date:" Margin="5" />
         <DatePicker Grid.Row="2" Grid.Column="1"
-                    Text="{Binding StartDate}"
+                    SelectedDate="{Binding StartDate}"
                     Margin="5" />
 
         <Label Grid.Row="3" Grid.Column="0" Content="End Date:" Margin="5" />
         <DatePicker Grid.Row="3" Grid.Column="1"
-                    Text="{Binding EndDate}"
+                    SelectedDate="{Binding EndDate}"
                     Margin="5" />
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"

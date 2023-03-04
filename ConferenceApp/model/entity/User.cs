@@ -21,14 +21,7 @@ namespace ConferenceApp.model.entity
 
         public User(User user)
         {
-            Id = user.Id;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            Email = user.Email;
-            Username = user.Username;
-            Password = user.Password;
-            if (user.Roles != null)
-                Roles = new BindingList<Role>(user.Roles.ToList());
+            copy(user);
         }
 
         public void copy(User user)
@@ -37,7 +30,10 @@ namespace ConferenceApp.model.entity
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
             this.Email = user.Email;
+            this.Username = user.Username;
             this.Password = user.Password;
+            if (user.Roles != null)
+                Roles = new BindingList<Role>(user.Roles.ToList());
         }
     }
 }

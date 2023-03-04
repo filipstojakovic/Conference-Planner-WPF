@@ -5,84 +5,120 @@ using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao
 {
-	public class ConferenceDao : BaseDao
-	{
-		public List<Conference> findAll()
-		{
-			var sql = @"
+    public class ConferenceDao : BaseDao
+    {
+        public List<Conference> findAll()
+        {
+            var sql = @"
 				SELECT * FROM conference c
 				JOIN gathering g ON g.id = c.gathering_id";
 
-			List<Conference> list;
-			using (var command = new MySqlCommand(sql, connection))
-			{
-				list = extractConferenceData(command);
-			}
+            List<Conference> list;
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                list = extractConferenceData(command);
+            }
 
-			return list;
-		}
+            return list;
+        }
 
-		private List<Conference> extractConferenceData(MySqlCommand command)
-		{
-			List<Conference> conferences = new List<Conference>();
-			using (var reader = command.ExecuteReader())
-			{
-				while (reader.Read())
-				{
-					var id = reader.GetInt32(reader.GetOrdinal("id"));
-					var name = reader.GetString(reader.GetOrdinal("name"));
-					var desc = reader.GetString(reader.GetOrdinal("description"));
-					var start = reader.GetDateTime(reader.GetOrdinal("start_date"));
-					var end = reader.GetDateTime(reader.GetOrdinal("end_date"));
+        private List<Conference> extractConferenceData(MySqlCommand command)
+        {
+            List<Conference> conferences = new List<Conference>();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var id = reader.GetInt32(reader.GetOrdinal("id"));
+                    var name = reader.GetString(reader.GetOrdinal("name"));
+                    var desc = reader.GetString(reader.GetOrdinal("description"));
+                    var start = reader.GetDateTime(reader.GetOrdinal("start_date"));
+                    var end = reader.GetDateTime(reader.GetOrdinal("end_date"));
 
 
-					Conference conference = new Conference
-					{
-						Id = id,
-						Name = name,
-						Description = desc,
-						StartDate = start,
-						EndDate = end,
-					};
-					conferences.Add(conference);
-				}
-			}
-			return conferences;
-		}
+                    Conference conference = new Conference
+                    {
+                        Id = id,
+                        Name = name,
+                        Description = desc,
+                        StartDate = start,
+                        EndDate = end,
+                    };
+                    conferences.Add(conference);
+                }
+            }
 
-		public Conference insertConference(Conference conference, MySqlTransaction transaction)
-		{
-			const string gatheringSql = @"INSERT INTO gathering (description) VALUES (@description)";
-			const string conferenceSql = @"INSERT INTO conference (gathering_id, name, start_date, end_date) VALUES (@gathering_id, @name, @startDate, @endDate)";
+            return conferences;
+        }
 
-			int gatheringId;
-			using (var command = new MySqlCommand(gatheringSql, connection, transaction))
-			{
-				command.Parameters.AddWithValue("@description", conference.Description);
-				command.ExecuteNonQuery();
-				gatheringId = (int)command.LastInsertedId;
-			}
-			using (var command = new MySqlCommand(conferenceSql, connection, transaction))
-			{
-				command.Parameters.AddWithValue("@gathering_id", gatheringId);
-				command.Parameters.AddWithValue("@name", conference.Name);
-				command.Parameters.AddWithValue("@startDate", conference.StartDate);
-				command.Parameters.AddWithValue("@endDate", conference.EndDate);
-				command.ExecuteNonQuery();
-			}
+        public Conference insertConference(Conference conference, MySqlTransaction transaction)
+        {
+            const string gatheringSql = @"INSERT INTO gathering (description) VALUES (@description)";
+            const string conferenceSql =
+                @"INSERT INTO conference (gathering_id, name, start_date, end_date) VALUES (@gathering_id, @name, @startDate, @endDate)";
 
-			conference.Id = gatheringId;
-			return conference;
-		}
+            int gatheringId;
+            using (var command = new MySqlCommand(gatheringSql, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@description", conference.Description);
+                command.ExecuteNonQuery();
+                gatheringId = (int)command.LastInsertedId;
+            }
 
-		public void deleteConference(int? gatheringId)
-		{
-			string deleteConferenceSql = $"DELETE FROM gathering WHERE id = {gatheringId}";
+            using (var command = new MySqlCommand(conferenceSql, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@gathering_id", gatheringId);
+                command.Parameters.AddWithValue("@name", conference.Name);
+                command.Parameters.AddWithValue("@startDate", conference.StartDate);
+                command.Parameters.AddWithValue("@endDate", conference.EndDate);
+                command.ExecuteNonQuery();
+            }
 
-			using (var command = new MySqlCommand(deleteConferenceSql, connection))
-			{
-				command.ExecuteNonQuery();
-			}
-		}
-	}
+            conference.Id = gatheringId;
+            return conference;
+        }
+
+        public void updateConference(Conference conference)
+        {
+            const string updateGatheringSql = @"
+                UPDATE gathering 
+                SET 
+                    description = @description 
+                WHERE id = @id";
+
+            const string updateConferenceSql = @"
+                UPDATE conference 
+                SET
+                    name = @name, 
+                    start_date = @startDate,
+                    end_date = @endDate
+                WHERE gathering_id = @id";
+
+            using (var command = new MySqlCommand(updateGatheringSql, connection))
+            {
+                command.Parameters.AddWithValue("@id", conference.Id);
+                command.Parameters.AddWithValue("@description", conference.Description);
+                command.ExecuteNonQuery();
+            }
+
+            using (var command = new MySqlCommand(updateConferenceSql, connection))
+            {
+                command.Parameters.AddWithValue("@id", conference.Id);
+                command.Parameters.AddWithValue("@name", conference.Name);
+                command.Parameters.AddWithValue("@startDate", conference.StartDate);
+                command.Parameters.AddWithValue("@endDate", conference.EndDate);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void deleteConference(int? gatheringId)
+        {
+            string deleteConferenceSql = $"DELETE FROM gathering WHERE id = {gatheringId}";
+
+            using (var command = new MySqlCommand(deleteConferenceSql, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+    }
 }

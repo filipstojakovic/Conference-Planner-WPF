@@ -13,9 +13,11 @@ public partial class LoginWindow : Window
     public LoginWindow()
     {
         appSettings = AppSettings.getInstance();
-        var lang = appSettings[AppSettings.LANG];
-
         InitializeComponent();
+        appSettings.loadSettings();
+        if (appSettings[AppSettings.LANG] == "sr")
+            sr.IsChecked = true;
+        
 
         DockPanelMain.Children.Clear();
         DockPanelMain.Children.Add(new LoginUserControl(closeWindow));

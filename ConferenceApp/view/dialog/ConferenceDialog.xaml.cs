@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Threading;
+using System.Windows;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
+using Haley.Utils;
 
 namespace ConferenceApp.view.dialog;
 
@@ -12,6 +15,8 @@ public partial class ConferenceDialog : Window
 
     public ConferenceDialog(Conference conference = null, bool edit = false)
     {
+        CultureInfo culture = new CultureInfo(LangUtils.CurrentCulture.Name);
+        Thread.CurrentThread.CurrentCulture = culture;
         InitializeComponent();
         Button.Content = edit ? "Save" : "Create";
         this.Title = (edit ? "Save" : "Create") + " conference";

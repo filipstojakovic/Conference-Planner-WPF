@@ -43,7 +43,7 @@ namespace ConferenceApp.view.login
                 user = userDao.insert(user);
                 if (user == null)
                 {
-                    MessageBox.Show("Failed to insert user.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Utils.ErrorBox("Failed to insert user.");
                     return;
                 }
 
@@ -52,7 +52,7 @@ namespace ConferenceApp.view.login
             }
             else
             {
-                MessageBox.Show("Please insert all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Please insert all fields.");
             }
         }
 
@@ -60,25 +60,25 @@ namespace ConferenceApp.view.login
         {
             if (!Utils.IsValidEmailAddress(email))
             {
-                MessageBox.Show("Email not valid.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Email not valid.");
                 return false;
             }
 
             if (isUsernameFieldTaken(username))
             {
-                MessageBox.Show("Username already in use.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Username already in use.");
                 return false;
             }
 
             if (isEmailFieldTaken(email))
             {
-                MessageBox.Show("Email already in use.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Email already in use.");
                 return false;
             }
 
             if (password != rePassword)
             {
-                MessageBox.Show("Passwords do not match.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Passwords do not match.");
                 return false;
             }
 

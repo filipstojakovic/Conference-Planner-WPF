@@ -45,7 +45,7 @@ namespace ConferenceApp.view.login
             else
             {
                 //ERROR MESSAGE, user doesnt exist
-                MessageBox.Show("Wrong username or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("Wrong username or password!");
             }
         }
 

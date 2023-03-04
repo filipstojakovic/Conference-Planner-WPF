@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,6 +13,8 @@ using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
 using ConferenceApp.view.dialog;
+using Haley.Utils;
+using Calendar = System.Windows.Controls.Calendar;
 
 namespace ConferenceApp.view.usercontrol
 {
@@ -103,6 +107,23 @@ namespace ConferenceApp.view.usercontrol
         private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
+            var dialog = new ConferenceDialog(conference, true);
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    conferenceBindingList.Remove(conference);
+                    conferenceDao.updateConference(dialog.ConferenceDialogData);
+                    conference.copy(dialog.ConferenceDialogData);
+                    conferenceBindingList.Add(conference);
+                    CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
+                }
+                catch (Exception)
+                {
+                    var message = LangUtils.Translate("error_update_conference");
+                    Utils.ErrorBox(message);
+                }
+            }
         }
 
         private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -152,14 +173,11 @@ namespace ConferenceApp.view.usercontrol
                 catch (Exception exception)
                 {
                     transaction.Rollback();
-                    Utils.ErrorBox("Unable to insert conference!");
+                    var message = LangUtils.Translate("error_insert_conference");
+                    Utils.ErrorBox(message);
                 }
 
                 CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
-            }
-            else
-            {
-                var test = dialog.ConferenceDialogData;
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
+using ConferenceApp.utils;
 using ConferenceApp.view.dialog;
 
 namespace ConferenceApp.view.usercontrol
@@ -77,14 +78,12 @@ namespace ConferenceApp.view.usercontrol
             User user = getSelectedUser(sender);
             if (user.Id == loggedInUser.Id)
             {
-                MessageBox.Show("You cannot delete yourself!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ErrorBox("You cannot delete yourself!");
                 return;
             }
 
-            MessageBoxResult result =
-                MessageBox.Show($"Are you sure you want to delete {user.FirstName} {user.LastName}?", "Confirmation",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            var result = Utils.confirmAction($"Are you sure you want to delete {user.FirstName} {user.LastName}?");
+            if (result)
             {
                 userBindingList.Remove(user);
                 userDao.delete(user.Id);
