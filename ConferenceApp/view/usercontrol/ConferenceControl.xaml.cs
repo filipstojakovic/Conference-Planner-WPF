@@ -154,7 +154,7 @@ namespace ConferenceApp.view.usercontrol
             return (Conference)item.SelectedCells[0].Item;
         }
 
-        private void NewConference_Button_Click(object sender, RoutedEventArgs e)
+        private void Create_Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ConferenceDialog(null, conferenceBindingList);
             if (dialog.ShowDialog() == true)

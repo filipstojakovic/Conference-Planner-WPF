@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical">
-            <Button Name="Button" Click="NewConference_Button_Click" Margin="12" MinWidth="80">
+            <Button Name="Create_Button" Click="Create_Button_Click" Margin="12" MinWidth="80">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                              VerticalAlignment="Stretch" Margin="0,0,2,0" />
@@ -46,8 +46,7 @@
                     <DataGridTextColumn Header="Start date"
                                         Binding="{Binding StartDate, StringFormat=d}" />
                     <DataGridTextColumn Header="End date"
-                                        Binding="{Binding EndDate, StringFormat=d}" 
-                                        />
+                                        Binding="{Binding EndDate, StringFormat=d}" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -57,11 +56,21 @@
                       FirstDayOfWeek="Monday"
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
                       DisplayDateChanged="calendar_DisplayDateChanged">
+                <Calendar.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                                     Color="{Binding Source={StaticResource BackgroundColor}, Path=Color}" />
+                    <SolidColorBrush x:Key="MaterialDesignBody" Color="Black" /> <!--TODO: body text color-->
+                    <!-- <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" />  TODO: header text color--> 
+                    
+                    <!-- https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/ba83813d2567813e1fa0865e42746de31f44022b/MaterialDesignThemes.Wpf/Themes/MaterialDesignTheme.Calendar.xaml#LL763C24-L763C24 -->
+                </Calendar.Resources>
                 <Calendar.CalendarDayButtonStyle>
                     <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
                         <Style.Triggers>
                             <Trigger Property="IsBlackedOut" Value="True">
-                                <Setter Property="Background" Value="#2196f3" />
+                                <Setter Property="Background" Value="{DynamicResource CalendarSelection}" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="TextElement.Foreground" Value="Black" />
                                 <Setter Property="Opacity" Value="1" />
                                 <Setter Property="Cursor" Value="Hand" />
                                 <Setter Property="TextBlock.Opacity" Value="1"></Setter>

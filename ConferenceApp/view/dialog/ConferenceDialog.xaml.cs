@@ -63,8 +63,6 @@ public partial class ConferenceDialog : Window
             }
         }
 
-
-        //TODO: ceheck if conference already in date time line
         DialogResult = true;
         Close();
     }

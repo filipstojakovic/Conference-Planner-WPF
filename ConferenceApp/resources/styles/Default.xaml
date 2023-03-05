@@ -10,6 +10,10 @@
 
     <SolidColorBrush x:Key="CustomDarkBlue" Color="#16375f"></SolidColorBrush>
     <SolidColorBrush x:Key="CustomLightBlue" Color="#2196f3"></SolidColorBrush>
+    
+    <SolidColorBrush x:Key="BackgroundColor" Color="DodgerBlue"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="CalendarSelection" Color="DodgerBlue"></SolidColorBrush>
 
     <!-- STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES -->
 

@@ -20,7 +20,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <materialDesign:ColorZone Padding="10" Background="DodgerBlue" Foreground="White" Mode="PrimaryMid"
+        <materialDesign:ColorZone Padding="10" Background="{DynamicResource BackgroundColor}" Foreground="White" Mode="PrimaryMid"
                                   Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch">
             <Grid>
                 <TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
@@ -62,7 +62,7 @@
                 </StackPanel>
             </Grid>
         </materialDesign:ColorZone>
-        <Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="DodgerBlue">
+        <Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="{DynamicResource BackgroundColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
                 <RowDefinition Height="*" />
@@ -141,7 +141,7 @@
                         <Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
                     </ListView.ItemContainerStyle>
 
-                    <ListViewItem VerticalAlignment="Center">
+                    <ListViewItem Name="LogoutButton" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="20" Height="20"
                                                      Margin="10 0" />

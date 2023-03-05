@@ -186,4 +186,34 @@
   <data name="error_update_conference" xml:space="preserve">
     <value>Greška pri ažuriranju konferencije</value>
   </data>
+  <data name="sessions" xml:space="preserve">
+    <value>Sesije</value>
+  </data>
+  <data name="session" xml:space="preserve">
+    <value>Sesija</value>
+  </data>
+  <data name="event" xml:space="preserve">
+    <value>Događaj</value>
+  </data>
+  <data name="events" xml:space="preserve">
+    <value>Događaji</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Opcije</value>
+  </data>
+  <data name="conferences" xml:space="preserve">
+    <value>Konferencije</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Korisnici</value>
+  </data>
+  <data name="locations" xml:space="preserve">
+    <value>Lokacije</value>
+  </data>
+  <data name="light" xml:space="preserve">
+    <value>Svijetla</value>
+  </data>
+  <data name="dark" xml:space="preserve">
+    <value>Tamna</value>
+  </data>
 </root>

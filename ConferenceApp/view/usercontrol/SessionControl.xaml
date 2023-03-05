@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:editors="http://wpfcontrols.com/"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600">
-    <DockPanel>
+    <StackPanel>
         <ComboBox Grid.Row="4" Grid.Column="1"
                   Name="ComboBox"
-                  DockPanel.Dock="Top" Margin="0,0,0,10"
+                  Margin="10,5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
                   FontSize="18"
@@ -26,11 +25,18 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
+        <Button Name="Create_Button" Click="Create_Button_Click" Margin="10,5" MinWidth="80">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
+                                         VerticalAlignment="Stretch" Margin="0,0,2,0" />
+                <TextBlock Text="Create session" />
+            </StackPanel>
+        </Button>
+
         <DataGrid Name="SessionDataGrid"
                   AutoGenerateColumns="False"
                   ColumnWidth="*"
                   VerticalScrollBarVisibility="Auto"
-                  DockPanel.Dock="Bottom"
                   IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -48,5 +54,5 @@
                                     Binding="{Binding EndDate, StringFormat=d}" />
             </DataGrid.Columns>
         </DataGrid>
-    </DockPanel>
+    </StackPanel>
 </UserControl>

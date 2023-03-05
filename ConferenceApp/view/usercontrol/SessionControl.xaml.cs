@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
+using ConferenceApp.view.dialog;
 
 namespace ConferenceApp.view.usercontrol;
 
@@ -56,5 +57,14 @@ public partial class SessionControl : UserControl
 
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
+    }
+
+    private void Create_Button_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new SessionDialog();
+        if (dialog.ShowDialog() == true)
+        {
+            
+        }
     }
 }
