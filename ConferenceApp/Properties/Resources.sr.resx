@@ -216,4 +216,13 @@
   <data name="dark" xml:space="preserve">
     <value>Tamna</value>
   </data>
+  <data name="create_conference" xml:space="preserve">
+    <value>Kreiraj konferenciju</value>
+  </data>
+  <data name="create_session" xml:space="preserve">
+    <value>Kreiraj sesiju</value>
+  </data>
+  <data name="create_event" xml:space="preserve">
+    <value>Kreiraj Događaj</value>
+  </data>
 </root>

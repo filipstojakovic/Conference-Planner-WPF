@@ -22,4 +22,8 @@ public partial class EventControl : UserControl
     private void ComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
     }
+
+    private void Create_Button_Click(object sender, RoutedEventArgs e)
+    {
+    }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600">
     <StackPanel>
@@ -29,7 +30,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                          VerticalAlignment="Stretch" Margin="0,0,2,0" />
-                <TextBlock Text="Create session" />
+                <TextBlock Text="{hm:Lang create_session}" />
             </StackPanel>
         </Button>
 

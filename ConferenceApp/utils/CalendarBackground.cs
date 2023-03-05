@@ -12,7 +12,7 @@ namespace DatePicker
 
     //TODO: https://www.codeproject.com/Tips/547627/Highlight-dates-on-a-WPF-Calendar
     /*
-     		CalendarBackground = new CalenderBackground(Calendar);
+     		CalendarBackground = new CalenderBackground(Calendar); // create CalendarBackground using the name of <Calendar name=Calendar/>
 
 			CalendarBackground.AddOverlay("circle", "circle.png"); // background image
 			CalendarBackground.AddOverlay("tjek", "tjek.png"); // background image

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:utils="clr-namespace:ConferenceApp.utils"
+             xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="800">
 
@@ -19,7 +20,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                              VerticalAlignment="Stretch" Margin="0,0,2,0" />
-                    <TextBlock Text="Create conference" />
+                    <TextBlock Text="{hm:Lang create_conference}" />
                 </StackPanel>
             </Button>
             <TextBox Background="White"

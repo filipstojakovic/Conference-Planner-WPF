@@ -34,27 +34,28 @@ namespace ConferenceApp.view
             HeaderUserText.Text = Utils.CapitalizeFirstLetter(currentUser.FirstName) + " " +
                                   Utils.CapitalizeFirstLetter(currentUser.LastName);
 
-            Drawer_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("conferences"), PackIconKind.Register,
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("conferences"), PackIconKind.Register,
                 () => new ConferenceControl(this.currentUser)));
-            Drawer_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("sessions"), PackIconKind.Connection,
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("sessions"), PackIconKind.Connection,
                 () => new SessionControl(this.currentUser)));
-            Drawer_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("events"), PackIconKind.Connection,
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("events"), PackIconKind.Connection,
                 () => new EventControl(this.currentUser)));
 
             //TODO: used for testing
-            Drawer_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About, () => new MenuControl()));
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About,
+                () => new MenuControl()));
 
             //if user has admin role
             if (currentUser.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
             {
-                Drawer_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("locations"), PackIconKind.Map,
+                Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("locations"), PackIconKind.Map,
                     () => new LocationControl()));
-                Drawer_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("users"), PackIconKind.User,
+                Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("users"), PackIconKind.User,
                     () => new UsersControl(this.currentUser)));
             }
 
-            Drawer_MenuListView.SelectedIndex = 0; // select first menu item by default
-            DrawerBottom_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("settings"), PackIconKind.Settings,
+            Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
+            Drawer_Bottom_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("settings"), PackIconKind.Settings,
                 () => new SettingsControl()));
 
 
@@ -76,8 +77,10 @@ namespace ConferenceApp.view
         private void Drawer_MenuListView_MouseLeftButtonUp(object sender, SelectionChangedEventArgs e)
         {
             var selectedItem = ((ListView)sender).SelectedItem;
+            if (selectedItem == null)
+                return;
             SwitchScreen((ItemMenu)selectedItem);
-            DrawerBottom_MenuListView.SelectedItems.Clear();
+            Drawer_Bottom_MenuListView.SelectedItems.Clear();
         }
 
         private void DrawerBottom_MenuListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -92,17 +95,15 @@ namespace ConferenceApp.view
                     new LoginWindow().Show();
                     this.Close();
                 }
-                else
-                {
-                    // selectedItem.
-                }
 
+                Drawer_Logout_MenuListView.SelectedItems.Clear();
                 return;
             }
 
             SwitchScreen(itemMenu);
-            Drawer_MenuListView.SelectedItems.Clear();
+            Drawer_Upper_MenuListView.SelectedItems.Clear();
         }
+
 
         private void SwitchScreen(ItemMenu sender)
         {

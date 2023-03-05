@@ -46,10 +46,10 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="Red" />
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="Red" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="Blue" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="Blue" />
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" />
     <Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="Template">
             <Setter.Value>

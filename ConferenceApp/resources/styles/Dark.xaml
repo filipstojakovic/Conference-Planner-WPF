@@ -48,10 +48,10 @@
     </Style>
 
 
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="Green" />
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="Green" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="Pink" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="Pink" />
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="DarkGray" />
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="DarkGray" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="Silver" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="Silver" />
     <Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="Template">
             <Setter.Value>

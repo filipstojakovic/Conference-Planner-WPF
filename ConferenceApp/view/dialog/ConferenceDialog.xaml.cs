@@ -54,8 +54,9 @@ public partial class ConferenceDialog : Window
 
         if (conferenceListForChecking != null)
         {
-            var hasOverLap = conferenceListForChecking.Any(conference => Utils.DateRangesOverlap(conference.StartDate,
-                conference.EndDate, ConferenceDialogData.StartDate, ConferenceDialogData.EndDate));
+            var hasOverLap = conferenceListForChecking.Any(conference =>
+                ConferenceDialogData.Id != conference.Id
+                && Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate, ConferenceDialogData.EndDate));
             if (hasOverLap)
             {
                 Utils.ErrorBox("Already have conference in that time period!");
