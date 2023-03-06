@@ -36,6 +36,7 @@ namespace ConferenceApp.view.dialog
             roleDao = new RoleDao();
             AllRoles = roleDao.findAll();
             DataContext = UserDialogData;
+            RoleComboBox.SelectedIndex = AllRoles.FindIndex(role => role.Name == SelectedRole.Name);
             RoleComboBox.DataContext = this;
             RoleComboBox.ItemsSource = AllRoles;
         }
