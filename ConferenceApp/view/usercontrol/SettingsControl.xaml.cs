@@ -10,8 +10,14 @@ namespace ConferenceApp.view.usercontrol
 	public partial class SettingsControl : UserControl
     {
         private readonly AppSettings appSettings;
-        public SettingsControl()
+
+        private readonly ListView drawerUpperMenuList;
+        private readonly ListView drawerBottomMenuList;
+
+        public SettingsControl(ListView upperMenuListView, ListView bottomMenuListView)
         {
+            drawerUpperMenuList = upperMenuListView;
+            drawerBottomMenuList = bottomMenuListView;
             Trace.WriteLine("before init AppSettings");
             appSettings = AppSettings.getInstance();
             InitializeComponent();
@@ -25,6 +31,8 @@ namespace ConferenceApp.view.usercontrol
         {
             var lang = selectedItemName(sender);
             appSettings.changeLang(lang);
+            drawerBottomMenuList.Items.Refresh();
+            drawerUpperMenuList.Items.Refresh();
         }
 
 

@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
+        xmlns:local="clr-namespace:ConferenceApp.view.dialog"
         mc:Ignorable="d"
         SizeToContent="Height"
         Width="500">
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -47,6 +49,29 @@
         <DatePicker Grid.Row="3" Grid.Column="1"
                     SelectedDate="{Binding EndDate}"
                     Margin="5" />
+
+        <Label Grid.Row="4" Grid.Column="0" Margin="5" Content="Moderator:" />
+        <ComboBox Grid.Row="4" Grid.Column="1"
+                  Name="ComboBox"
+                  Margin="5"
+                  IsEditable="False"
+                  materialDesign:HintAssist.Hint="Select conference moderator"
+                  ItemsSource="{Binding UsersModel, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}"
+                  >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="FirstName" />
+                                <Binding Path="LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">

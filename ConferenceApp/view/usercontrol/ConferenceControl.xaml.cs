@@ -41,7 +41,7 @@ namespace ConferenceApp.view.usercontrol
             List<Conference> conferenceList = conferenceDao.findAll();
             conferenceBindingList = new BindingList<Conference>(conferenceList);
             conferenceBindingList.ListChanged += ConferenceBindingListOnListChanged;
-            conferenceListDataGrid.ItemsSource = conferenceBindingList;
+            conferenceDataGrid.ItemsSource = conferenceBindingList;
 
             ConferenceBindingListOnListChanged(null, null);
         }
@@ -70,15 +70,15 @@ namespace ConferenceApp.view.usercontrol
             if (text != "")
             {
                 var filteredList = conferenceBindingList.Where(x => x.Name.ToLower().Contains(text.ToLower()));
-                conferenceListDataGrid.ItemsSource = null;
-                conferenceListDataGrid.ItemsSource = filteredList;
+                conferenceDataGrid.ItemsSource = null;
+                conferenceDataGrid.ItemsSource = filteredList;
             }
             else
             {
-                conferenceListDataGrid.ItemsSource = conferenceBindingList;
+                conferenceDataGrid.ItemsSource = conferenceBindingList;
             }
 
-            CollectionViewSource.GetDefaultView(conferenceListDataGrid).Refresh();
+            CollectionViewSource.GetDefaultView(conferenceDataGrid.Items).Refresh();
         }
 
 
@@ -112,8 +112,10 @@ namespace ConferenceApp.view.usercontrol
             {
                 try
                 {
-                    conferenceBindingList.Remove(conference);
                     conferenceDao.updateConference(dialog.ConferenceDialogData);
+                    
+                    
+                    conferenceBindingList.Remove(conference);
                     conference.copy(dialog.ConferenceDialogData);
                     conferenceBindingList.Add(conference);
                     CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
@@ -134,7 +136,7 @@ namespace ConferenceApp.view.usercontrol
                 return;
             conferenceDao.deleteConference(conference.Id);
             conferenceBindingList.Remove(conference);
-            CollectionViewSource.GetDefaultView(conferenceListDataGrid.ItemsSource).Refresh();
+            CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
         }
 
 
@@ -166,6 +168,9 @@ namespace ConferenceApp.view.usercontrol
                     UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
                     userGatheringRoleDao.insertUserConferenceConferenceRole(currentUser, conference,
                         GatheringRoleEnum.Organizer, transaction);
+
+                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser, conference,
+                        GatheringRoleEnum.Moderator, transaction);
 
                     transaction.Commit();
                     conferenceBindingList.Add(conference);

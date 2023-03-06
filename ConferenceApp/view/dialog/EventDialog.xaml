@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
@@ -10,6 +11,7 @@
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -28,9 +30,26 @@
         <TextBox Grid.Row="0" Grid.Column="1"
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Event type:" />
+        <ComboBox Grid.Row="1" Grid.Column="1"
+                  Name="ComboBox"
+                  Margin="10,5"
+                  IsTextSearchEnabled="False"
+                  IsEditable="False"
+                  materialDesign:HintAssist.Hint="Select event type"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="ComboBox_OnSelectionChanged"
+                  SelectedItem="{Binding Path=SelectedEventType, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Description:" Margin="5" />
-        <TextBox Grid.Row="1" Grid.Column="1"
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
+        <TextBox Grid.Row="2" Grid.Column="1"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
                  TextWrapping="Wrap"
@@ -39,27 +58,27 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Start Date:" Margin="5" />
-        <DatePicker Grid.Row="2" Grid.Column="1"
+        <Label Grid.Row="3" Grid.Column="0" Content="Start Date:" Margin="5" />
+        <DatePicker Grid.Row="3" Grid.Column="1"
                     SelectedDate="{Binding StartDate}"
                     Margin="5" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="End Date:" Margin="5" />
-        <DatePicker Grid.Row="3" Grid.Column="1"
+        <Label Grid.Row="4" Grid.Column="0" Content="End Date:" Margin="5" />
+        <DatePicker Grid.Row="4" Grid.Column="1"
                     SelectedDate="{Binding EndDate}"
                     Margin="5" />
         
-        <Label Grid.Row="4" Grid.Column="0" Margin="5" Content="Location:" />
-        <TextBox Grid.Row="4" Grid.Column="1"
-                 Margin="5"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        
-        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Room number:" />
+        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Location:" />
         <TextBox Grid.Row="5" Grid.Column="1"
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        
+        <Label Grid.Row="6" Grid.Column="0" Margin="5" Content="Room number:" />
+        <TextBox Grid.Row="6" Grid.Column="1"
+                 Margin="5"
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />

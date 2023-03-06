@@ -21,7 +21,7 @@ namespace GenSpark.WPFAccordionMenu
                     FirstName = "Filip",
                     Roles = new BindingList<Role>() { new Role { Name = "role" }, new Role { Name = "role1" } }
                 },
-                new User { FirstName = "nebojsa" }
+                new User { FirstName = "test 2" }
             };
             InitializeComponent();
             itemsControl.ItemsSource = userList;

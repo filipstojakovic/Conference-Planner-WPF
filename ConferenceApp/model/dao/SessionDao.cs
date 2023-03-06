@@ -33,6 +33,36 @@ public class SessionDao : BaseDao
         return list;
     }
 
+    public Session insertSession(Session session)
+    {
+        string insertSql = @"
+                INSERT INTO session (gathering_id, name, description, start_date, end_date) 
+                VALUES (@gatheringId, @name, @description, @startDate, @endDate)";
+
+        using (var command = new MySqlCommand(insertSql, connection))
+        {
+            command.Parameters.AddWithValue("@gatheringId", session.GatheringId);
+            command.Parameters.AddWithValue("@name", session.Name);
+            command.Parameters.AddWithValue("@description", session.Description);
+            command.Parameters.AddWithValue("@startDate", session.StartDate);
+            command.Parameters.AddWithValue("@endDate", session.EndDate);
+            command.ExecuteNonQuery();
+            session.Id = (int)command.LastInsertedId;
+        }
+
+        return session;
+    }
+    
+    //TODO: need update session
+
+    public void deleteSession(int? sessionId)
+    {
+        var sql = $"DELETE FROM session WHERE id={sessionId}";
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.ExecuteNonQuery();
+        }
+    }
     private List<Session> extractSessionData(MySqlCommand command)
     {
         List<Session> list = new List<Session>();
@@ -46,15 +76,8 @@ public class SessionDao : BaseDao
                 var desc = Utils.readerGetValue<string?>(reader, "description");
                 var start = Utils.readerGetValue<DateTime>(reader, "start_date");
                 var end = Utils.readerGetValue<DateTime>(reader, "end_date");
-                // var id = reader.GetInt32(reader.GetOrdinal("id"));
-                // var gatheringId = reader.GetInt32(reader.GetOrdinal("gathering_id"));
-                // var name = reader.GetString(reader.GetOrdinal("name"));
-                // var desc = reader.GetString(reader.GetOrdinal("description"));
-                // var start = reader.GetDateTime(reader.GetOrdinal("start_date"));
-                // var end = reader.GetDateTime(reader.GetOrdinal("end_date"));
 
-
-                Session conference = new Session()
+                Session session = new Session()
                 {
                     Id = id,
                     GatheringId = gatheringId,
@@ -63,7 +86,7 @@ public class SessionDao : BaseDao
                     StartDate = start,
                     EndDate = end,
                 };
-                list.Add(conference);
+                list.Add(session);
             }
         }
 

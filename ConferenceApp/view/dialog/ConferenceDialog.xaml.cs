@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using ConferenceApp.model;
+using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
 using Haley.Utils;
@@ -16,25 +23,38 @@ public partial class ConferenceDialog : Window
     public Role SelectedRole { get; set; }
     public bool Edit { get; set; }
 
+    private UserDao userDao;
+    public ConferenceModel ConferenceModel;
+
     private readonly BindingList<Conference> conferenceListForChecking;
 
     public ConferenceDialog(Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
         bool edit = false)
     {
-        CultureInfo culture = new CultureInfo(LangUtils.CurrentCulture.Name);
-        Thread.CurrentThread.CurrentCulture = culture;
         InitializeComponent();
+        this.conferenceListForChecking = conferenceListForChecking;
+        userDao = new UserDao();
+
         Button.Content = edit ? "Save" : "Create";
         this.Title = (edit ? "Save" : "Create") + " conference";
 
+        var userList = userDao.findAllUsersAndRoles();
+        ConferenceModel = new ConferenceModel(userList);
+        ComboBox.DataContext = ConferenceModel;
+
         if (conference != null)
+        {
             ConferenceDialogData = new Conference(conference);
+            var previousModerator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator)[0];
+            ConferenceModel.SelectedUser = previousModerator;
+            var index = userList.FindIndex(x => x.Username == previousModerator.Username);
+            ComboBox.SelectedIndex = index;
+        }
         else
         {
             ConferenceDialogData = new Conference();
         }
 
-        this.conferenceListForChecking = conferenceListForChecking;
         DataContext = ConferenceDialogData;
     }
 
@@ -52,11 +72,18 @@ public partial class ConferenceDialog : Window
             return;
         }
 
+        if (ConferenceModel.SelectedUser == null)
+        {
+            Utils.ErrorBox("Please select moderator");
+            return;
+        }
+
         if (conferenceListForChecking != null)
         {
             var hasOverLap = conferenceListForChecking.Any(conference =>
                 ConferenceDialogData.Id != conference.Id
-                && Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate, ConferenceDialogData.EndDate));
+                && Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate,
+                    ConferenceDialogData.EndDate));
             if (hasOverLap)
             {
                 Utils.ErrorBox("Already have conference in that time period!");

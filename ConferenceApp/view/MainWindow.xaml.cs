@@ -21,47 +21,58 @@ namespace ConferenceApp.view
 {
     public partial class MainWindow : Window
     {
-        private User currentUser;
+        private readonly User currentUser;
+        private readonly UserDao userDao;
 
         public MainWindow(User currentUser)
         {
-            CultureInfo culture = new CultureInfo(LangUtils.CurrentCulture.Name);
-            Thread.CurrentThread.CurrentCulture = culture;
+            userDao = new UserDao();
             Trace.WriteLine("before init MainWindow");
             InitializeComponent();
             Trace.WriteLine("after init MainWindow");
             this.currentUser = currentUser;
-            HeaderUserText.Text = Utils.CapitalizeFirstLetter(currentUser.FirstName) + " " +
-                                  Utils.CapitalizeFirstLetter(currentUser.LastName);
 
-            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("conferences"), PackIconKind.Register,
+
+            setUserFullNameHeader(currentUser);
+
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu("conferences", //LangUtils.Translate("conferences"),
+                PackIconKind.ViewAgenda,
                 () => new ConferenceControl(this.currentUser)));
-            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("sessions"), PackIconKind.Connection,
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu("sessions",
+                PackIconKind.ViewSequential,
                 () => new SessionControl(this.currentUser)));
-            Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("events"), PackIconKind.Connection,
+            Drawer_Upper_MenuListView.Items.Add(new ItemMenu("events", PackIconKind.ViewHeadline,
                 () => new EventControl(this.currentUser)));
 
             //TODO: used for testing
-            Drawer_Upper_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About,
-                () => new MenuControl()));
+            // Drawer_Upper_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About,
+            //     () => new MenuControl()));
 
             //if user has admin role
             if (currentUser.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
             {
-                Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("locations"), PackIconKind.Map,
-                    () => new LocationControl()));
-                Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("users"), PackIconKind.User,
+                // Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("locations"), PackIconKind.Map,
+                //     () => new LocationControl()));
+                Drawer_Upper_MenuListView.Items.Add(new ItemMenu("users", PackIconKind.User,
                     () => new UsersControl(this.currentUser)));
             }
 
             Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
-            Drawer_Bottom_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("settings"), PackIconKind.Settings,
-                () => new SettingsControl()));
+            Drawer_Bottom_MenuListView.Items.Add(new ItemMenu("settings", PackIconKind.Settings,
+                () => new SettingsControl(Drawer_Upper_MenuListView, Drawer_Bottom_MenuListView)));
 
 
             // test();
             // ConferenceDao conferenceDao = new ConferenceDao();
             // conferenceDao.deleteConference(2);
+        }
+
+        private void setUserFullNameHeader(User currentUser)
+        {
+            string userFullName = userDao.getUserFullname_Procedure(currentUser.Id);
+            string[] fullName = userFullName.Split(' ');
+            HeaderUserText.Text = Utils.CapitalizeFirstLetter(fullName[0]) + " " +
+                                  Utils.CapitalizeFirstLetter(fullName[1]);
         }
 
         void test()

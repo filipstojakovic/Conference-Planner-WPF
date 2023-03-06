@@ -51,5 +51,6 @@ namespace ConferenceApp.model.dao
 
             return userGatheringRole;
         }
+       
     }
 }

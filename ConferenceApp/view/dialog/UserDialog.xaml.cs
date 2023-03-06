@@ -38,9 +38,6 @@ namespace ConferenceApp.view.dialog
             DataContext = UserDialogData;
             RoleComboBox.DataContext = this;
             RoleComboBox.ItemsSource = AllRoles;
-
-            // editBtn.Content = edit ? "Edit" : "Create";
-            // editBtn.DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
