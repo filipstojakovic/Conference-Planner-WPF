@@ -28,9 +28,12 @@ public partial class ConferenceDialog : Window
 
     private readonly BindingList<Conference> conferenceListForChecking;
 
-    public ConferenceDialog(Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
+    private User currentUser;
+
+    public ConferenceDialog(User currentUser,Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
         bool edit = false)
     {
+        this.currentUser = currentUser;
         InitializeComponent();
         this.conferenceListForChecking = conferenceListForChecking;
         userDao = new UserDao();
@@ -91,6 +94,12 @@ public partial class ConferenceDialog : Window
             }
         }
 
+        if (currentUser.Username == ConferenceModel.SelectedUser.Username)
+        {
+            Utils.ErrorBox("Organizer and Moderator are the same person");
+            return;
+        }
+        
         DialogResult = true;
         Close();
     }

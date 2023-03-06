@@ -107,14 +107,20 @@ namespace ConferenceApp.view.usercontrol
         private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
-            var dialog = new ConferenceDialog(conference, conferenceBindingList, true);
+            var dialog = new ConferenceDialog(currentUser, conference, conferenceBindingList, true);
             if (dialog.ShowDialog() == true)
             {
+                var transaction = conferenceDao.startTransaction();
                 try
                 {
-                    conferenceDao.updateConference(dialog.ConferenceDialogData);
-                    
-                    
+                    conferenceDao.updateConference(dialog.ConferenceDialogData, transaction);
+                    UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
+                    userGatheringRoleDao.deleteConferenceModerator(conference,transaction);
+                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser,
+                        conference,
+                        GatheringRoleEnum.Moderator, transaction);
+
+                    transaction.Commit();
                     conferenceBindingList.Remove(conference);
                     conference.copy(dialog.ConferenceDialogData);
                     conferenceBindingList.Add(conference);
@@ -122,6 +128,7 @@ namespace ConferenceApp.view.usercontrol
                 }
                 catch (Exception)
                 {
+                    transaction.Rollback();
                     var message = LangUtils.Translate("error_update_conference");
                     Utils.ErrorBox(message);
                 }
@@ -158,7 +165,7 @@ namespace ConferenceApp.view.usercontrol
 
         private void Create_Button_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new ConferenceDialog(null, conferenceBindingList);
+            var dialog = new ConferenceDialog(currentUser, null, conferenceBindingList);
             if (dialog.ShowDialog() == true)
             {
                 var transaction = conferenceDao.startTransaction();
@@ -169,7 +176,8 @@ namespace ConferenceApp.view.usercontrol
                     userGatheringRoleDao.insertUserConferenceConferenceRole(currentUser, conference,
                         GatheringRoleEnum.Organizer, transaction);
 
-                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser, conference,
+                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser,
+                        conference,
                         GatheringRoleEnum.Moderator, transaction);
 
                     transaction.Commit();
@@ -184,6 +192,36 @@ namespace ConferenceApp.view.usercontrol
 
                 CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
             }
+        }
+
+        private void Join_MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Conference conference = getSelectedConference(sender);
+            if (!Utils.confirmAction("Are you sure you wanna join " + conference.Name + " conference"))
+            {
+                return;
+            }
+
+            UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
+            var transaction = userGatheringRoleDao.startTransaction();
+            try
+            {
+                userGatheringRoleDao.insertUserConferenceConferenceRole(currentUser, conference,
+                    GatheringRoleEnum.Visitor, transaction);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                Utils.ErrorBox("Unable to join");
+            }
+        }
+
+        private void Info_MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Conference conference = getSelectedConference(sender);
+            var dialog = new ConferenceUserListDialog(conference);
+            dialog.ShowDialog();
         }
     }
 }

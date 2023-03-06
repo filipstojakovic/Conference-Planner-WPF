@@ -36,6 +36,8 @@
                       IsReadOnly="True">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="Join conference" Click="Join_MenuItem_OnClick" />
+                        <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
                         <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
                         <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
                         <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />

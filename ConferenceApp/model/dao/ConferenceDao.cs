@@ -78,7 +78,7 @@ namespace ConferenceApp.model.dao
             return conference;
         }
 
-        public void updateConference(Conference conference)
+        public void updateConference(Conference conference, MySqlTransaction transaction)
         {
             const string updateGatheringSql = @"
                 UPDATE gathering 
@@ -94,14 +94,14 @@ namespace ConferenceApp.model.dao
                     end_date = @endDate
                 WHERE gathering_id = @id";
 
-            using (var command = new MySqlCommand(updateGatheringSql, connection))
+            using (var command = new MySqlCommand(updateGatheringSql, connection,transaction))
             {
                 command.Parameters.AddWithValue("@id", conference.Id);
                 command.Parameters.AddWithValue("@description", conference.Description);
                 command.ExecuteNonQuery();
             }
 
-            using (var command = new MySqlCommand(updateConferenceSql, connection))
+            using (var command = new MySqlCommand(updateConferenceSql, connection,transaction))
             {
                 command.Parameters.AddWithValue("@id", conference.Id);
                 command.Parameters.AddWithValue("@name", conference.Name);
