@@ -60,11 +60,13 @@
 
         <Label Grid.Row="3" Grid.Column="0" Content="Start Date:" Margin="5" />
         <DatePicker Grid.Row="3" Grid.Column="1"
+                    xml:lang="en-GB"
                     SelectedDate="{Binding StartDate}"
                     Margin="5" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="End Date:" Margin="5" />
         <DatePicker Grid.Row="4" Grid.Column="1"
+                    xml:lang="en-GB"
                     SelectedDate="{Binding EndDate}"
                     Margin="5" />
         

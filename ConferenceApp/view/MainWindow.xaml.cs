@@ -124,7 +124,7 @@ namespace ConferenceApp.view
             var screen = sender.CreateUserControl();
             DockPanelMain.Children.Clear();
             DockPanelMain.Children.Add(screen);
-            HeaderBar.Text = sender.Header;
+            HeaderBar.Text = LangUtils.Translate(sender.Header);
         }
     }
 }

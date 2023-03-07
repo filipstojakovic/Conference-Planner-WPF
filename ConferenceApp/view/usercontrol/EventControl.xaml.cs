@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -54,17 +55,19 @@ public partial class EventControl : UserControl
             EventDataGrid.ItemsSource = new BindingList<Event>();
             EventDataGrid.DataContext = new BindingList<Event>();
             CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
+            ComboBox.SelectedIndex = 0;
         }
     }
 
     private void Create_Button_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new EventDialog();
+        Session session = (Session)ComboBox.SelectedItem;
+        var dialog = new EventDialog(session);
         if (dialog.ShowDialog() == true)
         {
-            
+            //TODO: insert session and update list
+            Console.WriteLine();
         }
-        
     }
 
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)

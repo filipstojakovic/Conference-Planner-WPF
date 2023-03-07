@@ -37,7 +37,7 @@ namespace ConferenceApp.model.dao
             {
                 command.Parameters.AddWithValue("@userId", user.Id);
                 command.Parameters.AddWithValue("@gatheringId", insertedConference.Id);
-                command.Parameters.AddWithValue("@gatheringRoleId", gatheringRole.Id); //FK
+                command.Parameters.AddWithValue("@gatheringRoleId", gatheringRole.Id); 
 
                 command.ExecuteNonQuery();
             }

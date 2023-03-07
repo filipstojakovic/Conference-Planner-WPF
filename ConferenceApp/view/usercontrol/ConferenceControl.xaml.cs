@@ -121,9 +121,7 @@ namespace ConferenceApp.view.usercontrol
                         GatheringRoleEnum.Moderator, transaction);
 
                     transaction.Commit();
-                    conferenceBindingList.Remove(conference);
                     conference.copy(dialog.ConferenceDialogData);
-                    conferenceBindingList.Add(conference);
                     CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
                 }
                 catch (Exception)

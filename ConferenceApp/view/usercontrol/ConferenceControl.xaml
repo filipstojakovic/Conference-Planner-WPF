@@ -47,9 +47,9 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                     <DataGridTextColumn Header="Start date"
-                                        Binding="{Binding StartDate, StringFormat=d}" />
+                                        Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
                     <DataGridTextColumn Header="End date"
-                                        Binding="{Binding EndDate, StringFormat=d}" />
+                                        Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

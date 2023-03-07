@@ -52,8 +52,30 @@ public class SessionDao : BaseDao
 
         return session;
     }
-    
-    //TODO: need update session
+
+    public void updateSession(Session session)
+    {
+        var sql = @"UPDATE session 
+                    SET
+                       gathering_id=@gatheringId,
+                       name=@name,
+                       description=@description,
+                       start_date=@startDate,
+                       end_date=@endDate
+                   WHERE id=@sessionId
+                    ";
+
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("@sessionId", session.Id);
+            command.Parameters.AddWithValue("@gatheringId", session.GatheringId);
+            command.Parameters.AddWithValue("@name", session.Name);
+            command.Parameters.AddWithValue("@description", session.Description);
+            command.Parameters.AddWithValue("@startDate", session.StartDate);
+            command.Parameters.AddWithValue("@endDate", session.EndDate);
+            command.ExecuteNonQuery();
+        }
+    }
 
     public void deleteSession(int? sessionId)
     {
@@ -63,6 +85,7 @@ public class SessionDao : BaseDao
             command.ExecuteNonQuery();
         }
     }
+
     private List<Session> extractSessionData(MySqlCommand command)
     {
         List<Session> list = new List<Session>();

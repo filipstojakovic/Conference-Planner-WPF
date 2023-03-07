@@ -52,9 +52,10 @@ public partial class SessionControl : UserControl
         }
         else
         {
-            SessionDataGrid.ItemsSource = new BindingList<Session>();;
-            SessionDataGrid.DataContext = new BindingList<Session>();;
+            SessionDataGrid.ItemsSource = new BindingList<Session>();
+            SessionDataGrid.DataContext = new BindingList<Session>();
             CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            ComboBox.SelectedIndex = 0;
         }
     }
 
@@ -73,17 +74,16 @@ public partial class SessionControl : UserControl
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedSession = getSelectedConference(sender);
-        var dialog = new SessionDialog(SelectedConference.Id, selectedSession);
+        var dialog = new SessionDialog(SelectedConference.Id, selectedSession, true);
         if (dialog.ShowDialog() == true)
         {
-            //TODO: update session
-            // var sessionDialogData = dialog.SessionDialogData;
-            // var session = sessionDao.insertSession(sessionDialogData);
-            // sessionBindingList.Add(session);
+            Session session = dialog.SessionDialogData;
+            sessionDao.updateSession(session);
+            selectedSession.copy(session);
             CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
         }
     }
-    
+
     private Session getSelectedConference(object sender)
     {
         //Get the clicked MenuItem
@@ -102,12 +102,12 @@ public partial class SessionControl : UserControl
 
     private void Create_Button_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: first select conference from combobox
         if (SelectedConference == null)
         {
             Utils.ErrorBox("First select conference");
             return;
         }
+
         var dialog = new SessionDialog(SelectedConference.Id);
         if (dialog.ShowDialog() == true)
         {
@@ -115,7 +115,6 @@ public partial class SessionControl : UserControl
             var session = sessionDao.insertSession(sessionDialogData);
             sessionBindingList.Add(session);
             CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
-            //TODO: save
         }
     }
 }

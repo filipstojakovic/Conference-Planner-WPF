@@ -19,6 +19,10 @@ public partial class SessionDialog : Window
             sessionDialogData = new Session();
             sessionDialogData.GatheringId = gatheringId;
         }
+        else
+        {
+            sessionDialogData = new Session(sessionDialogData);
+        }
         this.SessionDialogData = sessionDialogData;
         DataContext = sessionDialogData;
     }

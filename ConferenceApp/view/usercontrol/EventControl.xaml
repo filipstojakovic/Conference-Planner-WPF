@@ -52,9 +52,9 @@
                 <DataGridTextColumn Header="Event type" Binding="{Binding EventType,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Start date"
-                                    Binding="{Binding StartDate, StringFormat=d}" />
+                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
                 <DataGridTextColumn Header="End date"
-                                    Binding="{Binding EndDate, StringFormat=d}" />
+                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
