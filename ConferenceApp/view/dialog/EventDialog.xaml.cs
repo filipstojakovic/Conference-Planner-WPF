@@ -14,7 +14,7 @@ public partial class EventDialog : Window
     private EventDialogData eventDialogData;
 
     private EventTypeDao eventTypeDao;
-    public EventDialog(Session session,Event myEvent = null)
+    public EventDialog(Session session,LiveEvent myLiveEvent = null)
     {
         InitializeComponent();
         eventTypeDao = new EventTypeDao();

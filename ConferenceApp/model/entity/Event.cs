@@ -11,12 +11,4 @@ public class Event
     public string EventType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-
-    public Event()
-    {
-        Name = "";
-        Description = "";
-        StartDate = DateTime.Now;
-        EndDate = DateTime.Now.AddDays(1);
-    }
 }

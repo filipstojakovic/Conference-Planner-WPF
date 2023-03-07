@@ -7,14 +7,14 @@ namespace ConferenceApp.view.dialog;
 
 public class EventDialogData : INotifyPropertyChanged
 {
-    private Event _event;
+    private LiveEvent _liveEvent;
 
-    public Event EventDialog
+    public LiveEvent LiveEventDialog
     {
-        get { return _event; }
+        get { return _liveEvent; }
         set
         {
-            _event = value;
+            _liveEvent = value;
             OnPropertyChanged();
         }
     }

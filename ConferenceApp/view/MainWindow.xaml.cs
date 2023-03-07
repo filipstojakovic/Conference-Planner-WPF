@@ -26,15 +26,28 @@ namespace ConferenceApp.view
 
         public MainWindow(User currentUser)
         {
-            userDao = new UserDao();
             Trace.WriteLine("before init MainWindow");
             InitializeComponent();
             Trace.WriteLine("after init MainWindow");
+            
             this.currentUser = currentUser;
-
+            userDao = new UserDao();
 
             setUserFullNameHeader(currentUser);
+            setDrawerButton(currentUser);
+            
+            LiveEvent liveEvent = new LiveEvent
+            {
+                Name = "event",
+                Description = "desc",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(5),
+                
+            }
+        }
 
+        private void setDrawerButton(User currentUser)
+        {
             Drawer_Upper_MenuListView.Items.Add(new ItemMenu("conferences", //LangUtils.Translate("conferences"),
                 PackIconKind.ViewAgenda,
                 () => new ConferenceControl(this.currentUser)));
@@ -60,11 +73,6 @@ namespace ConferenceApp.view
             Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
             Drawer_Bottom_MenuListView.Items.Add(new ItemMenu("settings", PackIconKind.Settings,
                 () => new SettingsControl(Drawer_Upper_MenuListView, Drawer_Bottom_MenuListView)));
-
-
-            // test();
-            // ConferenceDao conferenceDao = new ConferenceDao();
-            // conferenceDao.deleteConference(2);
         }
 
         private void setUserFullNameHeader(User currentUser)
@@ -80,15 +88,6 @@ namespace ConferenceApp.view
             {
                 Utils.ErrorBox("Unable to set users fullname");
             }
-        }
-
-        void test()
-        {
-            Conference conference = Generate.conference();
-            UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
-            User user = (new UserDao()).findById(2);
-            // userGatheringRoleDao.insertUserConferenceConferenceRole(this.currentUser, conference,
-            //     GatheringRoleEnum.Organizer);
         }
 
         //Selection changed in left menu

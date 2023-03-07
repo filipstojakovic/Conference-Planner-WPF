@@ -11,19 +11,19 @@ namespace ConferenceApp.view.usercontrol;
 
 public partial class EventControl : UserControl
 {
-    private BindingList<Event> eventBindingList;
+    private BindingList<LiveEvent> eventBindingList;
     private BindingList<Session> sessionBindingList;
     private Session SelectedSession;
 
 
     private readonly SessionDao sessionDao;
-    private readonly EventDao eventDao;
+    private readonly LiveEventDao liveEventDao;
 
     public EventControl(User currentUser)
     {
         InitializeComponent();
         sessionDao = new SessionDao();
-        eventDao = new EventDao();
+        liveEventDao = new LiveEventDao();
         loadData();
         // if (sessionBindingList.Count > 0)
         // {
@@ -44,16 +44,16 @@ public partial class EventControl : UserControl
         SelectedSession = (Session)ComboBox.SelectedItem;
         if (SelectedSession != null)
         {
-            var events = eventDao.findBySessionId(SelectedSession.Id);
-            eventBindingList = new BindingList<Event>(events);
+            var events = liveEventDao.findBySessionId(SelectedSession.Id);
+            eventBindingList = new BindingList<LiveEvent>(events);
             EventDataGrid.ItemsSource = eventBindingList;
             EventDataGrid.DataContext = eventBindingList;
             CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
         }
         else
         {
-            EventDataGrid.ItemsSource = new BindingList<Event>();
-            EventDataGrid.DataContext = new BindingList<Event>();
+            EventDataGrid.ItemsSource = new BindingList<LiveEvent>();
+            EventDataGrid.DataContext = new BindingList<LiveEvent>();
             CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
             ComboBox.SelectedIndex = 0;
         }

@@ -6,14 +6,13 @@ using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao;
 
-public class EventDao : BaseDao
+public abstract class EventDao : BaseDao
 {
-
-    public List<Event> findAll()
+    public List<LiveEvent> findAll()
     {
         //using select_events_with_event_type VIEW
         var sql = "SELECT * FROM select_events_with_event_type";
-        List<Event> list;
+        List<LiveEvent> list;
         using (var command = new MySqlCommand(sql, connection))
         {
             list = extractEventData(command);
@@ -22,10 +21,10 @@ public class EventDao : BaseDao
         return list;
     }
     
-    public List<Event> findBySessionId(int? sessionId)
+    public List<LiveEvent> findBySessionId(int? sessionId)
     {
         var sql = $"SELECT * FROM select_events_with_event_type WHERE session_id={sessionId}";
-        List<Event> list;
+        List<LiveEvent> list;
         using (var command = new MySqlCommand(sql, connection))
         {
             list = extractEventData(command);
@@ -34,9 +33,9 @@ public class EventDao : BaseDao
         return list;
     }
     
-    private List<Event> extractEventData(MySqlCommand command)
+    private List<LiveEvent> extractEventData(MySqlCommand command)
     {
-        List<Event> list = new List<Event>();
+        List<LiveEvent> list = new List<LiveEvent>();
         using (var reader = command.ExecuteReader())
         {
             while (reader.Read())
@@ -50,7 +49,7 @@ public class EventDao : BaseDao
                 
                 var eventTypeName = Utils.readerGetValue<string>(reader, "event_type_name");
 
-                Event conference = new Event()
+                LiveEvent conference = new LiveEvent()
                 {
                     Id = id,
                     SessionId = sessionId,
@@ -66,5 +65,4 @@ public class EventDao : BaseDao
 
         return list;
     }
-
 }
