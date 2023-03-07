@@ -6,6 +6,7 @@ using System.Windows.Data;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.datagridview;
 using ConferenceApp.model.entity;
+using ConferenceApp.utils;
 using ConferenceApp.view.dialog;
 
 namespace ConferenceApp.view.usercontrol;
@@ -15,7 +16,6 @@ public partial class EventControl : UserControl
     private BindingList<LiveEventDataGrid> eventBindingList;
     private BindingList<Session> sessionBindingList;
     private Session SelectedSession;
-
 
     private readonly SessionDao sessionDao;
     private readonly LiveEventDao liveEventDao;
@@ -80,5 +80,26 @@ public partial class EventControl : UserControl
 
     private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
+        LiveEventDataGrid liveEventDataGrid = getSelectedEvent(sender);
+        var result = Utils.confirmAction("Are you sure you want to delete " + liveEventDataGrid.Name);
+        if (!result)
+            return;
+        try
+        {
+            liveEventDao.deleteEvent(liveEventDataGrid.Id);
+            eventBindingList.Remove(liveEventDataGrid);
+        }
+        catch (Exception)
+        {
+            Utils.ErrorBox("Was not able to remove event");
+        }
+    }
+
+    private LiveEventDataGrid getSelectedEvent(object sender)
+    {
+        var menuItem = (MenuItem)sender;
+        var contextMenu = (ContextMenu)menuItem.Parent;
+        var item = (DataGrid)contextMenu.PlacementTarget;
+        return (LiveEventDataGrid)item.SelectedCells[0].Item;
     }
 }

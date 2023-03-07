@@ -33,4 +33,15 @@ public abstract class EventDao : BaseDao
 
         return liveEvent;
     }
+
+    public void deleteEvent(int? eventId)
+    {
+        var sql = "DELETE FROM event WHERE id=@eventId";
+
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("@eventId", eventId);
+            command.ExecuteNonQuery();
+        }
+    }
 }
