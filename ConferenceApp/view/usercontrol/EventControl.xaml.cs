@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using ConferenceApp.model.dao;
+using ConferenceApp.model.datagridview;
 using ConferenceApp.model.entity;
 using ConferenceApp.view.dialog;
 
@@ -11,7 +12,7 @@ namespace ConferenceApp.view.usercontrol;
 
 public partial class EventControl : UserControl
 {
-    private BindingList<LiveEvent> eventBindingList;
+    private BindingList<LiveEventDataGrid> eventBindingList;
     private BindingList<Session> sessionBindingList;
     private Session SelectedSession;
 
@@ -45,7 +46,7 @@ public partial class EventControl : UserControl
         if (SelectedSession != null)
         {
             var events = liveEventDao.findBySessionId(SelectedSession.Id);
-            eventBindingList = new BindingList<LiveEvent>(events);
+            eventBindingList = new BindingList<LiveEventDataGrid>(events);
             EventDataGrid.ItemsSource = eventBindingList;
             EventDataGrid.DataContext = eventBindingList;
             CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();

@@ -43,14 +43,14 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
                     <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Event Name" Binding="{Binding Name,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Event type" Binding="{Binding EventType,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Event name" Binding="{Binding Name,Mode=TwoWay}" />
+                <DataGridTextColumn Header="Event type" Binding="{Binding EventTypeName,Mode=TwoWay}" />
+                <DataGridTextColumn Header="Street" Binding="{Binding Street,Mode=TwoWay}" />
+                <DataGridTextColumn Header="Room number" Binding="{Binding RoomNumber,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Start date"
                                     Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
                 <DataGridTextColumn Header="End date"

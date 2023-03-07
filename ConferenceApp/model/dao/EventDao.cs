@@ -1,68 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using ConferenceApp.model.entity;
-using ConferenceApp.utils;
+﻿using ConferenceApp.model.entity;
 using MySql.Data.MySqlClient;
 
 namespace ConferenceApp.model.dao;
 
 public abstract class EventDao : BaseDao
 {
-    public List<LiveEvent> findAll()
-    {
-        //using select_events_with_event_type VIEW
-        var sql = "SELECT * FROM select_events_with_event_type";
-        List<LiveEvent> list;
-        using (var command = new MySqlCommand(sql, connection))
-        {
-            list = extractEventData(command);
-        }
+    protected EventTypeDao eventTypeDao;
 
-        return list;
+    protected EventDao()
+    {
+        eventTypeDao = new EventTypeDao();
     }
-    
-    public List<LiveEvent> findBySessionId(int? sessionId)
+
+    protected LiveEvent insertEvent(LiveEvent liveEvent, MySqlTransaction transaction)
     {
-        var sql = $"SELECT * FROM select_events_with_event_type WHERE session_id={sessionId}";
-        List<LiveEvent> list;
-        using (var command = new MySqlCommand(sql, connection))
+        var sql = @"INSERT INTO event(session_id, event_type_id, name, description, start_date, end_date)
+                    VALUES (@sessionId, @eventTypeId, @name,@description,@startDate,@endDate)";
+
+        EventType eventType = eventTypeDao.findByName(liveEvent.EventTypeName)[0];
+
+        using (var command = new MySqlCommand(sql, connection, transaction))
         {
-            list = extractEventData(command);
+            command.Parameters.AddWithValue("@sessionId", liveEvent.SessionId);
+            command.Parameters.AddWithValue("@eventTypeId", eventType.Id);
+            command.Parameters.AddWithValue("@name", liveEvent.Name);
+            command.Parameters.AddWithValue("@description", liveEvent.Description);
+            command.Parameters.AddWithValue("@startDate", liveEvent.StartDate);
+            command.Parameters.AddWithValue("@endDate", liveEvent.EndDate);
+            command.ExecuteNonQuery();
+            liveEvent.Id = (int)command.LastInsertedId;
         }
 
-        return list;
-    }
-    
-    private List<LiveEvent> extractEventData(MySqlCommand command)
-    {
-        List<LiveEvent> list = new List<LiveEvent>();
-        using (var reader = command.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                var id = Utils.readerGetValue<int>(reader, "id");
-                var sessionId = Utils.readerGetValue<int>(reader, "session_id");
-                var name = Utils.readerGetValue<string>(reader, "name");
-                var desc = Utils.readerGetValue<string?>(reader, "description");
-                var start = Utils.readerGetValue<DateTime>(reader, "start_date");
-                var end = Utils.readerGetValue<DateTime>(reader, "end_date");
-                
-                var eventTypeName = Utils.readerGetValue<string>(reader, "event_type_name");
-
-                LiveEvent conference = new LiveEvent()
-                {
-                    Id = id,
-                    SessionId = sessionId,
-                    Name = name,
-                    Description = desc,
-                    StartDate = start,
-                    EndDate = end,
-                    EventType = eventTypeName
-                };
-                list.Add(conference);
-            }
-        }
-
-        return list;
+        return liveEvent;
     }
 }

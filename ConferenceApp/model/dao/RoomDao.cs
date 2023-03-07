@@ -5,7 +5,7 @@ namespace ConferenceApp.model.dao;
 
 public class RoomDao : BaseDao
 {
-    private LocationDao locationDao;
+    private readonly LocationDao locationDao;
 
     public RoomDao()
     {
