@@ -205,7 +205,6 @@ namespace ConferenceApp.model.dao
         public void delete(int? userId)
         {
             string deleteUserSql = $"DELETE FROM user WHERE id = {userId}";
-            //TODO: conference check
 
             using (var command = new MySqlCommand(deleteUserSql, connection))
             {

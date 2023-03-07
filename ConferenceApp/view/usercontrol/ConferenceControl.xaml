@@ -62,8 +62,8 @@
                 <Calendar.Resources>
                     <SolidColorBrush x:Key="PrimaryHueMidBrush"
                                      Color="{Binding Source={StaticResource BackgroundColor}, Path=Color}" />
-                    <SolidColorBrush x:Key="MaterialDesignBody" Color="Black" /> <!--TODO: body text color-->
-                    <!-- <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" />  TODO: header text color--> 
+                    <SolidColorBrush x:Key="MaterialDesignBody" Color="Black" /> <!-- body text color-->
+                    <!-- <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" />  // header text color--> 
                     
                     <!-- https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/ba83813d2567813e1fa0865e42746de31f44022b/MaterialDesignThemes.Wpf/Themes/MaterialDesignTheme.Calendar.xaml#LL763C24-L763C24 -->
                 </Calendar.Resources>

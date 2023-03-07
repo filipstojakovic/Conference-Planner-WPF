@@ -44,7 +44,7 @@ namespace ConferenceApp.view
             Drawer_Upper_MenuListView.Items.Add(new ItemMenu("events", PackIconKind.ViewHeadline,
                 () => new EventControl(this.currentUser)));
 
-            //TODO: used for testing
+            //Used for testing
             // Drawer_Upper_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About,
             //     () => new MenuControl()));
 
@@ -69,10 +69,17 @@ namespace ConferenceApp.view
 
         private void setUserFullNameHeader(User currentUser)
         {
-            string userFullName = userDao.getUserFullname_Procedure(currentUser.Id);
-            string[] fullName = userFullName.Split(' ');
-            HeaderUserText.Text = Utils.CapitalizeFirstLetter(fullName[0]) + " " +
-                                  Utils.CapitalizeFirstLetter(fullName[1]);
+            try
+            {
+                string userFullName = userDao.getUserFullname_Procedure(currentUser.Id);
+                string[] fullName = userFullName.Split(' ');
+                HeaderUserText.Text = Utils.CapitalizeFirstLetter(fullName[0]) + " " +
+                                      Utils.CapitalizeFirstLetter(fullName[1]);
+            }
+            catch (Exception)
+            {
+                Utils.ErrorBox("Unable to set users fullname");
+            }
         }
 
         void test()

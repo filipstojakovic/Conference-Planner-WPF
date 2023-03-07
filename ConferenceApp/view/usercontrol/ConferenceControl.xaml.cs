@@ -55,14 +55,6 @@ namespace ConferenceApp.view.usercontrol
             }
         }
 
-        private bool ConferenceFilter(object item)
-        {
-            if (string.IsNullOrEmpty(txtFilter.Text))
-                return true;
-
-            return (item as Conference).Name.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-        }
-
         private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             var tbx = sender as TextBox;
@@ -103,64 +95,7 @@ namespace ConferenceApp.view.usercontrol
             // date is currently selected date on calendar;
             Console.WriteLine();
         }
-
-        private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            Conference conference = getSelectedConference(sender);
-            var dialog = new ConferenceDialog(currentUser, conference, conferenceBindingList, true);
-            if (dialog.ShowDialog() == true)
-            {
-                var transaction = conferenceDao.startTransaction();
-                try
-                {
-                    conferenceDao.updateConference(dialog.ConferenceDialogData, transaction);
-                    UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
-                    userGatheringRoleDao.deleteConferenceModerator(conference,transaction);
-                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser,
-                        conference,
-                        GatheringRoleEnum.Moderator, transaction);
-
-                    transaction.Commit();
-                    conference.copy(dialog.ConferenceDialogData);
-                    CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    var message = LangUtils.Translate("error_update_conference");
-                    Utils.ErrorBox(message);
-                }
-            }
-        }
-
-        private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            Conference conference = getSelectedConference(sender);
-            var yes = Utils.confirmAction($"Are you sure you want to delete {conference.Name}");
-            if (!yes)
-                return;
-            conferenceDao.deleteConference(conference.Id);
-            conferenceBindingList.Remove(conference);
-            CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
-        }
-
-
-        private Conference getSelectedConference(object sender)
-        {
-            //Get the clicked MenuItem
-            var menuItem = (MenuItem)sender;
-
-            //Get the ContextMenu to which the menuItem belongs
-            var contextMenu = (ContextMenu)menuItem.Parent;
-
-            //Find the placementTarget
-            var item = (DataGrid)contextMenu.PlacementTarget;
-
-            //Get the underlying item, that you cast to your object that is bound
-            //to the DataGrid (and has subject and state as property)
-            return (Conference)item.SelectedCells[0].Item;
-        }
-
+        
         private void Create_Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ConferenceDialog(currentUser, null, conferenceBindingList);
@@ -192,6 +127,55 @@ namespace ConferenceApp.view.usercontrol
             }
         }
 
+        private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Conference conference = getSelectedConference(sender);
+            var dialog = new ConferenceDialog(currentUser, conference, conferenceBindingList, true);
+            if (dialog.ShowDialog() == true)
+            {
+                var transaction = conferenceDao.startTransaction();
+                try
+                {
+                    //TODO: no overlap with other conferences, check session and events time period
+                    conferenceDao.updateConference(dialog.ConferenceDialogData, transaction);
+                    UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
+                    userGatheringRoleDao.deleteConferenceModerator(conference, transaction);
+                    userGatheringRoleDao.insertUserConferenceConferenceRole(dialog.ConferenceModel.SelectedUser,
+                        conference,
+                        GatheringRoleEnum.Moderator, transaction);
+
+                    transaction.Commit();
+                    conference.copy(dialog.ConferenceDialogData);
+                    CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    var message = LangUtils.Translate("error_update_conference");
+                    Utils.ErrorBox(message);
+                }
+            }
+        }
+
+        private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Conference conference = getSelectedConference(sender);
+            try
+            {
+                var yes = Utils.confirmAction($"Are you sure you want to delete {conference.Name}");
+                if (!yes)
+                    return;
+                conferenceDao.deleteConference(conference.Id);
+                conferenceBindingList.Remove(conference);
+                CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
+            }
+            catch (Exception)
+            {
+                Utils.ErrorBox("Unable to delete " + conference.Name);
+            }
+        }
+
+
         private void Join_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
@@ -220,6 +204,14 @@ namespace ConferenceApp.view.usercontrol
             Conference conference = getSelectedConference(sender);
             var dialog = new ConferenceUserListDialog(conference);
             dialog.ShowDialog();
+        }
+        
+        private Conference getSelectedConference(object sender)
+        {
+            var menuItem = (MenuItem)sender;
+            var contextMenu = (ContextMenu)menuItem.Parent;
+            var item = (DataGrid)contextMenu.PlacementTarget;
+            return (Conference)item.SelectedCells[0].Item;
         }
     }
 }

@@ -82,13 +82,20 @@ namespace ConferenceApp.view.usercontrol
                 return;
             }
 
-            var result = Utils.confirmAction($"Are you sure you want to delete {user.FirstName} {user.LastName}?");
-            if (result)
+            try
             {
-                userBindingList.Remove(user);
-                userDao.delete(user.Id);
-                loadData();
-                txtFilter_TextChanged(null, null);
+                var result = Utils.confirmAction($"Are you sure you want to delete {user.FirstName} {user.LastName}?");
+                if (result)
+                {
+                    userDao.delete(user.Id);
+                    userBindingList.Remove(user);
+                    loadData();
+                    txtFilter_TextChanged(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.ErrorBox("Unable to delete user");
             }
         }
 

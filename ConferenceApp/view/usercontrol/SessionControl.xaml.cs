@@ -59,6 +59,41 @@ public partial class SessionControl : UserControl
         }
     }
 
+    private void Create_Button_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedConference == null)
+        {
+            Utils.ErrorBox("First select conference");
+            return;
+        }
+
+        //TODO: check if inside conference time period
+        //TODO: check events in time period
+        var dialog = new SessionDialog(SelectedConference.Id);
+        if (dialog.ShowDialog() == true)
+        {
+            var sessionDialogData = dialog.SessionDialogData;
+            var session = sessionDao.insertSession(sessionDialogData);
+            sessionBindingList.Add(session);
+            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+        }
+    }
+
+    private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
+    {
+        var selectedSession = getSelectedConference(sender);
+        var dialog = new SessionDialog(SelectedConference.Id, selectedSession, true);
+        if (dialog.ShowDialog() == true)
+        {
+            //TODO: check if inside conference time period
+            //TODO: check events in time period
+            Session session = dialog.SessionDialogData;
+            sessionDao.updateSession(session);
+            selectedSession.copy(session);
+            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+        }
+    }
+    
     private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedSession = getSelectedConference(sender);
@@ -71,50 +106,11 @@ public partial class SessionControl : UserControl
         }
     }
 
-    private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
-    {
-        var selectedSession = getSelectedConference(sender);
-        var dialog = new SessionDialog(SelectedConference.Id, selectedSession, true);
-        if (dialog.ShowDialog() == true)
-        {
-            Session session = dialog.SessionDialogData;
-            sessionDao.updateSession(session);
-            selectedSession.copy(session);
-            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
-        }
-    }
-
     private Session getSelectedConference(object sender)
     {
-        //Get the clicked MenuItem
         var menuItem = (MenuItem)sender;
-
-        //Get the ContextMenu to which the menuItem belongs
         var contextMenu = (ContextMenu)menuItem.Parent;
-
-        //Find the placementTarget
         var item = (DataGrid)contextMenu.PlacementTarget;
-
-        //Get the underlying item, that you cast to your object that is bound
-        //to the DataGrid (and has subject and state as property)
         return (Session)item.SelectedCells[0].Item;
-    }
-
-    private void Create_Button_Click(object sender, RoutedEventArgs e)
-    {
-        if (SelectedConference == null)
-        {
-            Utils.ErrorBox("First select conference");
-            return;
-        }
-
-        var dialog = new SessionDialog(SelectedConference.Id);
-        if (dialog.ShowDialog() == true)
-        {
-            var sessionDialogData = dialog.SessionDialogData;
-            var session = sessionDao.insertSession(sessionDialogData);
-            sessionBindingList.Add(session);
-            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
-        }
     }
 }

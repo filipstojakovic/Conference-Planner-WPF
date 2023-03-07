@@ -65,7 +65,10 @@ public partial class EventControl : UserControl
         var dialog = new EventDialog(session);
         if (dialog.ShowDialog() == true)
         {
-            //TODO: insert session and update list
+            //TODO: insert event and update list
+            //TODO: check session date/time
+            //1: inside session start-end period
+            //2: no overlap with other events
             Console.WriteLine();
         }
     }
