@@ -27,12 +27,8 @@ public class LiveEventDao : EventDao
         return list;
     }
 
-    public LiveEvent insertLiveEvent(LiveEvent liveEvent)
+    public LiveEvent insertLiveEvent(LiveEvent liveEvent, MySqlTransaction transaction)
     {
-        var transaction = startTransaction();
-        //TODO: move try catch outside
-        try
-        {
             liveEvent.Room = roomDao.insertRoom(liveEvent.Room, transaction);
 
             liveEvent = insertEvent(liveEvent, transaction);
@@ -47,12 +43,6 @@ public class LiveEventDao : EventDao
             }
 
             transaction.Commit();
-        }
-        catch (Exception ex)
-        {
-            transaction.Rollback();
-            Utils.ErrorBox("Unable to insert live event");
-        }
 
         return liveEvent;
     }

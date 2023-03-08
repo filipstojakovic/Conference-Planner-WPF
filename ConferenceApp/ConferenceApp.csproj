@@ -73,9 +73,6 @@
     <Page Update="view\usercontrol\ConferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="view\usercontrol\LocationControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Update="view\usercontrol\SessionControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

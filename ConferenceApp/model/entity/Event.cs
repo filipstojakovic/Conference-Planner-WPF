@@ -11,4 +11,8 @@ public class Event
     public EventType EventType { get; set; }
     public DateTime StartDate { get; set; } = DateTime.Now;
     public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
+
+    public Event()
+    {
+    }
 }

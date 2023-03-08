@@ -68,8 +68,19 @@ public partial class EventControl : UserControl
             //TODO: check session date/time
             //1: inside session start-end period
             //2: no overlap with other events
-            LiveEvent liveEvent = liveEventDao.insertLiveEvent(dialog.EventDialogModel.LiveEventDialog);
-            eventBindingList.Add(liveEvent);
+            var transaction = liveEventDao.startTransaction();
+            try
+            {
+                LiveEvent liveEvent =
+                    liveEventDao.insertLiveEvent(dialog.EventDialogModel.LiveEventDialog, transaction);
+                eventBindingList.Add(liveEvent);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                Utils.ErrorBox("Unable to create event");
+            }
         }
     }
 
@@ -77,14 +88,17 @@ public partial class EventControl : UserControl
     {
         Session session = (Session)ComboBox.SelectedItem;
         LiveEvent selectedLiveEvent = getSelectedEvent(sender);
-        var dialog = new EventDialog(session, selectedLiveEvent);
+        LiveEvent copy = new LiveEvent(selectedLiveEvent);
+        var dialog = new EventDialog(session, copy);
         if (dialog.ShowDialog() == true)
         {
             var transaction = liveEventDao.startTransaction();
             try
             {
-                liveEventDao.updateLiveEvent(selectedLiveEvent, transaction);
+                liveEventDao.updateLiveEvent(copy, transaction);
+                selectedLiveEvent.copy(copy);
                 transaction.Commit();
+                CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
             }
             catch (Exception)
             {
