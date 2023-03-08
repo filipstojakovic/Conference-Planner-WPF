@@ -102,4 +102,5 @@ public partial class EventControl : UserControl
         var item = (DataGrid)contextMenu.PlacementTarget;
         return (LiveEventDataGrid)item.SelectedCells[0].Item;
     }
+
 }
