@@ -5,8 +5,6 @@
              xmlns:local="clr-namespace:ConferenceApp"
              Exit="App_OnExit"
              StartupUri="/view/login/LoginWindow.xaml">
-    <!-- StartupUri="/view/MainWindow.xaml" -->
-    <!-- TODO: here we change default startup screen -->
 
     <Application.Resources>
 

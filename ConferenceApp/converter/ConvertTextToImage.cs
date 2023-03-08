@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 namespace ConferenceApp.converter
 {
 	//convert imagePath to image. Used in DataGrid to show images in columns
+	//maybe in future project
 	public class ConvertTextToImage : IValueConverter
 	{
 		public object? Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -17,7 +18,7 @@ namespace ConferenceApp.converter
 		}
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			throw new NotImplementedException();
+			return "";
 		}
 	}
 }

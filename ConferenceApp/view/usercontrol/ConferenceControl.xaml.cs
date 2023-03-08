@@ -95,12 +95,13 @@ namespace ConferenceApp.view.usercontrol
             // date is currently selected date on calendar;
             Console.WriteLine();
         }
-        
+
         private void Create_Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ConferenceDialog(currentUser, null, conferenceBindingList);
             if (dialog.ShowDialog() == true)
             {
+                //TODO: no overlap with other conferences, check session and events time period
                 var transaction = conferenceDao.startTransaction();
                 try
                 {
@@ -205,7 +206,7 @@ namespace ConferenceApp.view.usercontrol
             var dialog = new ConferenceUserListDialog(conference);
             dialog.ShowDialog();
         }
-        
+
         private Conference getSelectedConference(object sender)
         {
             var menuItem = (MenuItem)sender;

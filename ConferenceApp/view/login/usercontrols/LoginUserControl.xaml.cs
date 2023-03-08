@@ -36,15 +36,14 @@ namespace ConferenceApp.view.login
                 new MainWindow(user).Show();
                 action();
             }
-            else if ("" == username && "" == password)  // TODO: delete me
+            else if ("" == username && "" == password) // TODO: delete me when done
             {
                 user = userDao.findByUsername("admin");
-                new MainWindow(user).Show(); 
+                new MainWindow(user).Show();
                 action();
             }
             else
             {
-                //ERROR MESSAGE, user doesnt exist
                 Utils.ErrorBox("Wrong username or password!");
             }
         }

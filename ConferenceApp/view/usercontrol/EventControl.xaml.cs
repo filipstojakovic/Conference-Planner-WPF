@@ -92,6 +92,9 @@ public partial class EventControl : UserControl
         var dialog = new EventDialog(session, copy);
         if (dialog.ShowDialog() == true)
         {
+            //TODO: check session date/time
+            //1: inside session start-end period
+            //2: no overlap with other events
             var transaction = liveEventDao.startTransaction();
             try
             {

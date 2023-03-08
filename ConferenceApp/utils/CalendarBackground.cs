@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace DatePicker
 {
 
-    //TODO: https://www.codeproject.com/Tips/547627/Highlight-dates-on-a-WPF-Calendar
+    //For more info VISIT: https://www.codeproject.com/Tips/547627/Highlight-dates-on-a-WPF-Calendar
     /*
      		CalendarBackground = new CalenderBackground(Calendar); // create CalendarBackground using the name of <Calendar name=Calendar/>
 

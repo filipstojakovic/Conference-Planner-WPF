@@ -29,20 +29,20 @@ public class LiveEventDao : EventDao
 
     public LiveEvent insertLiveEvent(LiveEvent liveEvent, MySqlTransaction transaction)
     {
-            liveEvent.Room = roomDao.insertRoom(liveEvent.Room, transaction);
+        liveEvent.Room = roomDao.insertRoom(liveEvent.Room, transaction);
 
-            liveEvent = insertEvent(liveEvent, transaction);
+        liveEvent = insertEvent(liveEvent, transaction);
 
-            var insertLiveEventSql = "INSERT INTO live_event (event_id, room_id) VALUES (@eventId,@roomId)";
-            using (var command = new MySqlCommand(insertLiveEventSql, connection, transaction))
-            {
-                command.Parameters.AddWithValue("@eventId", liveEvent.Id);
-                command.Parameters.AddWithValue("@roomId", liveEvent.Room.Id);
-                command.ExecuteNonQuery();
-                liveEvent.Id = (int)command.LastInsertedId;
-            }
+        var insertLiveEventSql = "INSERT INTO live_event (event_id, room_id) VALUES (@eventId,@roomId)";
+        using (var command = new MySqlCommand(insertLiveEventSql, connection, transaction))
+        {
+            command.Parameters.AddWithValue("@eventId", liveEvent.Id);
+            command.Parameters.AddWithValue("@roomId", liveEvent.Room.Id);
+            command.ExecuteNonQuery();
+            liveEvent.Id = (int)command.LastInsertedId;
+        }
 
-            transaction.Commit();
+        transaction.Commit();
 
         return liveEvent;
     }
@@ -50,18 +50,7 @@ public class LiveEventDao : EventDao
     public LiveEvent updateLiveEvent(LiveEvent liveEvent, MySqlTransaction transaction)
     {
         liveEvent.Room = roomDao.updateRoom(liveEvent.Room, transaction);
-
         liveEvent = updateEvent(liveEvent, transaction);
-
-        //TODO: vjerovatno je visak
-        // var insertLiveEventSql = "INSERT INTO live_event (event_id, room_id) VALUES (@eventId,@roomId)";
-        // using (var command = new MySqlCommand(insertLiveEventSql, connection, transaction))
-        // {
-        //     command.Parameters.AddWithValue("@eventId", liveEvent.Id);
-        //     command.Parameters.AddWithValue("@roomId", liveEvent.Room.Id);
-        //     command.ExecuteNonQuery();
-        //     liveEvent.Id = (int)command.LastInsertedId;
-        // }
 
         return liveEvent;
     }
