@@ -9,7 +9,7 @@ namespace ConferenceApp.view.dialog;
 
 public partial class EventDialog : Window
 {
-    private EventDialogModel _eventDialogModel;
+    public EventDialogModel EventDialogModel { get; set; }
 
     private EventTypeDao eventTypeDao;
     public EventDialog(Session session,LiveEvent myLiveEvent = null)
@@ -23,14 +23,17 @@ public partial class EventDialog : Window
             myLiveEvent.SessionId = session.Id;
         }
 
-        _eventDialogModel = new EventDialogModel();
-        _eventDialogModel.LiveEventDialog = myLiveEvent;
-        DataContext = _eventDialogModel;
+        EventDialogModel = new EventDialogModel();
+        EventDialogModel.LiveEventDialog = myLiveEvent;
+        DataContext = EventDialogModel;
         
         var eventTypes = eventTypeDao.findAll();
-        var eventTypeNames = eventTypes.Select(x => x.Name);
-        ComboBox.ItemsSource = eventTypeNames;
-        ComboBox.SelectedIndex = 0;
+        ComboBox.ItemsSource = eventTypes;
+        if (myLiveEvent != null)
+        {
+            var index = eventTypes.FindIndex(x => x.Id == myLiveEvent.EventType.Id);
+            ComboBox.SelectedIndex = index;
+        }
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)

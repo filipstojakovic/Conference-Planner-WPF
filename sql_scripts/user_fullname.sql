@@ -1,3 +1,4 @@
+DELIMITER $$
 CREATE PROCEDURE `get_user_fullname` (IN userId int, OUT full_name varchar(255))
 BEGIN
 	DECLARE FirstName VARCHAR(50);
@@ -11,4 +12,5 @@ WHERE
     id = userId;
     
     SET full_name = CONCAT(FirstName, ' ', LastName);
-END
+END$$
+DELIMITER ;

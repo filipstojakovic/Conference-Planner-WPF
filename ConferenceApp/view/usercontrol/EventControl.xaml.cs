@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using ConferenceApp.model.dao;
-using ConferenceApp.model.datagridview;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
 using ConferenceApp.view.dialog;
@@ -13,7 +12,7 @@ namespace ConferenceApp.view.usercontrol;
 
 public partial class EventControl : UserControl
 {
-    private BindingList<LiveEventDataGrid> eventBindingList;
+    private BindingList<LiveEvent> eventBindingList;
     private BindingList<Session> sessionBindingList;
     private Session SelectedSession;
 
@@ -46,7 +45,7 @@ public partial class EventControl : UserControl
         if (SelectedSession != null)
         {
             var events = liveEventDao.findBySessionId(SelectedSession.Id);
-            eventBindingList = new BindingList<LiveEventDataGrid>(events);
+            eventBindingList = new BindingList<LiveEvent>(events);
             EventDataGrid.ItemsSource = eventBindingList;
             EventDataGrid.DataContext = eventBindingList;
             CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
@@ -66,21 +65,38 @@ public partial class EventControl : UserControl
         var dialog = new EventDialog(session);
         if (dialog.ShowDialog() == true)
         {
-            //TODO: insert event and update list
             //TODO: check session date/time
             //1: inside session start-end period
             //2: no overlap with other events
-            Console.WriteLine();
+            LiveEvent liveEvent = liveEventDao.insertLiveEvent(dialog.EventDialogModel.LiveEventDialog);
+            eventBindingList.Add(liveEvent);
         }
     }
 
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
+        Session session = (Session)ComboBox.SelectedItem;
+        LiveEvent selectedLiveEvent = getSelectedEvent(sender);
+        var dialog = new EventDialog(session, selectedLiveEvent);
+        if (dialog.ShowDialog() == true)
+        {
+            var transaction = liveEventDao.startTransaction();
+            try
+            {
+                liveEventDao.updateLiveEvent(selectedLiveEvent, transaction);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                Utils.ErrorBox("Was not able to update event");
+            }
+        }
     }
 
     private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
-        LiveEventDataGrid liveEventDataGrid = getSelectedEvent(sender);
+        LiveEvent liveEventDataGrid = getSelectedEvent(sender);
         var result = Utils.confirmAction("Are you sure you want to delete " + liveEventDataGrid.Name);
         if (!result)
             return;
@@ -95,12 +111,11 @@ public partial class EventControl : UserControl
         }
     }
 
-    private LiveEventDataGrid getSelectedEvent(object sender)
+    private LiveEvent getSelectedEvent(object sender)
     {
         var menuItem = (MenuItem)sender;
         var contextMenu = (ContextMenu)menuItem.Parent;
         var item = (DataGrid)contextMenu.PlacementTarget;
-        return (LiveEventDataGrid)item.SelectedCells[0].Item;
+        return (LiveEvent)item.SelectedCells[0].Item;
     }
-
 }

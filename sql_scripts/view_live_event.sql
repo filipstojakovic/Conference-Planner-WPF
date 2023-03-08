@@ -19,4 +19,4 @@ VIEW `view_live_event` AS
         JOIN `event_type` `et` ON ((`e`.`event_type_id` = `et`.`id`)))
         JOIN `live_event` `le` ON ((`e`.`id` = `le`.`event_id`)))
         JOIN `room` `r` ON ((`le`.`room_id` = `r`.`id`)))
-        JOIN `location` `l` ON ((`r`.`location_id` = `l`.`id`)))
+        JOIN `location` `l` ON ((`r`.`location_id` = `l`.`id`)));

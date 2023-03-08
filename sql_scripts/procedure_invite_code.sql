@@ -1,3 +1,4 @@
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_using_access_code`(IN accessCode VARCHAR(255), IN userId INT)
 BEGIN
     DECLARE gatheringId INT;
@@ -11,4 +12,6 @@ BEGIN
     
     INSERT INTO user_gathering_role (gathering_id, user_id, gathering_role_id)
     VALUES (gatheringId, userId, gatheringRoleId);
-END
+END$$
+
+DELIMITER ;

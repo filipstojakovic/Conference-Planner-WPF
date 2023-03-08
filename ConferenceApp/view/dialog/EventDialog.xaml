@@ -19,6 +19,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -34,17 +35,17 @@
         <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Event type:" />
         <ComboBox Grid.Row="1" Grid.Column="1"
                   Name="ComboBox"
-                  Margin="10,5"
+                  Margin="5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
                   materialDesign:HintAssist.Hint="Select event type"
                   IsSynchronizedWithCurrentItem="True"
-                  SelectedItem="{Binding LiveEventDialog.EventTypeName, UpdateSourceTrigger=PropertyChanged}">
-            <!-- <ComboBox.ItemTemplate> -->
-            <!--     <DataTemplate> -->
-            <!--         <TextBlock Text="{Binding }" /> -->
-            <!--     </DataTemplate> -->
-            <!-- </ComboBox.ItemTemplate> -->
+                  SelectedItem="{Binding LiveEventDialog.EventType, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
@@ -69,20 +70,25 @@
                     SelectedDate="{Binding LiveEventDialog.EndDate}"
                     Margin="5" />
         
-        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Street name:" />
+        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="City:" />
         <TextBox Grid.Row="5" Grid.Column="1"
+                 Margin="5"
+                 Text="{Binding LiveEventDialog.Room.Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        
+        <Label Grid.Row="6" Grid.Column="0" Margin="5" Content="Street name:" />
+        <TextBox Grid.Row="6" Grid.Column="1"
                  Margin="5"
                  Text="{Binding LiveEventDialog.Room.Location.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         
-        <Label Grid.Row="6" Grid.Column="0" Margin="5" Content="Room number:" />
-        <TextBox Grid.Row="6" Grid.Column="1"
+        <Label Grid.Row="7" Grid.Column="0" Margin="5" Content="Room number:" />
+        <TextBox Grid.Row="7" Grid.Column="1"
                  Margin="5"
                  Text="{Binding LiveEventDialog.Room.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
             <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
         </StackPanel>
     </Grid>
 
