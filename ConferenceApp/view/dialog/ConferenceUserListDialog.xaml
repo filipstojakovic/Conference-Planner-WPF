@@ -5,8 +5,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ConferenceApp.view.dialog"
         mc:Ignorable="d"
-        Title="ConferenceUserListDialog" SizeToContent="Height"
+        Title="ConferenceUserListDialog" 
         Width="600"
+        SizeToContent="Height"
+        MinHeight="500"
         MaxHeight="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>

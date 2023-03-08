@@ -5,7 +5,7 @@ using ConferenceApp.model.entity;
 
 namespace ConferenceApp.view.dialog;
 
-public class EventDialogData : INotifyPropertyChanged
+public class EventDialogModel : INotifyPropertyChanged
 {
     private LiveEvent _liveEvent;
 
@@ -19,8 +19,6 @@ public class EventDialogData : INotifyPropertyChanged
         }
     }
     
-    
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public void OnPropertyChanged([CallerMemberName] string name = null)

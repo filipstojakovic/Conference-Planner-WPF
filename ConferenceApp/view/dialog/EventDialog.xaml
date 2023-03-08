@@ -29,7 +29,7 @@
         <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Event name:" />
         <TextBox Grid.Row="0" Grid.Column="1"
                  Margin="5"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding LiveEventDialog.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         
         <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Event type:" />
         <ComboBox Grid.Row="1" Grid.Column="1"
@@ -39,19 +39,18 @@
                   IsEditable="False"
                   materialDesign:HintAssist.Hint="Select event type"
                   IsSynchronizedWithCurrentItem="True"
-                  SelectionChanged="ComboBox_OnSelectionChanged"
-                  SelectedItem="{Binding Path=SelectedEventType, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+                  SelectedItem="{Binding LiveEventDialog.EventTypeName, UpdateSourceTrigger=PropertyChanged}">
+            <!-- <ComboBox.ItemTemplate> -->
+            <!--     <DataTemplate> -->
+            <!--         <TextBlock Text="{Binding }" /> -->
+            <!--     </DataTemplate> -->
+            <!-- </ComboBox.ItemTemplate> -->
         </ComboBox>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
         <TextBox Grid.Row="2" Grid.Column="1"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                 Text="{Binding LiveEventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
                  MaxLength="255"
@@ -61,29 +60,29 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Start Date:" Margin="5" />
         <DatePicker Grid.Row="3" Grid.Column="1"
                     xml:lang="en-GB"
-                    SelectedDate="{Binding StartDate}"
+                    SelectedDate="{Binding LiveEventDialog.StartDate}"
                     Margin="5" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="End Date:" Margin="5" />
         <DatePicker Grid.Row="4" Grid.Column="1"
                     xml:lang="en-GB"
-                    SelectedDate="{Binding EndDate}"
+                    SelectedDate="{Binding LiveEventDialog.EndDate}"
                     Margin="5" />
         
-        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Location:" />
+        <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="Street name:" />
         <TextBox Grid.Row="5" Grid.Column="1"
                  Margin="5"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding LiveEventDialog.Room.Location.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         
         <Label Grid.Row="6" Grid.Column="0" Margin="5" Content="Room number:" />
         <TextBox Grid.Row="6" Grid.Column="1"
                  Margin="5"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding LiveEventDialog.Room.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
+            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
         </StackPanel>
     </Grid>
 

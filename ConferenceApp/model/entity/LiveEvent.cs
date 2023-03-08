@@ -4,6 +4,5 @@ namespace ConferenceApp.model.entity;
 
 public class LiveEvent : Event
 {
-    public Room Room { get; set; }
-    
+    public Room Room { get; set; } = new Room();
 }
