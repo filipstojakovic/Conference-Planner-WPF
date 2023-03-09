@@ -11,6 +11,7 @@ public partial class ConferenceUserListDialog : Window
     public ConferenceUserListDialog(Conference conference)
     {
         InitializeComponent();
+        ConferenceName.Text = conference.Name;
 
         UserDao userDao = new UserDao();
         var Moderator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator)[0];

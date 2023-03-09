@@ -42,8 +42,6 @@ public class LiveEventDao : EventDao
             liveEvent.Id = (int)command.LastInsertedId;
         }
 
-        transaction.Commit();
-
         return liveEvent;
     }
 

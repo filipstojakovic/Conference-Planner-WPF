@@ -101,7 +101,6 @@ namespace ConferenceApp.view.usercontrol
             var dialog = new ConferenceDialog(currentUser, null, conferenceBindingList);
             if (dialog.ShowDialog() == true)
             {
-                //TODO: no overlap with other conferences, check session and events time period
                 var transaction = conferenceDao.startTransaction();
                 try
                 {
@@ -116,6 +115,9 @@ namespace ConferenceApp.view.usercontrol
 
                     transaction.Commit();
                     conferenceBindingList.Add(conference);
+                    CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
+                    ConferenceBindingListOnListChanged(null, null);
+
                 }
                 catch (Exception exception)
                 {
@@ -137,7 +139,6 @@ namespace ConferenceApp.view.usercontrol
                 var transaction = conferenceDao.startTransaction();
                 try
                 {
-                    //TODO: no overlap with other conferences, check session and events time period
                     conferenceDao.updateConference(dialog.ConferenceDialogData, transaction);
                     UserGatheringRoleDao userGatheringRoleDao = new UserGatheringRoleDao();
                     userGatheringRoleDao.deleteConferenceModerator(conference, transaction);
@@ -147,7 +148,8 @@ namespace ConferenceApp.view.usercontrol
 
                     transaction.Commit();
                     conference.copy(dialog.ConferenceDialogData);
-                    CollectionViewSource.GetDefaultView(conferenceBindingList).Refresh();
+                    CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
+                    ConferenceBindingListOnListChanged(null, null);
                 }
                 catch (Exception)
                 {

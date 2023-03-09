@@ -20,7 +20,15 @@
                   SelectedItem="{Binding Path=SelectedSession, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock>
+                        <TextBlock.Text>    
+                            <MultiBinding StringFormat="{}{0} ({1:dd/MM/yyyy HH:mm} - {2:dd/MM/yyyy HH:mm})">
+                                <Binding Path="Name" />
+                                <Binding Path="StartDate"/>
+                                <Binding Path="EndDate" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -51,9 +59,9 @@
                 <DataGridTextColumn Header="Event name" Binding="{Binding Name,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Event type" Binding="{Binding EventType.Name,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Start date"
-                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
+                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                 <DataGridTextColumn Header="End date"
-                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
+                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                 <DataGridTextColumn Header="Street" Binding="{Binding Room.Location.Street,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Room number" Binding="{Binding Room.RoomNumber,Mode=TwoWay}" />
             </DataGrid.Columns>

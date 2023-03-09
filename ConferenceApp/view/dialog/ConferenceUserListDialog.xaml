@@ -15,26 +15,34 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Organizer" />
+        
+        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Conferece name:" />
         <TextBox Grid.Row="0" Grid.Column="1"
                  Margin="5"
                  IsReadOnly="True"
-                 Name="OrganizerName" />
-        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Moderator" />
+                 Name="ConferenceName" />
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Organizer:" />
         <TextBox Grid.Row="1" Grid.Column="1"
+                 Margin="5"
+                 IsReadOnly="True"
+                 Name="OrganizerName" />
+        <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Moderator:" />
+        <TextBox Grid.Row="2" Grid.Column="1"
                  Margin="5"
                  IsReadOnly="True"
                  Name="ModeratorName" />
 
         <DataGrid Name="conferenceDataGrid"
                   Margin="0,5"
-                  Grid.Row="2" Grid.Column="0"
+                  Grid.Row="3" 
+                  Grid.Column="0"
                   Grid.ColumnSpan="2"
                   AutoGenerateColumns="False"
                   ColumnWidth="*"

@@ -67,11 +67,9 @@ public partial class SessionControl : UserControl
             return;
         }
 
-        //TODO: check if inside conference time period
-        //TODO: check events in time period
         try
         {
-            var dialog = new SessionDialog(SelectedConference.Id);
+            var dialog = new SessionDialog(SelectedConference);
             if (dialog.ShowDialog() == true)
             {
                 var sessionDialogData = dialog.SessionDialogData;
@@ -89,13 +87,11 @@ public partial class SessionControl : UserControl
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedSession = getSelectedConference(sender);
-        var dialog = new SessionDialog(SelectedConference.Id, selectedSession, true);
+        var dialog = new SessionDialog(SelectedConference, selectedSession, true);
         try
         {
             if (dialog.ShowDialog() == true)
             {
-                //TODO: check if inside conference time period
-                //TODO: check events in time period
                 Session session = dialog.SessionDialogData;
                 sessionDao.updateSession(session);
                 selectedSession.copy(session);

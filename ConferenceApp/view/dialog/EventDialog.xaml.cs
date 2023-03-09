@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,11 @@ public partial class EventDialog : Window
 
         if (myLiveEvent == null)
         {
-            myLiveEvent = new LiveEvent();
+            myLiveEvent = new LiveEvent
+            {
+                StartDate = session.StartDate,
+                EndDate = session.StartDate
+            };
             myLiveEvent.SessionId = session.Id;
         }
 
