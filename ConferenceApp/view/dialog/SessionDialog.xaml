@@ -1,15 +1,16 @@
 ﻿<Window x:Class="ConferenceApp.view.dialog.SessionDialog"
-       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ConferenceApp.view.dialog"
         xmlns:converter="clr-namespace:ConferenceApp.converter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
         Width="500">
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -40,17 +41,45 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Start Date:" Margin="5" />
-        <DatePicker Grid.Row="2" Grid.Column="1"
-                    xml:lang="en-GB"
-                    SelectedDate="{Binding StartDate}"
-                    Margin="5" />
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="End Date:" Margin="5" />
-        <DatePicker Grid.Row="3" Grid.Column="1"
-                    xml:lang="en-GB"
-                    SelectedDate="{Binding EndDate}"
-                    Margin="5" />
+            <Label Grid.Row="0" Grid.Column="0" Content="Start Date:" Margin="5" />
+            <DatePicker Grid.Row="0" Grid.Column="1"
+                        xml:lang="en-GB"
+                        SelectedDate="{Binding StartDate}"
+                        Margin="5" />
+
+            <Label Grid.Column="2" Content="Start time:" Margin="5" />
+            <materialDesign:TimePicker Grid.Column="3"
+                                       xml:lang="en-GB"
+                                       Is24Hours="True"
+                                       Margin="5"
+                                       SelectedTime="{Binding StartDate}" />
+
+            <Label Grid.Row="1" Grid.Column="0" Content="End Date:" Margin="5" />
+            <DatePicker Grid.Row="1" Grid.Column="1"
+                        xml:lang="en-GB"
+                        SelectedDate="{Binding EndDate}"
+                        Margin="5" />
+
+            <Label Grid.Row="1" Grid.Column="2" Content="Start time:" Margin="5" />
+            <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+                                       xml:lang="en-GB"
+                                       Is24Hours="True"
+                                       Margin="5"
+                                       SelectedTime="{Binding EndDate}" />
+
+        </Grid>
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
