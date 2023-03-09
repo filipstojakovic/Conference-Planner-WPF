@@ -1,5 +1,5 @@
 DELIMITER $$
-DROP PROCEDURE IF EXISTS insert_visitor_using_access_code;
+DROP PROCEDURE IF EXISTS insert_visitor_using_access_code$$
 CREATE PROCEDURE insert_visitor_using_access_code(IN accessCode VARCHAR(255), IN userId INT)
 BEGIN
     DECLARE conference_id INT;
@@ -20,7 +20,7 @@ DELIMITER ;
 
 # check if user can vote
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_vote_insert;
+DROP TRIGGER IF EXISTS before_vote_insert$$
 CREATE TRIGGER before_vote_insert
     BEFORE INSERT
     ON vote
@@ -51,7 +51,7 @@ DELIMITER ;
 
 # check if conference ended before delete
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_conference_delete;
+DROP TRIGGER IF EXISTS before_conference_delete$$
 CREATE TRIGGER before_conference_delete
     BEFORE DELETE
     ON user_gathering_role
@@ -69,7 +69,7 @@ DELIMITER ;
 
 # session procedure
 DELIMITER $$
-DROP PROCEDURE IF EXISTS is_session_date_range_valid;
+DROP PROCEDURE IF EXISTS is_session_date_range_valid$$
 CREATE PROCEDURE is_session_date_range_valid(IN conferenceId INT, IN sessionStartDate DATETIME,
                                              IN sessionEndDate DATETIME,
                                              OUT isValid BOOLEAN)
@@ -92,7 +92,7 @@ DELIMITER ;
 
 # trigger before session insert
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_session_insert;
+DROP TRIGGER IF EXISTS before_session_insert$$
 CREATE TRIGGER before_session_insert
     BEFORE INSERT
     ON session
@@ -110,7 +110,7 @@ DELIMITER ;
 
 # trigger before session update
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_session_update;
+DROP TRIGGER IF EXISTS before_session_update$$
 CREATE TRIGGER before_session_update
     BEFORE UPDATE
     ON session
@@ -128,7 +128,7 @@ DELIMITER ;
 
 # event procedure
 DELIMITER $$
-DROP PROCEDURE IF EXISTS is_event_date_range_valid;
+DROP PROCEDURE IF EXISTS is_event_date_range_valid$$
 CREATE PROCEDURE is_event_date_range_valid(IN sessionId INT, IN eventStartDate DATETIME,
                                            IN eventEndDate DATETIME,
                                            OUT isValid BOOLEAN)
@@ -151,7 +151,7 @@ DELIMITER ;
 
 # trigger before event insert
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_event_insert;
+DROP TRIGGER IF EXISTS before_event_insert$$
 CREATE TRIGGER before_event_insert
     BEFORE INSERT
     ON event
@@ -169,7 +169,7 @@ DELIMITER ;
 
 # trigger before event update
 DELIMITER $$
-DROP TRIGGER IF EXISTS before_event_insert;
+DROP TRIGGER IF EXISTS before_event_insert$$
 CREATE TRIGGER before_event_insert
     BEFORE UPDATE
     ON event
@@ -187,7 +187,7 @@ DELIMITER ;
 
 # create trigger before conference insert
 DELIMITER $$
-DROP TRIGGER IF EXISTS set_conference_start_end_time_on_insert;
+DROP TRIGGER IF EXISTS set_conference_start_end_time_on_insert$$
 CREATE TRIGGER set_conference_start_end_time_on_insert
     BEFORE INSERT
     ON `conference`
@@ -199,7 +199,7 @@ END$$
 
 # create trigger before conference update
 DELIMITER $$
-DROP TRIGGER IF EXISTS set_conference_start_end_time_update;
+DROP TRIGGER IF EXISTS set_conference_start_end_time_update$$
 CREATE TRIGGER set_conference_start_end_time_update
     BEFORE UPDATE
     ON `conference`
@@ -212,7 +212,7 @@ DELIMITER ;
 
 # get users full name
 DELIMITER $$
-DROP PROCEDURE IF EXISTS  get_user_fullname;
+DROP PROCEDURE IF EXISTS  get_user_fullname$$
 CREATE PROCEDURE get_user_fullname (IN userId int, OUT full_name varchar(255))
 BEGIN
     DECLARE FirstName VARCHAR(50);
