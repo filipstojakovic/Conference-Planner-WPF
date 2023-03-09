@@ -50,9 +50,9 @@
                 <DataGridTextColumn Header="Session Name" Binding="{Binding Name,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Start date"
-                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
                 <DataGridTextColumn Header="End date"
-                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

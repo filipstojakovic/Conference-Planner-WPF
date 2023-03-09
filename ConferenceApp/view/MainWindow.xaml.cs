@@ -36,32 +36,6 @@ namespace ConferenceApp.view
             setUserFullNameHeader(currentUser);
             setDrawerButton(currentUser);
 
-            // test();
-        }
-
-        private void test()
-        {
-            // LiveEvent liveEvent = new LiveEvent
-            // {
-            //     SessionId = 1,
-            //     Name = "event111",
-            //     Description = "desc",
-            //     StartDate = DateTime.Now,
-            //     EndDate = DateTime.Now.AddDays(5),
-            //     EventTypeName = "lecture",
-            //     Room = new Room
-            //     {
-            //         RoomNumber = "321",
-            //         Location = new Location
-            //         {
-            //             City = "city111",
-            //             Country = "country",
-            //             Street = "street1"
-            //         }
-            //     }
-            // };
-            // LiveEventDao liveEventDao = new LiveEventDao();
-            // liveEventDao.insertLiveEvent(liveEvent);
         }
 
         private void setDrawerButton(User currentUser)

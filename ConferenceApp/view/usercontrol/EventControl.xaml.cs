@@ -106,7 +106,7 @@ public partial class EventControl : UserControl
             catch (Exception)
             {
                 transaction.Rollback();
-                Utils.ErrorBox("Was not able to update event");
+                Utils.ErrorBox("Unable to update event");
             }
         }
     }
@@ -124,7 +124,7 @@ public partial class EventControl : UserControl
         }
         catch (Exception)
         {
-            Utils.ErrorBox("Was not able to remove event");
+            Utils.ErrorBox("Uaable to delete event");
         }
     }
 

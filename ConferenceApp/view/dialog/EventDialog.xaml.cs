@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
+using ConferenceApp.utils;
 
 namespace ConferenceApp.view.dialog;
 
@@ -12,10 +13,16 @@ public partial class EventDialog : Window
     public EventDialogModel EventDialogModel { get; set; }
 
     private EventTypeDao eventTypeDao;
-    public EventDialog(Session session,LiveEvent myLiveEvent = null)
+    private Session _session;
+
+    public EventDialog(Session session, LiveEvent myLiveEvent = null)
     {
         InitializeComponent();
+        _session = session;
         eventTypeDao = new EventTypeDao();
+
+        Button.Content = myLiveEvent != null ? "Save" : "Create";
+        this.Title = (myLiveEvent != null ? "Save" : "Create") + " conference";
 
         if (myLiveEvent == null)
         {
@@ -26,7 +33,7 @@ public partial class EventDialog : Window
         EventDialogModel = new EventDialogModel();
         EventDialogModel.LiveEventDialog = myLiveEvent;
         DataContext = EventDialogModel;
-        
+
         var eventTypes = eventTypeDao.findAll();
         ComboBox.ItemsSource = eventTypes;
         if (myLiveEvent != null)
@@ -38,6 +45,13 @@ public partial class EventDialog : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+        if (!(_session.StartDate <= EventDialogModel.LiveEventDialog.StartDate
+              && _session.EndDate >= EventDialogModel.LiveEventDialog.EndDate))
+        {
+            Utils.ErrorBox("Event is outside session start/end range");
+            return;
+        }
+
         DialogResult = true;
         Close();
     }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         SizeToContent="Height"
         Width="500">
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -31,7 +31,7 @@
         <TextBox Grid.Row="0" Grid.Column="1"
                  Margin="5"
                  Text="{Binding LiveEventDialog.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        
+
         <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Event type:" />
         <ComboBox Grid.Row="1" Grid.Column="1"
                   Name="ComboBox"
@@ -47,39 +47,66 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
         <TextBox Grid.Row="2" Grid.Column="1"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                 Text="{Binding LiveEventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                 Text="{Binding LiveEventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
                  MaxLength="255"
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Start Date:" Margin="5" />
-        <DatePicker Grid.Row="3" Grid.Column="1"
-                    xml:lang="en-GB"
-                    SelectedDate="{Binding LiveEventDialog.StartDate}"
-                    Margin="5" />
+        <Grid Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Label Grid.Row="4" Grid.Column="0" Content="End Date:" Margin="5" />
-        <DatePicker Grid.Row="4" Grid.Column="1"
-                    xml:lang="en-GB"
-                    SelectedDate="{Binding LiveEventDialog.EndDate}"
-                    Margin="5" />
-        
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Start date:" Margin="5" />
+            <DatePicker Grid.Column="1"
+                        xml:lang="en-GB"
+                        SelectedDate="{Binding LiveEventDialog.StartDate}"
+                        Margin="5" />
+            <Label Grid.Column="2" Content="Start time:" Margin="5" />
+            <materialDesign:TimePicker Grid.Column="3"
+                                       xml:lang="en-GB"
+                                       Is24Hours="True"
+                                       Margin="5"
+                                       SelectedTime="{Binding LiveEventDialog.StartDate}" />
+
+            <Label Grid.Column="0" Grid.Row="1" Content="End date:" Margin="5" />
+            <DatePicker Grid.Column="1" Grid.Row="1"
+                        xml:lang="en-GB"
+                        SelectedDate="{Binding LiveEventDialog.EndDate}"
+                        Margin="5" />
+            <Label Grid.Column="2" Grid.Row="1" Content="End time:" Margin="5" />
+            <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+                                       xml:lang="en-GB"
+                                       Is24Hours="True"
+                                       Margin="5"
+                                       SelectedTime="{Binding LiveEventDialog.EndDate}" />
+        </Grid>
+
         <Label Grid.Row="5" Grid.Column="0" Margin="5" Content="City:" />
         <TextBox Grid.Row="5" Grid.Column="1"
                  Margin="5"
                  Text="{Binding LiveEventDialog.Room.Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        
+
         <Label Grid.Row="6" Grid.Column="0" Margin="5" Content="Street name:" />
         <TextBox Grid.Row="6" Grid.Column="1"
                  Margin="5"
                  Text="{Binding LiveEventDialog.Room.Location.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        
+
         <Label Grid.Row="7" Grid.Column="0" Margin="5" Content="Room number:" />
         <TextBox Grid.Row="7" Grid.Column="1"
                  Margin="5"

@@ -13,6 +13,8 @@ public partial class SessionDialog : Window
         InitializeComponent();
         Button.Content = edit ? "Save" : "Create";
         this.Title = (edit ? "Save" : "Create") + " conference";
+        
+            //TODO: add Time picker to Session dialog
 
         if (sessionDialogData == null)
         {

@@ -69,13 +69,20 @@ public partial class SessionControl : UserControl
 
         //TODO: check if inside conference time period
         //TODO: check events in time period
-        var dialog = new SessionDialog(SelectedConference.Id);
-        if (dialog.ShowDialog() == true)
+        try
         {
-            var sessionDialogData = dialog.SessionDialogData;
-            var session = sessionDao.insertSession(sessionDialogData);
-            sessionBindingList.Add(session);
-            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            var dialog = new SessionDialog(SelectedConference.Id);
+            if (dialog.ShowDialog() == true)
+            {
+                var sessionDialogData = dialog.SessionDialogData;
+                var session = sessionDao.insertSession(sessionDialogData);
+                sessionBindingList.Add(session);
+                CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            }
+        }
+        catch (Exception)
+        {
+            Utils.ErrorBox("Unable to add session");
         }
     }
 
@@ -83,26 +90,40 @@ public partial class SessionControl : UserControl
     {
         var selectedSession = getSelectedConference(sender);
         var dialog = new SessionDialog(SelectedConference.Id, selectedSession, true);
-        if (dialog.ShowDialog() == true)
+        try
         {
-            //TODO: check if inside conference time period
-            //TODO: check events in time period
-            Session session = dialog.SessionDialogData;
-            sessionDao.updateSession(session);
-            selectedSession.copy(session);
-            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            if (dialog.ShowDialog() == true)
+            {
+                //TODO: check if inside conference time period
+                //TODO: check events in time period
+                Session session = dialog.SessionDialogData;
+                sessionDao.updateSession(session);
+                selectedSession.copy(session);
+                CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            }
+        }
+        catch (Exception)
+        {
+            Utils.ErrorBox("Unable to update session");
         }
     }
-    
+
     private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedSession = getSelectedConference(sender);
         var result = Utils.confirmAction("Are you sure you want to delete session " + selectedSession.Name);
-        if (result)
+        try
         {
-            sessionDao.deleteSession(selectedSession.Id);
-            sessionBindingList.Remove(selectedSession);
-            CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            if (result)
+            {
+                sessionDao.deleteSession(selectedSession.Id);
+                sessionBindingList.Remove(selectedSession);
+                CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
+            }
+        }
+        catch (Exception)
+        {
+            Utils.ErrorBox("Unable to delete session");
         }
     }
 

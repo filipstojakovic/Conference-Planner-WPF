@@ -51,9 +51,9 @@
                 <DataGridTextColumn Header="Event name" Binding="{Binding Name,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Event type" Binding="{Binding EventType.Name,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Start date"
-                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
                 <DataGridTextColumn Header="End date"
-                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy hh:mm}}" />
                 <DataGridTextColumn Header="Street" Binding="{Binding Room.Location.Street,Mode=TwoWay}" />
                 <DataGridTextColumn Header="Room number" Binding="{Binding Room.RoomNumber,Mode=TwoWay}" />
             </DataGrid.Columns>
