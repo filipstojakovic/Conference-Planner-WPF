@@ -2,57 +2,59 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
-
-    <!-- Constants -->
-    <Color x:Key="DarkGrayColor">#2e3137</Color>
-    <Color x:Key="LightGrayColor">#545d6a</Color>
+	
+	<!-- Constants -->
+    <Color x:Key="MyBackground">#2e3137</Color>
+    <Color x:Key="MyBackgroundLighter">#545d6a</Color>
     <Color x:Key="CustomDarkBlueColor">#16375f</Color>
     <Color x:Key="CustomLightBlueColor">#2196f3</Color>
     <Color x:Key="DodgerBlueColor">DodgerBlue</Color>
 
-	<!-- Font Sizes -->
-	<system:Double x:Key="SmallFontSize">14</system:Double>
-	<system:Double x:Key="MediumFontSize">18</system:Double>
-	<system:Double x:Key="LargeFontSize">22</system:Double>
 
 	<!-- Colors -->
-    <SolidColorBrush x:Key="DarkGray" Color="{StaticResource DarkGrayColor}" />
+    <SolidColorBrush x:Key="MyBackgroundColor" Color="{StaticResource MyBackground}" />
     <!-- Window background -->
-    <SolidColorBrush x:Key="LightGray" Color="{StaticResource LightGrayColor}" />
+    <SolidColorBrush x:Key="MyBackgroundColorLighter" Color="{StaticResource MyBackgroundLighter}" />
     <!-- Field background -->
     <SolidColorBrush x:Key="CustomDarkBlue" Color="{StaticResource CustomDarkBlueColor}" />
     <SolidColorBrush x:Key="CustomLightBlue" Color="{StaticResource CustomLightBlueColor}" />
     <SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource DodgerBlueColor}" />
     <SolidColorBrush x:Key="CalendarSelection" Color="{StaticResource DodgerBlueColor}" />
 
-	<!-- Menu Items -->
-	<SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" />
-	<SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" />
-	<SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" />
-	<SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" />
+    <!-- TextBox color -->
+    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
+    <SolidColorBrush x:Key="TextBoxForeground" Color="white" />
+
+    <!-- Menu Items -->
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" />
 
 
-
-	<!-- STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES STYLES -->
+	<!-- Font Sizes -->
+    <system:Double x:Key="SmallFontSize">14</system:Double>
+    <system:Double x:Key="MediumFontSize">18</system:Double>
+    <system:Double x:Key="LargeFontSize">22</system:Double>
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="{StaticResource LightGray}"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-		<Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
+        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
     </Style>
 
     <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
-        <Setter Property="Background" Value="{StaticResource LightGray}"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-		<Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
-	</Style>
+        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
+    </Style>
 
     <Style x:Key="ButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource LightGray}"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-		<Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
-	</Style>
-
+        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
+    </Style>
+    
     <Style x:Key="PopupContentStyle" TargetType="{x:Type ContentControl}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
@@ -63,7 +65,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="Template">
@@ -117,5 +118,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

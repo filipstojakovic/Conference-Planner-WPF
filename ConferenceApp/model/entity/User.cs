@@ -11,6 +11,7 @@ namespace ConferenceApp.model.entity
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public SettingsEntity SettingsEntity { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
 
@@ -37,7 +38,5 @@ namespace ConferenceApp.model.entity
             if (user.Roles != null)
                 Roles = new BindingList<Role>(user.Roles.ToList());
         }
-        
-        
     }
 }

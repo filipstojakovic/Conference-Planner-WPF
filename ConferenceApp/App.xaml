@@ -11,9 +11,7 @@
         <ResourceDictionary x:Name="myResourceDict">
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="/resources/styles/default.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="/resources/styles/Default.xaml" />
 
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Calendar.xaml" />

@@ -13,10 +13,12 @@ namespace ConferenceApp.model.dao
     public class UserDao : BaseDao
     {
         private readonly UserRoleDao userRoleDao;
+        private readonly SettingsDao settingsDao;
 
         public UserDao()
         {
             this.userRoleDao = new UserRoleDao();
+            this.settingsDao = new SettingsDao();
         }
 
         public List<User> findAllUsersAndRoles()
@@ -69,6 +71,9 @@ namespace ConferenceApp.model.dao
                 List<User> users = extractUsersData(command);
                 user = getFirstOrNull(users);
             }
+
+            SettingsEntity settingsEntity = settingsDao.findByUserId(user.Id);
+            user.SettingsEntity = settingsEntity;
 
             return user;
         }

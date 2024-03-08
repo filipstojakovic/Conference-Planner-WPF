@@ -8,7 +8,7 @@
         Width="1000"
         MinHeight="600"
         MinWidth="400">
-    <Grid Background="{StaticResource DarkGray}">
+    <Grid Background="{DynamicResource MyBackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition MinWidth="400" Width="Auto"></ColumnDefinition>
