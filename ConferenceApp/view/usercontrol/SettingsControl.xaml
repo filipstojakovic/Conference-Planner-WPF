@@ -28,11 +28,12 @@
         <Label Padding="5" FontSize="16" Grid.Row="1" Grid.Column="0" Content="{hly:Lang background}"
                ContentStringFormat='{}{0}:'>
         </Label>
-        <ComboBox x:Name="themeComboBox" Padding="5" FontSize="16" Grid.Row="1" Grid.Column="1"
+        <ComboBox x:Name="themeComboBox" Padding="5" MinWidth="120" FontSize="16" Grid.Row="1" Grid.Column="1"
                   SelectionChanged="ThemeComboBox_OnSelectionChanged">
             <ComboBoxItem x:Name="default" Content="{hly:Lang light}"></ComboBoxItem>
             <ComboBoxItem x:Name="dark" Content="{hly:Lang dark}"></ComboBoxItem>
-        </ComboBox>
+			<ComboBoxItem x:Name="invert" Content="{hly:Lang invert}"></ComboBoxItem>
 
+		</ComboBox>
     </Grid>
 </UserControl>

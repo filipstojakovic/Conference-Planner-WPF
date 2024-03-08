@@ -1,6 +1,6 @@
 ﻿namespace ConferenceApp.utils
 {
-	public class Base64Util
+	public abstract class Base64Util
 	{
 		public static string Base64Encode(string plainText)
 		{

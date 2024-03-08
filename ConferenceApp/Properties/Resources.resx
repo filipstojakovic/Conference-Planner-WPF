@@ -225,4 +225,7 @@
   <data name="create_event" xml:space="preserve">
     <value>Create event</value>
   </data>
+  <data name="about" xml:space="preserve">
+    <value>About</value>
+  </data>
 </root>

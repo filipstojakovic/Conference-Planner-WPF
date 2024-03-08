@@ -145,7 +145,7 @@
     <value>Podrazumjevana</value>
   </data>
   <data name="invert" xml:space="preserve">
-    <value>Obrnuta</value>
+    <value>Invertovano</value>
   </data>
   <data name="register" xml:space="preserve">
     <value>Registracija</value>
@@ -224,5 +224,8 @@
   </data>
   <data name="create_event" xml:space="preserve">
     <value>Kreiraj Događaj</value>
+  </data>
+  <data name="about" xml:space="preserve">
+    <value>O aplikaciji</value>
   </data>
 </root>

@@ -48,11 +48,8 @@ namespace ConferenceApp.view
                 () => new SessionControl(this.currentUser)));
             Drawer_Upper_MenuListView.Items.Add(new ItemMenu("events", PackIconKind.ViewHeadline,
                 () => new EventControl(this.currentUser)));
-
-            //Used for testing
-            // Drawer_Upper_MenuListView.Items.Add(new ItemMenu("Menu Control", PackIconKind.About,
-            //     () => new MenuControl()));
-
+            
+            //TODO: admin user controls
             //if user has admin role
             if (currentUser.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
             {
@@ -65,6 +62,8 @@ namespace ConferenceApp.view
             Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
             Drawer_Bottom_MenuListView.Items.Add(new ItemMenu("settings", PackIconKind.Settings,
                 () => new SettingsControl(Drawer_Upper_MenuListView, Drawer_Bottom_MenuListView)));
+            // Drawer_Bottom_MenuListView.Items.Add(new ItemMenu("about", PackIconKind.About,
+            //     () => new AboutControl()));
         }
 
         private void setUserFullNameHeader(User currentUser)

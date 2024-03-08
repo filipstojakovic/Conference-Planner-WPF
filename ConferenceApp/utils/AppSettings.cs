@@ -13,9 +13,9 @@ namespace ConferenceApp.utils;
 // Singleton
 public class AppSettings
 {
-    public static readonly string SETTINGS_PATH = "settings.json";
-    public static readonly string THEME = "theme";
-    public static readonly string LANG = "lang";
+    public const string SETTINGS_PATH = "settings.json";
+    public const string THEME = "theme";
+    public const string LANG = "lang";
 
     private static AppSettings appSettings;
 
