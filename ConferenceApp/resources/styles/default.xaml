@@ -9,8 +9,8 @@
     <Color x:Key="CustomDarkBlueColor">#16375f</Color>
     <Color x:Key="CustomLightBlueColor">#2196f3</Color>
     <Color x:Key="DodgerBlueColor">DodgerBlue</Color>
-
-
+    <FontFamily x:Key="MyFont">Comic Sans MS</FontFamily>
+    
 	<!-- Colors -->
     <SolidColorBrush x:Key="MyBackgroundColor" Color="{StaticResource MyBackground}" />
     <!-- Window background -->
@@ -36,36 +36,48 @@
     <system:Double x:Key="SmallFontSize">14</system:Double>
     <system:Double x:Key="MediumFontSize">18</system:Double>
     <system:Double x:Key="LargeFontSize">22</system:Double>
+    
+    <!-- Text Font -->
+    <Style TargetType="Window">
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
+    </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
+    </Style>
+    
+    <Style TargetType="TextElement">
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
+    </Style>
+    
+    <Style TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
+    </Style>
+    
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="Comic Sans MS" />
+    </Style>
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
     </Style>
 
     <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
         <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
     </Style>
 
     <Style x:Key="ButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource TextBoxForeground}"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"></Setter>
     </Style>
     
-    <Style x:Key="PopupContentStyle" TargetType="{x:Type ContentControl}">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Border Background="DodgerBlue" CornerRadius="10">
-                    </Border>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="Template">
             <Setter.Value>

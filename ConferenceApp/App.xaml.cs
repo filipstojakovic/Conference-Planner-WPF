@@ -20,9 +20,9 @@ namespace ConferenceApp
 			AppSettings.getInstance().applyTheme();
 		}
 
-		private void App_OnExit(object sender, ExitEventArgs e)
-		{
-			AppSettings.getInstance().saveSettings();
-		}
+		// private void App_OnExit(object sender, ExitEventArgs e)
+		// {
+		// 	AppSettings.getInstance().saveSettings();
+		// }
 	}
 }

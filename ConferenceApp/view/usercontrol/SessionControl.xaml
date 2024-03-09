@@ -34,7 +34,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Name="Create_Button" Click="Create_Button_Click" Margin="10,5" MinWidth="80">
+        <Button Style="{DynamicResource ButtonStyle}" Name="Create_Button" Click="Create_Button_Click" Margin="10,5" MinWidth="80">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                          VerticalAlignment="Stretch" Margin="0,0,2,0" />

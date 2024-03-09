@@ -26,9 +26,8 @@ namespace ConferenceApp.view
 
         public MainWindow(User currentUser)
         {
-            Trace.WriteLine("before init MainWindow");
             InitializeComponent();
-            Trace.WriteLine("after init MainWindow");
+            Style = (Style)FindResource(typeof(Window));
 
             this.currentUser = currentUser;
             userDao = new UserDao();

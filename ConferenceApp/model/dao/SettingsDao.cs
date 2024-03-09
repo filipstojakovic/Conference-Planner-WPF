@@ -28,7 +28,7 @@ public class SettingsDao : BaseDao
         {
             settingsEntity = new SettingsEntity
             {
-                UserId = reader.GetInt32(reader.GetOrdinal("id")),
+                UserId = reader.GetInt32(reader.GetOrdinal("user_id")),
                 Language = reader.GetString(reader.GetOrdinal("language")),
                 Theme = reader.GetString(reader.GetOrdinal("theme")),
             };

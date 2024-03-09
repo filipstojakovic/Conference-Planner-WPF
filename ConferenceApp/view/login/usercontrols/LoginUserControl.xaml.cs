@@ -33,6 +33,8 @@ namespace ConferenceApp.view.login
             User user = userDao.findByUsername(username);
             if (checkIfUsernameAndPasswordValid(user, username, password))
             {
+                this.appSettings.SettingsEntity = user.SettingsEntity;
+                this.appSettings.applySettings();
                 new MainWindow(user).Show();
                 action();
             }

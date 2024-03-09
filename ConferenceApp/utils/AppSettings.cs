@@ -7,27 +7,23 @@ using System.Security.Policy;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using ConferenceApp.model.entity;
+using Google.Protobuf;
 
 namespace ConferenceApp.utils;
 
 // Singleton
 public class AppSettings
 {
-    public const string SETTINGS_PATH = "settings.json";
-    public const string THEME = "theme";
-    public const string LANG = "lang";
+    public SettingsEntity SettingsEntity { get; set; }
 
     private static AppSettings appSettings;
-
-    public Dictionary<string, string> settingsDictionary;
-    public string path { get; }
 
     public static AppSettings getInstance()
     {
         if (appSettings == null)
         {
             appSettings = new AppSettings();
-            appSettings.loadSettings();
         }
 
         return appSettings;
@@ -35,49 +31,17 @@ public class AppSettings
 
     private AppSettings()
     {
-        path = SETTINGS_PATH;
-        makeDefaultSettings();
+        SettingsEntity = new SettingsEntity();
     }
 
-    private void makeDefaultSettings()
+    public void changeLang(string lang)
     {
-        if (File.Exists(path))
-            return;
-
-        settingsDictionary = new Dictionary<string, string>
-        {
-            { THEME, "default" },
-            { LANG, "en" }
-        };
-        saveSettings();
-    }
-
-    //override [] operator
-    public string this[string key]
-    {
-        get => settingsDictionary[key];
-        set => settingsDictionary[key] = value;
-    }
-
-    public void saveSettings()
-    {
-        File.WriteAllText(path, JsonSerializer.Serialize(settingsDictionary));
-    }
-
-    public void loadSettings()
-    {
-        settingsDictionary = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(path));
-    }
-
-    public void applyTheme()
-    {
-        changeTheme(this[THEME]);
+        LangUtils.ChangeCulture(lang);
     }
 
     public void changeTheme(string theme)
     {
-        appSettings[THEME] = theme;
-        var themeUri = new Uri("pack://application:,,,/resources/styles/" + appSettings[THEME] + ".xaml",
+        var themeUri = new Uri("pack://application:,,,/resources/styles/" + theme + ".xaml",
             UriKind.Absolute);
         var styleDictionary = Application.Current
             .Resources
@@ -88,14 +52,20 @@ public class AppSettings
         styleDictionary.Source = themeUri;
     }
 
-    public void applyLang()
+
+    public void applyTheme()
     {
-        changeLang(this[LANG]);
+        this.changeTheme(SettingsEntity.Theme);
     }
 
-    public void changeLang(string lang)
+    public void applyLanguage()
     {
-        appSettings[LANG] = lang;
-        LangUtils.ChangeCulture(lang);
+        changeLang(SettingsEntity.Language);
+    }
+
+    public void applySettings()
+    {
+        this.applyTheme();
+        this.applyLanguage();
     }
 }

@@ -2,7 +2,7 @@ namespace ConferenceApp.model;
 
 public enum ThemeEnum
 {
-    DEFAULT,
-    DARK,
-    INVERT
+    @default,
+    dark,
+    invert
 }

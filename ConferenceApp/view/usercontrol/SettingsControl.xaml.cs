@@ -23,13 +23,11 @@ public partial class SettingsControl : UserControl
     {
         drawerUpperMenuList = upperMenuListView;
         drawerBottomMenuList = bottomMenuListView;
-        Trace.WriteLine("before init AppSettings");
         appSettings = AppSettings.getInstance();
         InitializeComponent();
-        Trace.WriteLine("after init AppSettings");
 
-        langComboBox.SelectedItem = langComboBox.FindName(appSettings[AppSettings.LANG]);
-        themeComboBox.SelectedItem = themeComboBox.FindName(appSettings[AppSettings.THEME]);
+        langComboBox.SelectedItem = langComboBox.FindName(appSettings.SettingsEntity.Language);
+        themeComboBox.SelectedItem = themeComboBox.FindName(appSettings.SettingsEntity.Theme);
     }
 
     private void LangComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

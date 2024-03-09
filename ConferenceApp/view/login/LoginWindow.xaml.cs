@@ -14,24 +14,11 @@ public partial class LoginWindow : Window
     {
         appSettings = AppSettings.getInstance();
         InitializeComponent();
-        appSettings.loadSettings();
-        if (appSettings[AppSettings.LANG] == "sr")
-            sr.IsChecked = true;
-        
 
         DockPanelMain.Children.Clear();
         DockPanelMain.Children.Add(new LoginUserControl(closeWindow));
 
         var frame = Application.Current;
-    }
-
-    private void Language_ToggleButton_OnChecked(object sender, RoutedEventArgs e)
-    {
-        var radioButton = sender as RadioButton;
-        if (radioButton == null)
-            return;
-
-        appSettings.changeLang("en" == radioButton.Name ? "en" : "sr");
     }
 
     private void closeWindow()

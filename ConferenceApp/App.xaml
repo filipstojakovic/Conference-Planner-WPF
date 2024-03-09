@@ -3,15 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:ConferenceApp"
-             Exit="App_OnExit"
              StartupUri="/view/login/LoginWindow.xaml">
+             <!-- Exit="App_OnExit" -->
 
     <Application.Resources>
 
         <ResourceDictionary x:Name="myResourceDict">
             <ResourceDictionary.MergedDictionaries>
-
-                <ResourceDictionary Source="/resources/styles/Default.xaml" />
 
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Calendar.xaml" />
@@ -27,6 +25,8 @@
 
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+
+                <ResourceDictionary Source="/resources/styles/Default.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

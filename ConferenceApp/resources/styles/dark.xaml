@@ -5,7 +5,9 @@
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Default.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+			<materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+			<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+	</ResourceDictionary.MergedDictionaries>
     
     <!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
     <SolidColorBrush x:Key="DarkGray" Color="#2e3137"></SolidColorBrush>
@@ -15,6 +17,9 @@
 
     <SolidColorBrush x:Key="CustomDarkBlue" Color="#16375f"></SolidColorBrush>
     <SolidColorBrush x:Key="CustomLightBlue" Color="#0963ba"></SolidColorBrush>
+    <Color x:Key="MyBackgroundLighter">red</Color>
+    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
+
     
     <SolidColorBrush x:Key="BackgroundColor" Color="#2e3137"></SolidColorBrush>
     <SolidColorBrush x:Key="CalendarSelection" Color="Silver"></SolidColorBrush>

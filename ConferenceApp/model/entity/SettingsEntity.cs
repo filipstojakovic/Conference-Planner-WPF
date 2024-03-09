@@ -8,7 +8,7 @@ public class SettingsEntity
 
     public SettingsEntity()
     {
-        this.Language = LanguageEnum.DEFAULT.ToString();
-        this.Theme = ThemeEnum.DEFAULT.ToString();
+        this.Language = LanguageEnum.en.ToString();
+        this.Theme = ThemeEnum.@default.ToString();
     }
 }

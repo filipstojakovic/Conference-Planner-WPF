@@ -2,6 +2,6 @@ namespace ConferenceApp.model;
 
 public enum LanguageEnum
 {
-    DEFAULT,
-    ENGLISH
+    en,
+    sr
 }
