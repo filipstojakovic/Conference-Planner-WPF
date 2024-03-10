@@ -15,8 +15,8 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical">
-            <Button Name="Create_Button" Click="Create_Button_Click" Margin="12" MinWidth="80" >
+        <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+            <Button Name="Create_Button" Click="Create_Button_Click" MinWidth="80" Margin="0,0,0,10" >
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                              VerticalAlignment="Stretch" Margin="0,0,2,0" />
@@ -60,28 +60,29 @@
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
                       DisplayDateChanged="calendar_DisplayDateChanged">
                 <Calendar.Resources>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush"
-                                     Color="{Binding Source={StaticResource BackgroundColor}, Path=Color}" />
-                    <SolidColorBrush x:Key="MaterialDesignBody" Color="Black" /> <!-- body text color-->
+                    <!-- <SolidColorBrush x:Key="PrimaryHueMidBrush" -->
+                    <!--                  Color="{Binding Source={StaticResource BackgroundColor}, Path=Color}" /> -->
+                    <!-- ~1~ body text color@1@ -->
+                    <!-- <SolidColorBrush x:Key="MaterialDesignBody" Color="Black" />  -->
                     <!-- <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" />  // header text color--> 
                     
                     <!-- https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/ba83813d2567813e1fa0865e42746de31f44022b/MaterialDesignThemes.Wpf/Themes/MaterialDesignTheme.Calendar.xaml#LL763C24-L763C24 -->
                 </Calendar.Resources>
-                <Calendar.CalendarDayButtonStyle>
-                    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
-                        <Style.Triggers>
-                            <Trigger Property="IsBlackedOut" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource CalendarSelection}" />
-                                <Setter Property="Foreground" Value="Black" />
-                                <Setter Property="TextElement.Foreground" Value="Black" />
-                                <Setter Property="Opacity" Value="1" />
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="TextBlock.Opacity" Value="1"></Setter>
-                                <Setter Property="TextBox.Opacity" Value="1"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Calendar.CalendarDayButtonStyle>
+                <!-- <Calendar.CalendarDayButtonStyle> -->
+                    <!-- <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}"> -->
+                    <!--     <Style.Triggers> -->
+                    <!--         <Trigger Property="IsBlackedOut" Value="True"> -->
+                    <!--             <Setter Property="Background" Value="{DynamicResource CalendarSelection}" /> -->
+                    <!--             <Setter Property="Foreground" Value="Black" /> -->
+                    <!--             <Setter Property="TextElement.Foreground" Value="Black" /> -->
+                    <!--             <Setter Property="Opacity" Value="1" /> -->
+                    <!--             <Setter Property="Cursor" Value="Hand" /> -->
+                    <!--             <Setter Property="TextBlock.Opacity" Value="1"></Setter> -->
+                    <!--             <Setter Property="TextBox.Opacity" Value="1"></Setter> -->
+                    <!--         </Trigger> -->
+                    <!--     </Style.Triggers> -->
+                    <!-- </Style> -->
+                <!-- </Calendar.CalendarDayButtonStyle> -->
             </Calendar>
         </Viewbox>
     </Grid>

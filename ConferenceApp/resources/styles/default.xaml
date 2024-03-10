@@ -96,10 +96,10 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd"
-                                    Value="{DynamicResource Item.MouseOver.Background}" />
-                            <Setter Property="BorderBrush" TargetName="Bd"
-                                    Value="{DynamicResource Item.MouseOver.Border}" />
+                            <!-- <Setter Property="Background" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.MouseOver.Background}" /> -->
+                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.MouseOver.Border}" /> -->
                         </MultiTrigger>
 
                         <!--MainWindow not in focus-->
@@ -108,10 +108,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="False" />
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd"
-                                    Value="{DynamicResource Item.SelectedActive.Background}" />
-                            <Setter Property="BorderBrush" TargetName="Bd"
-                                    Value="{DynamicResource Item.SelectedActive.Border}" />
+                            <!-- <Setter Property="Background" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.SelectedActive.Background}" /> -->
+                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.SelectedActive.Border}" /> -->
                         </MultiTrigger>
 
                         <!--Selected menu item-->
@@ -120,10 +120,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True" />
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd"
-                                    Value="{DynamicResource Item.SelectedActive.Background}" />
-                            <Setter Property="BorderBrush" TargetName="Bd"
-                                    Value="{DynamicResource Item.SelectedActive.Border}" />
+                            <!-- <Setter Property="Background" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.SelectedActive.Background}" /> -->
+                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
+                            <!--         Value="{DynamicResource Item.SelectedActive.Border}" /> -->
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

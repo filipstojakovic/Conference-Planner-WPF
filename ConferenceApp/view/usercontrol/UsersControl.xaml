@@ -8,7 +8,6 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <local:ConvertTextToImage x:Key="convert" />
         <local:ConvertListToString x:Key="listToString" />
     </UserControl.Resources>
 
@@ -25,8 +24,8 @@
                   AutoGenerateColumns="False"
                   ColumnWidth="*"
                   VerticalScrollBarVisibility="Auto"
-                  DockPanel.Dock="Bottom"
                   IsReadOnly="True">
+                  <!-- DockPanel.Dock="Bottom" -->
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />

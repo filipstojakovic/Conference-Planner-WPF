@@ -18,6 +18,7 @@ namespace ConferenceApp.database
 				mySqlSingleton = new MySqlSingleton();
 				var connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
 				mySqlSingleton.connection = new MySqlConnection(connectionString);
+				
 				mySqlSingleton.connection.Open();
 			}
 			return mySqlSingleton;

@@ -2,13 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
-    
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Default.xaml" />
-			<materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
-			<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-	</ResourceDictionary.MergedDictionaries>
-    
+        <!-- <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Orange" /> -->
+        <ResourceDictionary
+        Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.dark.xaml" />
+        <!-- <ResourceDictionary -->
+        <!--     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" /> -->
+        <ResourceDictionary
+            Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.orange.xaml" />
+        <!-- <ResourceDictionary -->
+        <!--     Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" /> -->
+        <!-- -->
+        <!-- <ResourceDictionary -->
+        <!--     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" /> -->
+    </ResourceDictionary.MergedDictionaries>
+
     <!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
     <SolidColorBrush x:Key="DarkGray" Color="#2e3137"></SolidColorBrush>
     <!-- pozadina prozora -->
@@ -20,7 +30,7 @@
     <Color x:Key="MyBackgroundLighter">red</Color>
     <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
 
-    
+
     <SolidColorBrush x:Key="BackgroundColor" Color="#2e3137"></SolidColorBrush>
     <SolidColorBrush x:Key="CalendarSelection" Color="Silver"></SolidColorBrush>
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="DarkGray" />

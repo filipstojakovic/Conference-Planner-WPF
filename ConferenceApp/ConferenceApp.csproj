@@ -12,6 +12,15 @@
 		<None Remove="resources\calendar_background.webp" />
 		<None Remove="resources\calendar_icon.png" />
 		<None Remove="resources\calendar_icon.webp" />
+		<None Update="resources\scripts\data.sql">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="resources\scripts\generate schema.sql">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="resources\scripts\triggers and procedures.sql">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
   <ItemGroup>

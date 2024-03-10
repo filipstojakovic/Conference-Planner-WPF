@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceApp", "ConferenceApp\ConferenceApp.csproj", "{16D93340-4E5B-44B1-B1F2-29513E8763E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConferenceApp", "ConferenceApp\ConferenceApp.csproj", "{16D93340-4E5B-44B1-B1F2-29513E8763E8}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ConfereceAppSetup", "ConfereceAppSetup\ConfereceAppSetup.vdproj", "{92514D41-A6BF-40A3-A88F-98283947462D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{16D93340-4E5B-44B1-B1F2-29513E8763E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16D93340-4E5B-44B1-B1F2-29513E8763E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16D93340-4E5B-44B1-B1F2-29513E8763E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92514D41-A6BF-40A3-A88F-98283947462D}.Debug|Any CPU.ActiveCfg = Debug
+		{92514D41-A6BF-40A3-A88F-98283947462D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
