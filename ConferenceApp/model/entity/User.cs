@@ -27,6 +27,11 @@ namespace ConferenceApp.model.entity
             copy(user);
         }
 
+        public string getFullName()
+        {
+            return $@"{FirstName} {LastName}";
+        }
+
         public void copy(User user)
         {
             this.Id = user.Id;

@@ -69,7 +69,7 @@ namespace ConferenceApp.view
         {
             try
             {
-                string userFullName = userDao.getUserFullname_Procedure(currentUser.Id);
+                string userFullName = currentUser.getFullName();
                 string[] fullName = userFullName.Split(' ');
                 HeaderUserText.Text = Utils.CapitalizeFirstLetter(fullName[0]) + " " +
                                       Utils.CapitalizeFirstLetter(fullName[1]);

@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>resources\images\calendar-icon32x32.ico</ApplicationIcon>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -12,9 +13,7 @@
 		<None Remove="resources\calendar_background.webp" />
 		<None Remove="resources\calendar_icon.png" />
 		<None Remove="resources\calendar_icon.webp" />
-		<None Update="resources\scripts\data.sql">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
+		<None Remove="resources\images\calendar-logo.png" />
 		<None Update="resources\scripts\generate schema.sql">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -34,7 +33,7 @@
   <ItemGroup>
     <None Remove="resources\images\calendar-icon.png" />
     <Resource Include="resources\images\calendar-background.jpg" />
-    <Resource Include="resources\images\calendar-icon.png">
+    <Resource Include="resources\images\calendar-logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Remove="resources\images\calendar-background.jpg" />
@@ -97,6 +96,22 @@
     <Page Update="view\dialog\ConferenceDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="resources\scripts\ddlScript.sql" />
+    <Content Include="resources\images\calendar-icon32x32.ico" />
+    <Content Include="resources\scripts\ddlScript.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="resources\scripts\triggersAndProcedures.sql" />
+    <Content Include="resources\scripts\triggersAndProcedures.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="resources\scripts\data.sql" />
+    <Content Include="resources\scripts\data.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

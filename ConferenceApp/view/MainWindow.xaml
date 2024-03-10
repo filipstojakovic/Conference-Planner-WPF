@@ -14,124 +14,126 @@
         MinWidth="1000"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <converter:ConvertStringToString x:Key="StringToString" />
-    </Window.Resources>
+	<Window.Resources>
+		<converter:ConvertStringToString x:Key="StringToString" />
+	</Window.Resources>
 
 
-    <Grid Background="{DynamicResource MaterialDesignDarkSeparatorBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid Background="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <materialDesign:ColorZone Padding="10"  Foreground="White"
+		<materialDesign:ColorZone Padding="10"  Foreground="White"
                                   Mode="PrimaryMid"
+								  Background="{DynamicResource BackgroundColor}"
                                   Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch">
-            <Grid>
-                <TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TextBlock x:Name="HeaderUserText" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
-                </StackPanel>
-            </Grid>
-        </materialDesign:ColorZone>
-        <Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+			<Grid>
+				<TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+					<TextBlock x:Name="HeaderUserText" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
+				</StackPanel>
+			</Grid>
+		</materialDesign:ColorZone>
+		<Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
               Background="{DynamicResource BackgroundColor}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="70" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Background="Transparent">
-                <Image Source="/resources/images/calendar-icon.png" />
-            </Grid>
+			<Grid Grid.Row="0" Background="Transparent">
+				<Image Source="/resources/images/calendar-logo.png" />
+			</Grid>
 
-            <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch"
+			<ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <ListView x:Name="Drawer_Upper_MenuListView"
+				<StackPanel>
+					<ListView x:Name="Drawer_Upper_MenuListView"
                               Background="{x:Null}"
                               BorderThickness="0"
                               ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
+							  Foreground="White"
                               Margin="0,10,0,0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               SelectionChanged="Drawer_MenuListView_MouseLeftButtonUp">
 
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-                        </ListView.ItemContainerStyle>
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
+						</ListView.ItemContainerStyle>
 
-                        <ListView.ItemTemplate>
-                            <!--Every card menu item-->
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="20" Height="20"
+						<ListView.ItemTemplate>
+							<!--Every card menu item-->
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+									<materialDesign:PackIcon Kind="{Binding Path=Icon}" Width="20" Height="20"
                                                              VerticalAlignment="Center"
                                                              Margin="10 0"  />
-                                    <TextBlock Text="{Binding Path=Header, Converter={StaticResource StringToString}}"
+									<TextBlock Text="{Binding Path=Header, Converter={StaticResource StringToString}}"
                                                VerticalAlignment="Stretch" Padding="5 5"
                                                FontSize="18" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </ScrollViewer>
+								</StackPanel>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackPanel>
+			</ScrollViewer>
 
 
-            <StackPanel Grid.Row="2" Margin="0,10,0,10">
-                <!--SETTINGS button-->
-                <ListView x:Name="Drawer_Bottom_MenuListView"
+			<StackPanel Grid.Row="2" Margin="0,10,0,10">
+				<!--SETTINGS button-->
+				<ListView x:Name="Drawer_Bottom_MenuListView"
                           Background="{x:Null}" BorderThickness="0"
                           ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
                           Foreground="White"
                           MouseLeftButtonUp="DrawerBottom_MenuListView_MouseLeftButtonUp">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-                    </ListView.ItemContainerStyle>
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
+					</ListView.ItemContainerStyle>
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                         HorizontalAlignment="Center">
-                                <materialDesign:PackIcon Kind="{Binding Path=Icon}" VerticalAlignment="Center"
+								<materialDesign:PackIcon Kind="{Binding Path=Icon}" VerticalAlignment="Center"
                                                          Width="20" Height="20" Margin="10 0" />
-                                <TextBlock Text="{Binding Path=Header,Converter={StaticResource StringToString}}"
+								<TextBlock Text="{Binding Path=Header,Converter={StaticResource StringToString}}"
                                            VerticalAlignment="Center" Padding="5 5"
                                            FontSize="18" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+							</StackPanel>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
 
-                <!--LOGOUT BUTTON-->
-                <ListView
+				<!--LOGOUT BUTTON-->
+				<ListView
                     x:Name="Drawer_Logout_MenuListView"
                     MouseLeftButtonUp="DrawerBottom_MenuListView_MouseLeftButtonUp"
                     BorderThickness="0"
                     Foreground="White"
                     Background="{x:Null}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-                    </ListView.ItemContainerStyle>
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
+					</ListView.ItemContainerStyle>
 
-                    <ListViewItem Name="LogoutButton" VerticalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="20" Height="20"
+					<ListViewItem Name="LogoutButton" VerticalAlignment="Center">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+							<materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="20" Height="20"
                                                      Margin="10 0" />
-                            <TextBlock Text="{hm:Lang logout}" VerticalAlignment="Center" Padding="5 5" FontSize="18" />
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
-            </StackPanel>
+							<TextBlock Text="{hm:Lang logout}" VerticalAlignment="Center" Padding="5 5" FontSize="18" />
+						</StackPanel>
+					</ListViewItem>
+				</ListView>
+			</StackPanel>
 
 
-        </Grid>
-        <DockPanel x:Name="DockPanelMain" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
-    </Grid>
+		</Grid>
+		<DockPanel x:Name="DockPanelMain" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" />
+	</Grid>
 </Window>

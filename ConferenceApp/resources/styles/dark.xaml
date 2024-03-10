@@ -19,7 +19,11 @@
         <!--     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" /> -->
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
+	<FontFamily x:Key="MyFont">Comic Sans MS</FontFamily>
+	<system:Double x:Key="MediumFontSize">22</system:Double>
+
+
+	<!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
     <SolidColorBrush x:Key="DarkGray" Color="#2e3137"></SolidColorBrush>
     <!-- pozadina prozora -->
     <SolidColorBrush x:Key="LightGray" Color="#348d6a"></SolidColorBrush>

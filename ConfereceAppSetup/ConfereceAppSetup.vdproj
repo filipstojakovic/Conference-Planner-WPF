@@ -37,6 +37,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -53,6 +69,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -103,7 +135,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_C2DF25C7CB9E474B81E9AD417EDA6930"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -139,9 +171,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ConfereceAppSetup"
+        "ProductName" = "8:Conferece planner"
         "ProductCode" = "8:{610615DB-19DB-4722-920F-9A3307528AA3}"
-        "PackageCode" = "8:{F1FAEDCA-10C0-4EB3-854A-7F1AF661AEC8}"
+        "PackageCode" = "8:{10F457C3-C3D5-4CD4-A154-6452C3515316}"
         "UpgradeCode" = "8:{0C1FB1FC-F162-49ED-87E2-EC5108569584}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -152,7 +184,7 @@
         "Manufacturer" = "8:ETFBL"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:ConfereceAppSetup"
+        "Title" = "8:Conferece planner"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Filip Stojakovic"
         "Keywords" = "8:"
@@ -162,7 +194,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -267,12 +299,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_E3C0AC76A83D4610A671F1845D478EC8"
             "Folder" = "8:_8E9C51A660B1406DACB5490E47C31AE7"
             "WorkingFolder" = "8:_C2DF25C7CB9E474B81E9AD417EDA6930"
-            "Icon" = "8:"
+            "Icon" = "8:_E3C0AC76A83D4610A671F1845D478EC8"
             "Feature" = "8:"
             }
         }
@@ -676,7 +708,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E3C0AC76A83D4610A671F1845D478EC8"
             {
-            "SourcePath" = "8:..\\ConferenceApp\\obj\\Release\\net7.0-windows10.0.22621.0\\apphost.exe"
+            "SourcePath" = "8:..\\ConferenceApp\\obj\\Debug\\net7.0-windows10.0.22621.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2DF25C7CB9E474B81E9AD417EDA6930"

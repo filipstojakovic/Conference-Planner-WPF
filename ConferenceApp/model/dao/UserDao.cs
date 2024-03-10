@@ -217,25 +217,6 @@ namespace ConferenceApp.model.dao
             }
         }
 
-        public string getUserFullname_Procedure(int? id)
-        {
-            string fullName = "";
-            using (MySqlCommand command = new MySqlCommand("get_user_fullname", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@userId", id);
-
-                MySqlParameter fullNameParameter = new MySqlParameter("@full_name", MySqlDbType.VarChar, 255);
-                fullNameParameter.Direction = ParameterDirection.Output;
-                command.Parameters.Add(fullNameParameter);
-
-                command.ExecuteNonQuery();
-                fullName = (string)fullNameParameter.Value;
-            }
-
-            return fullName;
-        }
-
         public List<User> findUserByGatherAndRole(Conference conference, GatheringRoleEnum gatheringRoleEnum)
         {
             GatheringRole gatheringRole = new GatheringRoleDao().findByName(gatheringRoleEnum.ToString());
