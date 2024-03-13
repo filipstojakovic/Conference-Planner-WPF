@@ -155,6 +155,7 @@ namespace ConferenceApp.model.dao
                 }
 
                 userRoleDao.insertUserRole(user, transaction);
+                settingsDao.createSettings(user,transaction);
                 transaction.Commit();
             }
             catch (Exception e)

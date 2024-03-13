@@ -135,8 +135,8 @@
   <data name="login" xml:space="preserve">
     <value>Prijava</value>
   </data>
-  <data name="background" xml:space="preserve">
-    <value>Pozadina</value>
+  <data name="theme" xml:space="preserve">
+    <value>Tema</value>
   </data>
   <data name="lang" xml:space="preserve">
     <value>Jezik</value>

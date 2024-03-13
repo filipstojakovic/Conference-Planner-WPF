@@ -1,71 +1,74 @@
-﻿using Haley.Utils;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Security.Policy;
-using System.Text.Json;
 using System.Windows;
-using System.Windows.Controls;
+using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
-using Google.Protobuf;
+using Haley.Utils;
 
 namespace ConferenceApp.utils;
 
 // Singleton
 public class AppSettings
 {
-    public SettingsEntity SettingsEntity { get; set; }
+	public SettingsEntity SettingsEntity { get; set; }
+	public SettingsDao SettingsDao { get; private set; }
 
-    private static AppSettings appSettings;
+	private static AppSettings appSettings;
 
-    public static AppSettings getInstance()
-    {
-        if (appSettings == null)
-        {
-            appSettings = new AppSettings();
-        }
+	public static AppSettings getInstance()
+	{
+		if (appSettings == null)
+		{
+			appSettings = new AppSettings();
+		}
 
-        return appSettings;
-    }
+		return appSettings;
+	}
 
-    private AppSettings()
-    {
-        SettingsEntity = new SettingsEntity();
-    }
+	private AppSettings()
+	{
+		SettingsEntity = new SettingsEntity();
+		this.SettingsDao = new SettingsDao();
+	}
 
-    public void changeLang(string lang)
-    {
-        LangUtils.ChangeCulture(lang);
-    }
+	public void applySettings()
+	{
+		this.applyTheme();
+		this.applyLanguage();
+	}
 
-    public void changeTheme(string theme)
-    {
-        var themeUri = new Uri("pack://application:,,,/resources/styles/" + theme + ".xaml",
-            UriKind.Absolute);
-        var styleDictionary = Application.Current
-            .Resources
-            .MergedDictionaries
-            .FirstOrDefault(resourceDictionary =>
-                resourceDictionary.Source.OriginalString.Contains("resources/styles"));
+	public void changeLang(string lang)
+	{
+		appSettings.SettingsEntity.Language = lang;
+		LangUtils.ChangeCulture(lang);
+		SettingsDao.updateSettings(appSettings.SettingsEntity);
+		
+	}
 
-        styleDictionary.Source = themeUri;
-    }
+	public void changeTheme(string theme)
+	{
+		var themeUri = new Uri("pack://application:,,,/resources/styles/" + theme + ".xaml",
+			UriKind.Absolute);
+		var styleDictionary = Application.Current
+			.Resources
+			.MergedDictionaries
+			.FirstOrDefault(resourceDictionary =>
+				resourceDictionary.Source.OriginalString.Contains("resources/styles"));
+
+		styleDictionary.Source = themeUri;
+		appSettings.SettingsEntity.Theme = theme;
+		SettingsDao.updateSettings(appSettings.SettingsEntity);
+	}
 
 
-    public void applyTheme()
-    {
-        this.changeTheme(SettingsEntity.Theme);
-    }
+	public void applyTheme()
+	{
+		this.changeTheme(SettingsEntity.Theme);
+	}
 
-    public void applyLanguage()
-    {
-        changeLang(SettingsEntity.Language);
-    }
+	public void applyLanguage()
+	{
+		changeLang(SettingsEntity.Language);
+	}
 
-    public void applySettings()
-    {
-        this.applyTheme();
-        this.applyLanguage();
-    }
 }

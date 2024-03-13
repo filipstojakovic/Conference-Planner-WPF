@@ -34,17 +34,6 @@ public partial class SettingsControl : UserControl
 	{
 		var theme = selectedItemName(sender);
 		appSettings.changeTheme(theme);
-
-		//TODO: check this out
-		//if ("invert".Equals(theme.ToLower()))
-		//{
-		//    var currentFontFamily = TextBlock.FontFamilyProperty.GetMetadata(typeof(TextBlock)).DefaultValue.ToString();
-		//    if (!"Comic Sans MS".Equals(currentFontFamily))
-		//        TextBlock.FontFamilyProperty.OverrideMetadata(
-		//            typeof(TextBlock),
-		//            new FrameworkPropertyMetadata(
-		//                new FontFamily("Comic Sans MS")));
-		//}
 	}
 
 	private string selectedItemName(object sender)

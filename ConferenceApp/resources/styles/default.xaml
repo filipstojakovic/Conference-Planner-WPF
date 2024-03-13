@@ -2,139 +2,124 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
-	
+
 	<!-- Constants -->
-    <Color x:Key="MyBackground">#2e3137</Color>
-    <Color x:Key="MyBackgroundLighter">#545d6a</Color>
-    <Color x:Key="CustomDarkBlueColor">#16375f</Color>
-    <Color x:Key="CustomLightBlueColor">#2196f3</Color>
-    <Color x:Key="DodgerBlueColor">DodgerBlue</Color>
+	<Color x:Key="MyBackground">#2e3137</Color>
+	<Color x:Key="MyBackgroundLighter">#545d6a</Color>
+	<Color x:Key="CustomDarkBlueColor">#16375f</Color>
+	<Color x:Key="CustomLightBlueColor">#2196f3</Color>
+	<Color x:Key="DodgerBlueColor">DodgerBlue</Color>
 	<FontFamily x:Key="MyFont">Arial</FontFamily>
-    
-    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource Primary200}"/>
-    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}"/>
-    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary500}"/>
-    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}"/>
-    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
-    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
+
+	<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource Primary200}"/>
+	<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}"/>
+	<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary500}"/>
+	<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}"/>
+	<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
+	<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
 
 	<!-- Colors -->
-    <SolidColorBrush x:Key="MyBackgroundColor" Color="{StaticResource MyBackground}" />
-    <!-- Window background -->
-    <SolidColorBrush x:Key="MyBackgroundColorLighter" Color="{StaticResource MyBackgroundLighter}" />
-    <!-- Field background -->
-    <SolidColorBrush x:Key="CustomDarkBlue" Color="{StaticResource CustomDarkBlueColor}" />
-    <SolidColorBrush x:Key="CustomLightBlue" Color="{StaticResource CustomLightBlueColor}" />
-    <SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource DodgerBlueColor}" />
-    <SolidColorBrush x:Key="CalendarDisabledDays" Color="{DynamicResource Primary900}" />
-    
-    <!-- TextBox color -->
-    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
-    <SolidColorBrush x:Key="TextBoxForeground" Color="white" />
+	<SolidColorBrush x:Key="MyBackgroundColor" Color="{StaticResource MyBackground}" />
+	<!-- Window background -->
+	<SolidColorBrush x:Key="MyBackgroundColorLighter" Color="{StaticResource MyBackgroundLighter}" />
+	<!-- Field background -->
+	<SolidColorBrush x:Key="CustomDarkBlue" Color="{StaticResource CustomDarkBlueColor}" />
+	<SolidColorBrush x:Key="CustomLightBlue" Color="{StaticResource CustomLightBlueColor}" />
+	<SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource Primary900}" />
+	<SolidColorBrush x:Key="CalendarDisabledDays" Color="{DynamicResource Primary500}" />
 
-    <!-- Menu Items -->
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" />
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" />
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" />
+	<!-- TextBox color -->
+	<SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
+	<SolidColorBrush x:Key="TextBoxForeground" Color="white" />
+
+	<!-- Menu Items -->
+	<SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" />
+	<SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" />
+	<SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" />
+	<SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" />
 
 
 	<!-- Font Sizes -->
-    <system:Double x:Key="SmallFontSize">14</system:Double>
-    <system:Double x:Key="MediumFontSize">18</system:Double>
-    <system:Double x:Key="LargeFontSize">22</system:Double>
-    
-    <!-- Text Font -->
-    <Style TargetType="Window">
-        <Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
-    </Style>
-    <Style TargetType="TextBlock">
-		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
-    </Style>
-    
-    <Style TargetType="TextElement">
-		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
-    </Style>
-    
-    <Style TargetType="TextBox">
-		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
-    </Style>
-    
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
-    </Style>
+	<system:Double x:Key="SmallFontSize">14</system:Double>
+	<system:Double x:Key="MediumFontSize">18</system:Double>
+	<system:Double x:Key="LargeFontSize">22</system:Double>
 
-    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+	<!-- Text Font -->
+	<Style TargetType="Window">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
+	</Style>
+	<Style TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
+	</Style>
+
+	<Style TargetType="TextElement">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
+	</Style>
+
+	<Style TargetType="TextBox">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
+	</Style>
+
+	<Style TargetType="{x:Type Label}">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+	</Style>
+
+	<Style x:Key="TextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBoxBase}">
 		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
 		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
 		<Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"></Setter>
-    </Style>
+	</Style>
 
-	<Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+	<Style x:Key="PasswordBoxStyle" TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignPasswordBox}">
 		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
 		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
 		<Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"></Setter>
-    </Style>
+	</Style>
 
-    <Style x:Key="ButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
+	<Style x:Key="ButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
 		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>
 		<Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"></Setter>
-    </Style>
-    
-    <Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                    <Border x:Name="Bd"
+	</Style>
+
+	<Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}" >
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListViewItem}">
+					<Border x:Name="Bd"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <!--MenuItem Content presenter-->
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						<!--MenuItem Content presenter-->
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <!--MouseOver menu item-->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <!-- <Setter Property="Background" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.MouseOver.Background}" /> -->
-                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.MouseOver.Border}" /> -->
-                        </MultiTrigger>
+					</Border>
+					<ControlTemplate.Triggers>
+						<!--MouseOver menu item-->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="Selector.IsSelectionActive" Value="False" />
+								<Condition Property="IsSelected" Value="True" />
+							</MultiTrigger.Conditions>
+							<Setter Property="Foreground" Value="Red"/>
 
-                        <!--MainWindow not in focus-->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Selector.IsSelectionActive" Value="False" />
-                                <Condition Property="IsSelected" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <!-- <Setter Property="Background" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.SelectedActive.Background}" /> -->
-                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.SelectedActive.Border}" /> -->
-                        </MultiTrigger>
+						</MultiTrigger>
 
-                        <!--Selected menu item-->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Selector.IsSelectionActive" Value="True" />
-                                <Condition Property="IsSelected" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <!-- <Setter Property="Background" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.SelectedActive.Background}" /> -->
-                            <!-- <Setter Property="BorderBrush" TargetName="Bd" -->
-                            <!--         Value="{DynamicResource Item.SelectedActive.Border}" /> -->
-                        </MultiTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<!--Selected menu item-->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="Selector.IsSelectionActive" Value="True" />
+								<Condition Property="IsSelected" Value="True" />
+							</MultiTrigger.Conditions>
+
+							<Setter Property="Foreground" Value="Red"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

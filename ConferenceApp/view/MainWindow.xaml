@@ -52,12 +52,12 @@
 				<Image Source="/resources/images/calendar-logo.png" />
 			</Grid>
 
+			<!-- Menu items -->
 			<ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 				<StackPanel>
 					<ListView x:Name="Drawer_Upper_MenuListView"
 					materialDesign:ListBoxItemAssist.ShowSelection="True"
-                              Background="{x:Null}"
                               BorderThickness="0"
                               ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
 							  Foreground="White"
