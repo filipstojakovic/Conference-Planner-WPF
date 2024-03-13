@@ -30,7 +30,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `conference` WRITE;
 /*!40000 ALTER TABLE `conference` DISABLE KEYS */;
-INSERT INTO `conference` VALUES (2,'2023-03-10 00:00:00','2023-03-20 23:59:59','conference1');
+INSERT INTO `conference` VALUES (2,'2024-03-10 00:00:00','2024-03-20 23:59:59','conference1');
 /*!40000 ALTER TABLE `conference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +49,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (3,3,1,'event1','opis event1','2023-03-10 10:00:00','2023-03-10 12:00:00'),(4,3,3,'event2','opis event2','2023-03-10 13:00:00','2023-03-10 15:00:00'),(5,4,2,'event 3','opis eventa 3','2023-03-16 08:00:00','2023-03-16 10:00:00'),(6,4,1,'evet 4','opis eventa 4','2023-03-17 08:00:00','2023-03-17 10:00:00');
+INSERT INTO `event` VALUES (3,3,1,'event1','opis event1','2024-03-10 10:00:00','2024-03-10 12:00:00'),(4,3,3,'event2','opis event2','2024-03-10 13:00:00','2024-03-10 15:00:00'),(5,4,2,'event 3','opis eventa 3','2024-03-16 08:00:00','2024-03-16 10:00:00'),(6,4,1,'evet 4','opis eventa 4','2024-03-17 08:00:00','2024-03-17 10:00:00');
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +202,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `session` WRITE;
 /*!40000 ALTER TABLE `session` DISABLE KEYS */;
-INSERT INTO `session` VALUES (3,2,'2023-03-10 10:00:00','2023-03-15 20:00:00','session1','opis session1'),(4,2,'2023-03-16 08:00:00','2023-03-20 20:00:00','session2','opis session2');
+INSERT INTO `session` VALUES (3,2,'2024-03-10 10:00:00','2024-03-15 20:00:00','session1','opis session1'),(4,2,'2024-03-16 08:00:00','2024-03-20 20:00:00','session2','opis session2');
 /*!40000 ALTER TABLE `session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-09 22:48:05
+-- Dump completed on 2024-03-09 22:48:05

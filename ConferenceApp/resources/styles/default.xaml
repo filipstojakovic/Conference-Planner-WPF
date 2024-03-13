@@ -10,7 +10,13 @@
     <Color x:Key="CustomLightBlueColor">#2196f3</Color>
     <Color x:Key="DodgerBlueColor">DodgerBlue</Color>
 	<FontFamily x:Key="MyFont">Arial</FontFamily>
-
+    
+    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource Primary200}"/>
+    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}"/>
+    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary500}"/>
+    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}"/>
+    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
+    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
 
 	<!-- Colors -->
     <SolidColorBrush x:Key="MyBackgroundColor" Color="{StaticResource MyBackground}" />
@@ -20,8 +26,8 @@
     <SolidColorBrush x:Key="CustomDarkBlue" Color="{StaticResource CustomDarkBlueColor}" />
     <SolidColorBrush x:Key="CustomLightBlue" Color="{StaticResource CustomLightBlueColor}" />
     <SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource DodgerBlueColor}" />
-    <SolidColorBrush x:Key="CalendarSelection" Color="{StaticResource DodgerBlueColor}" />
-
+    <SolidColorBrush x:Key="CalendarDisabledDays" Color="{DynamicResource Primary900}" />
+    
     <!-- TextBox color -->
     <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource MyBackgroundLighter}" />
     <SolidColorBrush x:Key="TextBoxForeground" Color="white" />
@@ -65,7 +71,7 @@
 		<Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"></Setter>
     </Style>
 
-    <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+	<Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
 		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
 		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}"/>

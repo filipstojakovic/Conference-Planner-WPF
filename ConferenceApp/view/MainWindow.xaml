@@ -56,6 +56,7 @@
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 				<StackPanel>
 					<ListView x:Name="Drawer_Upper_MenuListView"
+					materialDesign:ListBoxItemAssist.ShowSelection="True"
                               Background="{x:Null}"
                               BorderThickness="0"
                               ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
@@ -64,9 +65,9 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               SelectionChanged="Drawer_MenuListView_MouseLeftButtonUp">
 
-						<ListView.ItemContainerStyle>
+						<!--<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-						</ListView.ItemContainerStyle>
+						</ListView.ItemContainerStyle>-->
 
 						<ListView.ItemTemplate>
 							<!--Every card menu item-->
@@ -89,13 +90,14 @@
 			<StackPanel Grid.Row="2" Margin="0,10,0,10">
 				<!--SETTINGS button-->
 				<ListView x:Name="Drawer_Bottom_MenuListView"
+				materialDesign:ListBoxItemAssist.ShowSelection="True"
                           Background="{x:Null}" BorderThickness="0"
                           ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
                           Foreground="White"
                           MouseLeftButtonUp="DrawerBottom_MenuListView_MouseLeftButtonUp">
-					<ListView.ItemContainerStyle>
+					<!--<ListView.ItemContainerStyle>
 						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-					</ListView.ItemContainerStyle>
+					</ListView.ItemContainerStyle>-->
 
 					<ListView.ItemTemplate>
 						<DataTemplate>
@@ -114,13 +116,14 @@
 				<!--LOGOUT BUTTON-->
 				<ListView
                     x:Name="Drawer_Logout_MenuListView"
+					materialDesign:ListBoxItemAssist.ShowSelection="True"
                     MouseLeftButtonUp="DrawerBottom_MenuListView_MouseLeftButtonUp"
                     BorderThickness="0"
                     Foreground="White"
                     Background="{x:Null}">
-					<ListView.ItemContainerStyle>
+					<!--<ListView.ItemContainerStyle>
 						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-					</ListView.ItemContainerStyle>
+					</ListView.ItemContainerStyle>-->
 
 					<ListViewItem Name="LogoutButton" VerticalAlignment="Center">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
