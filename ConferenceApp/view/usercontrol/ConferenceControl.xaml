@@ -16,18 +16,24 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Margin="0,0,10,0">
-            <Button Name="Create_Button" Click="Create_Button_Click" MinWidth="80" Margin="0,0,0,10" >
+            <Button Name="Create_Button" Click="Create_Button_Click" MinWidth="80" Margin="0,0,0,10">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                              VerticalAlignment="Stretch" Margin="0,0,2,0" />
                     <TextBlock Text="{hm:Lang create_conference}" />
                 </StackPanel>
             </Button>
-            <TextBox Background="White"
+            <TextBox Style="{StaticResource RegularTextBoxStyle}"
                      Margin="0,0,0,10"
-                     FontSize="18"
-                     materialDesign:HintAssist.Hint="Filter result..."
-                     Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+                     materialDesign:TextFieldAssist.HasClearButton="True"
+                     Name="txtFilter" TextChanged="txtFilter_TextChanged">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Search" VerticalAlignment="Center" />
+                        <TextBlock Text="Filter conference" />
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
 
             <DataGrid Name="conferenceDataGrid"
                       AutoGenerateColumns="False"
@@ -59,21 +65,13 @@
                       FirstDayOfWeek="Monday"
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
                       DisplayDateChanged="calendar_DisplayDateChanged">
-				<Calendar.Resources>
-					<!-- body text color-->
-                    <!--<SolidColorBrush x:Key="MaterialDesignBody" Color="Black" />--> 
-                    <!-- <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" />  // header text color -->
-                    
-                    <!-- https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/ba83813d2567813e1fa0865e42746de31f44022b/MaterialDesignThemes.Wpf/Themes/MaterialDesignTheme.Calendar.xaml#LL763C24-L763C24 -->
-                </Calendar.Resources>
-				<Calendar.CalendarDayButtonStyle>
-					<Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                <Calendar.CalendarDayButtonStyle>
+                    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
                         <Style.Triggers>
                             <Trigger Property="IsBlackedOut" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource CalendarDisabledDays}" />
                                 <Setter Property="Cursor" Value="Hand" />
-
-							</Trigger>
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Calendar.CalendarDayButtonStyle>

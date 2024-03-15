@@ -5,11 +5,13 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Default.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.light.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.green.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+        
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
+        </ResourceDictionary.MergedDictionaries>
 
     <FontFamily x:Key="MyFont">Times New Roman</FontFamily>
     <system:Double x:Key="MediumFontSize">22</system:Double>

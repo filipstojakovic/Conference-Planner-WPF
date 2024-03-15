@@ -12,6 +12,7 @@
         Height="600" Width="1300"
         MinHeight="600"
         MinWidth="1000"
+		Style="{StaticResource MaterialDesignWindow}"
         WindowStartupLocation="CenterScreen">
 
 	<Window.Resources>
@@ -19,7 +20,7 @@
 	</Window.Resources>
 
 
-	<Grid Background="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
@@ -34,9 +35,9 @@
 								  Background="{DynamicResource BackgroundColor}"
                                   Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch">
 			<Grid>
-				<TextBlock x:Name="HeaderBar" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
+				<TextBlock Style="{DynamicResource SectionTitle}" x:Name="HeaderBar"/>
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-					<TextBlock x:Name="HeaderUserText" VerticalAlignment="Center" Padding="5 3" FontSize="20" />
+					<TextBlock x:Name="HeaderUserText" Style="{DynamicResource SectionTitle}" />
 				</StackPanel>
 			</Grid>
 		</materialDesign:ColorZone>

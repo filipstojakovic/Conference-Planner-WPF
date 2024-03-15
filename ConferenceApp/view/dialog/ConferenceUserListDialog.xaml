@@ -9,37 +9,42 @@
         Width="600"
         SizeToContent="Height"
         MinHeight="500"
+                Style="{StaticResource MaterialDesignWindow}"
+
         MaxHeight="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Conferece name:" />
-        <TextBox Grid.Row="0" Grid.Column="1"
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Conference name:" VerticalAlignment="Center" />
+		<TextBox Grid.Row="0" Grid.Column="1"
+        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
                  Margin="5"
                  IsReadOnly="True"
                  Name="ConferenceName" />
 
-        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Organizer:" />
-        <TextBox Grid.Row="1" Grid.Column="1"
+		<Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Organizer:" VerticalAlignment="Center" />
+		<TextBox Grid.Row="1" Grid.Column="1"
+        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
                  Margin="5"
                  IsReadOnly="True"
                  Name="OrganizerName" />
-        <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Moderator:" />
-        <TextBox Grid.Row="2" Grid.Column="1"
+		<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Moderator:" VerticalAlignment="Center"/>
+		<TextBox Grid.Row="2" Grid.Column="1"
+        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
                  Margin="5"
                  IsReadOnly="True"
                  Name="ModeratorName" />
 
-        <DataGrid Name="conferenceDataGrid"
+		<DataGrid Name="conferenceDataGrid"
                   Margin="0,5"
                   Grid.Row="3" 
                   Grid.Column="0"
@@ -49,12 +54,12 @@
                   VerticalScrollBarVisibility="Auto"
                   ItemsSource="{Binding Visitors}"
                   IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-            </DataGrid.Columns>
-        </DataGrid>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
+				<DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
+				<DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+			</DataGrid.Columns>
+		</DataGrid>
 
-    </Grid>
+	</Grid>
 </Window>

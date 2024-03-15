@@ -9,16 +9,19 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
+                Style="{StaticResource MaterialDesignWindow}"
+
         Width="500">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,12 +30,12 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Session name:" />
-        <TextBox Grid.Row="0" Grid.Column="1"
+        <TextBox Style="{DynamicResource RegularTextBoxStyle}" Padding="5" Grid.Row="0" Grid.Column="1"
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Description:" Margin="5" />
-        <TextBox Grid.Row="1" Grid.Column="1"
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
+        <TextBox Grid.Row="2" Grid.Column="1"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
                  TextWrapping="Wrap"
@@ -41,7 +44,7 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -56,12 +59,15 @@
             <Label Grid.Row="0" Grid.Column="0" Content="Start Date:" Margin="5" />
             <DatePicker Grid.Row="0" Grid.Column="1"
                         xml:lang="en-GB"
+                        Padding="5"
                         SelectedDate="{Binding StartDate}"
                         Margin="5" />
 
             <Label Grid.Column="2" Content="Start time:" Margin="5" />
             <materialDesign:TimePicker Grid.Column="3"
                                        xml:lang="en-GB"
+                                                               Padding="5"
+
                                        Is24Hours="True"
                                        Margin="5"
                                        SelectedTime="{Binding StartDate}" />
@@ -69,19 +75,23 @@
             <Label Grid.Row="1" Grid.Column="0" Content="End Date:" Margin="5" />
             <DatePicker Grid.Row="1" Grid.Column="1"
                         xml:lang="en-GB"
+                                                Padding="5"
+
                         SelectedDate="{Binding EndDate}"
                         Margin="5" />
 
             <Label Grid.Row="1" Grid.Column="2" Content="Start time:" Margin="5" />
             <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
                                        xml:lang="en-GB"
+                                                               Padding="5"
+
                                        Is24Hours="True"
                                        Margin="5"
                                        SelectedTime="{Binding EndDate}" />
 
         </Grid>
 
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />

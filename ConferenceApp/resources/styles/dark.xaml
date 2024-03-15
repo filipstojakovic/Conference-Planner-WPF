@@ -24,7 +24,7 @@
 
 
 	<!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->
-    <SolidColorBrush x:Key="DarkGray" Color="#2e3137"></SolidColorBrush>
+	<SolidColorBrush x:Key="DarkGray" Color="#303030"></SolidColorBrush>
     <!-- pozadina prozora -->
     <SolidColorBrush x:Key="LightGray" Color="#348d6a"></SolidColorBrush>
     <!-- pozadina polja -->

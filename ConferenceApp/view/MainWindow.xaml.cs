@@ -21,15 +21,14 @@ namespace ConferenceApp.view
 
 		public MainWindow(User currentUser)
 		{
+			AppSettings.getInstance().applySettings();
 			InitializeComponent();
-			Style = (Style)FindResource(typeof(Window));
 
 			this.currentUser = currentUser;
 			userDao = new UserDao();
 
 			setUserFullNameHeader(currentUser);
 			setDrawerButton(currentUser);
-
 		}
 
 		private void setDrawerButton(User currentUser)

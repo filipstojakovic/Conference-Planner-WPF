@@ -14,12 +14,12 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="auto" />
-			<ColumnDefinition Width="auto" MinWidth="100" />
+			<ColumnDefinition Width="auto" MinWidth="120" />
 		</Grid.ColumnDefinitions>
 
 
 		<Label Margin="0,0,0,8" FontSize="16" Grid.Row="0" Grid.Column="0" Content="{hly:Lang lang}" 
-               ContentStringFormat='{}{0}:'>
+               ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
 		</Label>
 		<ComboBox x:Name="langComboBox" Margin="0,0,0,8" FontSize="16" Grid.Row="0" Grid.Column="1" 
                   SelectionChanged="LangComboBox_OnSelectionChanged">
@@ -27,7 +27,7 @@
 			<ComboBoxItem x:Name="sr" Content="{hly:Lang sr}"></ComboBoxItem>
 		</ComboBox>
 		<Label Margin="0,8,0,0" FontSize="16" Grid.Row="1" Grid.Column="0" Content="{hly:Lang theme}" 
-               ContentStringFormat='{}{0}:'>
+               ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
 		</Label>
 		<ComboBox x:Name="themeComboBox" Margin="0,8,0,0" MinWidth="120" FontSize="16" Grid.Row="1" Grid.Column="1" 
                   SelectionChanged="ThemeComboBox_OnSelectionChanged">

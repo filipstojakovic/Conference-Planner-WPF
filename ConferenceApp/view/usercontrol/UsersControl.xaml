@@ -7,40 +7,48 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <local:ConvertListToString x:Key="listToString" />
-    </UserControl.Resources>
+	<UserControl.Resources>
+		<local:ConvertListToString x:Key="listToString" />
+	</UserControl.Resources>
 
-    <DockPanel>
-        <TextBox
+	<DockPanel>
+		<TextBox
             Name="txtFilter"
             FontSize="18"
             TextChanged="txtFilter_TextChanged"
-            Background="White"
-            DockPanel.Dock="Top" Margin="0,0,0,10"
-            materialDesign:HintAssist.Hint="Filter result..." />
+            Style="{StaticResource RegularTextBoxStyle}"
+                                   materialDesign:TextFieldAssist.HasClearButton="True"
 
-        <DataGrid Name="usersList"
+            DockPanel.Dock="Top" Margin="0,0,0,10" >
+			<materialDesign:HintAssist.Hint>
+				<StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
+					<materialDesign:PackIcon Kind="Search" VerticalAlignment="Center"/>
+					<TextBlock Text="Filter users" />
+				</StackPanel>
+			</materialDesign:HintAssist.Hint>
+		</TextBox>
+
+		<DataGrid Name="usersList"
                   AutoGenerateColumns="False"
                   ColumnWidth="*"
                   VerticalScrollBarVisibility="Auto"
                   IsReadOnly="True">
-                  <!-- DockPanel.Dock="Bottom" -->
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
-                    <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Roles"
+			<!-- DockPanel.Dock="Bottom" -->
+			<DataGrid.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+					<MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+					<MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+				</ContextMenu>
+			</DataGrid.ContextMenu>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="First Name" Binding="{Binding FirstName,Mode=TwoWay}" />
+				<DataGridTextColumn Header="Last Name" Binding="{Binding LastName,Mode=TwoWay}" />
+				<DataGridTextColumn Header="Email" Binding="{Binding Email,Mode=TwoWay}" />
+				<DataGridTextColumn Header="Roles"
                                     Binding="{Binding Roles,Mode=TwoWay, Converter={StaticResource listToString}}" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </DockPanel>
+			</DataGrid.Columns>
+		</DataGrid>
+	</DockPanel>
 
 </UserControl>

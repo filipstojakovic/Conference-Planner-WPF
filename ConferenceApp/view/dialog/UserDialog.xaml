@@ -7,6 +7,8 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
+                Style="{StaticResource MaterialDesignWindow}"
+
         Width="400"
         >
 

@@ -5,15 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
 		     xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
+			              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
              d:MinWidth="400">
 	<Grid>
 		<StackPanel HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center">
 			<Label Content="{hm:Lang login}" Foreground="White" FontSize="25" HorizontalAlignment="Center" />
 			<Separator></Separator>
-			<Label Content="{hm:Lang username}" Foreground="White" />
-			<TextBox MinWidth="300" Name="txtUsername" Style="{StaticResource TextBoxStyle}" PreviewKeyUp="TextBox_PreviewKeyUp" />
-			<Label Content="{hm:Lang password}" Foreground="White" />
-			<PasswordBox MinWidth="300" Name="txtPassword" Style="{StaticResource PasswordBoxStyle}" PreviewKeyUp="TextBox_PreviewKeyUp"/>
+
+			<Label Margin="0,8,0,0" Content="{hm:Lang username}" Foreground="White" />
+			<TextBox MinWidth="300" Name="txtUsername" Style="{DynamicResource LoginTextBoxStyle}" 
+			Foreground="white" BorderBrush="White" Padding="5" PreviewKeyUp="TextBox_PreviewKeyUp" />
+
+			<Label Margin="0,8,0,0" Content="{hm:Lang password}" Foreground="White" />
+			<PasswordBox MinWidth="300" Name="txtPassword" Style="{DynamicResource LoginPasswordBoxStyle}"  
+			Foreground="white" BorderBrush="White" Padding="5"  PreviewKeyUp="TextBox_PreviewKeyUp"/>
+
 			<Button Name="btnSubmit" Style="{StaticResource ButtonStyle}" Click="Login_Click" Content="{hm:Lang submit}" Margin="60 20"/>
 		</StackPanel>
 	</Grid>

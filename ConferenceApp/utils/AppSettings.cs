@@ -4,6 +4,7 @@ using System.Windows;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using Haley.Utils;
+using MaterialDesignThemes.Wpf;
 
 namespace ConferenceApp.utils;
 
@@ -12,6 +13,7 @@ public class AppSettings
 {
 	public SettingsEntity SettingsEntity { get; set; }
 	public SettingsDao SettingsDao { get; private set; }
+	private readonly PaletteHelper _paletteHelper = new PaletteHelper();
 
 	private static AppSettings appSettings;
 
@@ -31,6 +33,14 @@ public class AppSettings
 		this.SettingsDao = new SettingsDao();
 	}
 
+	private void ToggleBaseColour(bool isDark)
+	{
+		ITheme theme = _paletteHelper.GetTheme();
+		IBaseTheme baseTheme = isDark ? new MaterialDesignDarkTheme() : (IBaseTheme)new MaterialDesignLightTheme();
+		theme.SetBaseTheme(baseTheme);
+		_paletteHelper.SetTheme(theme);
+	}
+
 	public void applySettings()
 	{
 		this.applyTheme();
@@ -42,7 +52,7 @@ public class AppSettings
 		appSettings.SettingsEntity.Language = lang;
 		LangUtils.ChangeCulture(lang);
 		SettingsDao.updateSettings(appSettings.SettingsEntity);
-		
+
 	}
 
 	public void changeTheme(string theme)
