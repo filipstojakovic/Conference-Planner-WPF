@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
 using ConferenceApp.model;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
@@ -214,5 +215,19 @@ namespace ConferenceApp.view.usercontrol
 			var item = (DataGrid)contextMenu.PlacementTarget;
 			return (Conference)item.SelectedCells[0].Item;
 		}
+
+		// // Not Implemented
+		// private void Join_RowButton_Clicked(object sender, RoutedEventArgs e)
+		// {
+		// 	for (var vis = sender as Visual; vis != null; vis = VisualTreeHelper.GetParent(vis) as Visual)
+		// 		if (vis is DataGridRow)
+		// 		{
+		// 			var row = (DataGridRow)vis;
+		// 			var conference = row.DataContext;
+		// 			row.DetailsVisibility =
+		// 			row.DetailsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+		// 			break;
+		// 		}
+		// }
 	}
 }

@@ -28,8 +28,6 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="10" />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
-			<RowDefinition Height="Auto" />
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -47,6 +45,7 @@
         <ComboBox Grid.Row="2" Grid.Column="1"
                   Name="ComboBox"
                   Margin="5"
+                  Padding="5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
                   materialDesign:HintAssist.Hint="Select event type"
@@ -60,7 +59,7 @@
         </ComboBox>
         <Label Grid.Row="4" Grid.Column="0" Content="Description:" Margin="5" />
         <TextBox Grid.Row="4" Grid.Column="1"
-                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                 Style="{DynamicResource RegularTextBoxStyle}"
                  Text="{Binding LiveEventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5"
                  TextWrapping="Wrap"
@@ -133,8 +132,8 @@
 
         <StackPanel Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
-            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Create" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
         </StackPanel>
     </Grid>
 

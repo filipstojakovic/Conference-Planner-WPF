@@ -50,8 +50,8 @@
 
 	<!-- Font Sizes -->
 	<system:Double x:Key="SmallFontSize">14</system:Double>
-	<system:Double x:Key="MediumFontSize">18</system:Double>
-	<system:Double x:Key="LargeFontSize">22</system:Double>
+	<system:Double x:Key="MediumFontSize">16</system:Double>
+	<system:Double x:Key="LargeFontSize">18</system:Double>
 
 	<!-- Text Font -->
 	<Style x:Key="MaterialDesignWindow" TargetType="Window">
@@ -78,6 +78,7 @@
 	<Style TargetType="{x:Type Label}" BasedOn="{StaticResource MaterialDesignLabel}">
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
 		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
 	</Style>
 
 	<Style x:Key="SectionTitle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline5TextBlock}">
@@ -86,7 +87,14 @@
 
 	</Style>
 
+	<Style x:Key="RegularDataGrid" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
 
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+	</Style>
+	
 
 	<Style x:Key="RegularTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
 		<!--<Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="red"></Setter> this is when focused-->
@@ -116,20 +124,38 @@
 	</Style>
 
 	<Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
-		<!--<Setter Property="Background" Value="White"></Setter>-->
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
+
 	</Style>
 
 	<Style TargetType="materialDesign:TimePicker" BasedOn="{StaticResource MaterialDesignOutlinedTimePicker}">
-		<!--<Setter Property="Background" Value="White"></Setter>-->
-	</Style>
-
-
-	<Style x:Key="ButtonStyle" TargetType="Button">
-		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
-		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
-		<Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"></Setter>
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
+
 	</Style>
+
+
+	<Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+		<!--<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>-->
+		<!--<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>-->
+		<!--<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />-->
+		<!--<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>-->
+	</Style>
+
+	<Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+		<!--<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>-->
+		<!--<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>-->
+		<!--<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />-->
+		<!--<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>-->
+	</Style>
+
+	<Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+		<!--<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />-->
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
+	</Style>
+
+	
 
 	<Style TargetType="RadioButton">
 		<Setter Property="Background" Value="white"/>
@@ -140,12 +166,19 @@
 	</Style>
 
 	<Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
+
 	</Style>
 
-	<Style x:Key="RegularTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MateridalDesignText}">
+	<Style x:Key="RegularTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
 	</Style>
 
 	<Style x:Key="RegularComboBox" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
+		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
 	</Style>
 
 	<Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">

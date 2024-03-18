@@ -7,8 +7,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-                Style="{StaticResource MaterialDesignWindow}"
-
+        Style="{StaticResource MaterialDesignWindow}"
         Width="400"
         >
 
@@ -20,10 +19,15 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
 
         </Grid.RowDefinitions>
@@ -33,21 +37,32 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="First Name:" />
         <TextBox Grid.Row="0" Grid.Column="1"
+        Style="{StaticResource RegularTextBoxStyle}"
+        Padding="5"
                  Margin="5"
                  Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <Label Grid.Row="1" Grid.Column="0" Content="Last Name:" Margin="5" />
-        <TextBox Grid.Row="1" Grid.Column="1"
-                 Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Username:" Margin="5" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Last Name:" Margin="5" />
         <TextBox Grid.Row="2" Grid.Column="1"
+                Style="{StaticResource RegularTextBoxStyle}"
+                Padding="5"
+                 Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Username:" Margin="5" />
+        <TextBox Grid.Row="4" Grid.Column="1"
+                Style="{StaticResource RegularTextBoxStyle}"
+                Padding="5"
                  Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-        <Label Grid.Row="3" Grid.Column="0" Content="Email:" Margin="5" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        <Label Grid.Row="6" Grid.Column="0" Content="Email:" Margin="5" />
+        <TextBox Grid.Row="6" Grid.Column="1"
+                Style="{StaticResource RegularTextBoxStyle}"
+                Padding="5"
+        Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5" />
-        <Label Grid.Row="4" Grid.Column="0" Content="Role:" Margin="5" />
-        <ComboBox Grid.Row="4" Grid.Column="1"
+        <Label Grid.Row="8" Grid.Column="0" Content="Role:" Margin="5" />
+        <ComboBox Grid.Row="8" Grid.Column="1"
                   Name="RoleComboBox"
                   IsTextSearchEnabled="False"
+                  Margin="5"
+                  Padding="5"
                   IsEditable="False"
                   IsSynchronizedWithCurrentItem="True"
                   ItemsSource="{Binding AllRoles}"
@@ -60,9 +75,9 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
 
             <!-- <Button Content="Edit" -->

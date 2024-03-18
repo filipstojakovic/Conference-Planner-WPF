@@ -33,16 +33,18 @@
 
 		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Name:" />
 		<TextBox Grid.Row="0" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
+        Style="{DynamicResource RegularTextBoxStyle}" 
+				Padding="5"
                 materialDesign:HintAssist.Hint="Conference name"
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 		<Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
 		<TextBox Grid.Row="2" Grid.Column="1"
+		Style="{DynamicResource RegularTextBoxStyle}" 
         materialDesign:HintAssist.Hint="Conference description"
-                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+				 Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
                  MaxLength="255"
@@ -66,6 +68,7 @@
 		<Label Grid.Row="8" Grid.Column="0" Margin="5" Content="Moderator:" />
 		<ComboBox Grid.Row="8" Grid.Column="1"
                   Name="ComboBox"
+				  Padding="5"
                   Margin="5"
                   IsEditable="False"
                   materialDesign:HintAssist.Hint="Select conference moderator"
@@ -88,8 +91,8 @@
 
 		<StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
-			<Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Create" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
 		</StackPanel>
 	</Grid>
 

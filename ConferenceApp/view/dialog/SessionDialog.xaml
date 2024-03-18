@@ -21,9 +21,10 @@
 			<RowDefinition Height="10" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="10" />
+			<RowDefinition Height="10" />
 			<RowDefinition Height="Auto" />
 
-        </Grid.RowDefinitions>
+		</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -91,9 +92,9 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="Cancel" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
         </StackPanel>
     </Grid>

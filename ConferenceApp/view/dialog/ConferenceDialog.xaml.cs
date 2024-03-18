@@ -1,112 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using ConferenceApp.model;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
-using Haley.Utils;
 
 namespace ConferenceApp.view.dialog;
 
 public partial class ConferenceDialog : Window
 {
-    public Conference ConferenceDialogData { get; set; }
-    public Role SelectedRole { get; set; }
-    public bool Edit { get; set; }
+	public Conference ConferenceDialogData { get; set; }
+	public Role SelectedRole { get; set; }
+	public bool Edit { get; set; }
 
-    private UserDao userDao;
-    public ConferenceModel ConferenceModel;
+	private UserDao userDao;
+	public ConferenceModel ConferenceModel;
 
-    private readonly BindingList<Conference> conferenceListForChecking;
+	private readonly BindingList<Conference> conferenceListForChecking;
 
-    private User currentUser;
+	private User currentUser;
 
-    public ConferenceDialog(User currentUser,Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
-        bool edit = false)
-    {
-        this.currentUser = currentUser;
-        InitializeComponent();
-        this.conferenceListForChecking = conferenceListForChecking;
-        userDao = new UserDao();
+	public ConferenceDialog(User currentUser, Conference conference = null, BindingList<Conference> conferenceListForChecking = null,
+		bool edit = false)
+	{
+		this.currentUser = currentUser;
+		InitializeComponent();
+		this.conferenceListForChecking = conferenceListForChecking;
+		userDao = new UserDao();
 
-        Button.Content = edit ? "Save" : "Create";
-        this.Title = (edit ? "Save" : "Create") + " conference";
+		Button.Content = edit ? "Save" : "Create";
+		this.Title = (edit ? "Save" : "Create") + " conference";
 
-        var userList = userDao.findAllUsersAndRoles();
-        ConferenceModel = new ConferenceModel(userList);
-        ComboBox.DataContext = ConferenceModel;
+		var userList = userDao.findAllUsersAndRoles();
+		ConferenceModel = new ConferenceModel(userList);
+		ComboBox.DataContext = ConferenceModel;
 
-        if (conference != null)
-        {
-            ConferenceDialogData = new Conference(conference);
-            var previousModerator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator)[0];
-            ConferenceModel.SelectedUser = previousModerator;
-            var index = userList.FindIndex(x => x.Username == previousModerator.Username);
-            ComboBox.SelectedIndex = index;
-        }
-        else
-        {
-            ConferenceDialogData = new Conference();
-        }
+		if (conference != null)
+		{
+			ConferenceDialogData = new Conference(conference);
+			var previousModerator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator)[0];
+			ConferenceModel.SelectedUser = previousModerator;
+			var index = userList.FindIndex(x => x.Username == previousModerator.Username);
+			ComboBox.SelectedIndex = index;
+		}
+		else
+		{
+			ConferenceDialogData = new Conference();
+		}
 
-        DataContext = ConferenceDialogData;
-    }
+		DataContext = ConferenceDialogData;
+	}
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        if (ConferenceDialogData.Name == "")
-        {
-            Utils.ErrorBox("Conference name is missing");
-            return;
-        }
+	private void Button_Click(object sender, RoutedEventArgs e)
+	{
+		if (ConferenceDialogData.Name == "")
+		{
+			Utils.ErrorBox("Conference name is missing");
+			return;
+		}
 
-        if (ConferenceDialogData.StartDate > ConferenceDialogData.EndDate)
-        {
-            Utils.ErrorBox("Start date is after end date");
-            return;
-        }
+		if (ConferenceDialogData.StartDate > ConferenceDialogData.EndDate)
+		{
+			Utils.ErrorBox("Start date is after end date");
+			return;
+		}
 
-        if (ConferenceModel.SelectedUser == null)
-        {
-            Utils.ErrorBox("Please select moderator");
-            return;
-        }
+		if (ConferenceModel.SelectedUser == null)
+		{
+			Utils.ErrorBox("Please select moderator");
+			return;
+		}
 
-        if (conferenceListForChecking != null)
-        {
-            var hasOverLap = conferenceListForChecking.Any(conference =>
-                ConferenceDialogData.Id != conference.Id
-                && Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate,
-                    ConferenceDialogData.EndDate));
-            if (hasOverLap)
-            {
-                Utils.ErrorBox("Already have conference in that time period!");
-                return;
-            }
-        }
+		if (conferenceListForChecking != null)
+		{
+			var hasOverLap = conferenceListForChecking.Any(conference =>
+				ConferenceDialogData.Id != conference.Id
+				&& Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate,
+					ConferenceDialogData.EndDate));
+			if (hasOverLap)
+			{
+				Utils.ErrorBox("Already have conference in that time period!");
+				return;
+			}
+		}
 
-        if (currentUser.Username == ConferenceModel.SelectedUser.Username)
-        {
-            Utils.ErrorBox("Organizer and Moderator are the same person");
-            return;
-        }
-        
-        DialogResult = true;
-        Close();
-    }
+		if (currentUser.Username == ConferenceModel.SelectedUser.Username)
+		{
+			Utils.ErrorBox("Organizer and Moderator are the same person");
+			return;
+		}
 
-    private void Cancel_Button_Click(object sender, RoutedEventArgs e)
-    {
-        DialogResult = false;
-        Close();
-    }
+		DialogResult = true;
+		Close();
+	}
+
+	private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+	{
+		DialogResult = false;
+		Close();
+	}
+
 }
