@@ -7,9 +7,10 @@
              xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
              mc:Ignorable="d"
              d:DesignHeight="550" d:DesignWidth="900">
-	<Grid>
+	<Grid Margin="0,5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
+			<RowDefinition Height="10" />
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -21,19 +22,21 @@
 		<Label Margin="0,0,0,8" FontSize="16" Grid.Row="0" Grid.Column="0" Content="{hly:Lang lang}" 
                ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
 		</Label>
-		<ComboBox x:Name="langComboBox" Margin="0,0,0,8" FontSize="16" Grid.Row="0" Grid.Column="1" 
+		<ComboBox x:Name="langComboBox" Grid.Row="0" Grid.Column="1" 
+		Padding="10"
                   SelectionChanged="LangComboBox_OnSelectionChanged">
 			<ComboBoxItem x:Name="en" Content="{hly:Lang en}"></ComboBoxItem>
 			<ComboBoxItem x:Name="sr" Content="{hly:Lang sr}"></ComboBoxItem>
 		</ComboBox>
-		<Label Margin="0,8,0,0" FontSize="16" Grid.Row="1" Grid.Column="0" Content="{hly:Lang theme}" 
+		<Label FontSize="16" Grid.Row="2" Grid.Column="0" Content="{hly:Lang theme}" 
                ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
 		</Label>
-		<ComboBox x:Name="themeComboBox" Margin="0,8,0,0" MinWidth="120" FontSize="16" Grid.Row="1" Grid.Column="1" 
+		<ComboBox x:Name="themeComboBox" Margin="0,8,0,0" MinWidth="120"  Grid.Row="2" Grid.Column="1" 
+		Padding="10"
                   SelectionChanged="ThemeComboBox_OnSelectionChanged">
 			<ComboBoxItem x:Name="default" Content="{hly:Lang light}"></ComboBoxItem>
 			<ComboBoxItem x:Name="dark" Content="{hly:Lang dark}"></ComboBoxItem>
-			<ComboBoxItem x:Name="invert" Content="{hly:Lang invert}"></ComboBoxItem>
+			<ComboBoxItem x:Name="purple" Content="{hly:Lang purple}"></ComboBoxItem>
 
 		</ComboBox>
 	</Grid>

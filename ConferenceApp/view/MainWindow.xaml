@@ -51,13 +51,13 @@
 		<Grid HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
               Background="{DynamicResource BackgroundColor}">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="70" />
+				<RowDefinition Height="90" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 
-			<Grid Grid.Row="0" Background="Transparent">
-				<Image Source="/resources/images/calendar-logo.png" />
+			<Grid Grid.Row="0" Background="Transparent" Margin="10">
+				<Image  Source="/resources/images/calendar-logo.png" />
 			</Grid>
 
 			<!-- Menu items -->
@@ -69,13 +69,8 @@
                               BorderThickness="0"
                               ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
 							  Foreground="White"
-                              Margin="0,10,0,0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               SelectionChanged="Drawer_MenuListView_MouseLeftButtonUp">
-
-						<!--<ListView.ItemContainerStyle>
-							<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-						</ListView.ItemContainerStyle>-->
 
 						<ListView.ItemTemplate>
 							<!--Every card menu item-->
@@ -103,10 +98,6 @@
                           ItemsSource="{Binding Path=ItemMenu, Mode=TwoWay}"
                           Foreground="White"
                           MouseLeftButtonUp="DrawerBottom_MenuListView_MouseLeftButtonUp">
-					<!--<ListView.ItemContainerStyle>
-						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-					</ListView.ItemContainerStyle>-->
-
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
@@ -129,9 +120,6 @@
                     BorderThickness="0"
                     Foreground="White"
                     Background="{x:Null}">
-					<!--<ListView.ItemContainerStyle>
-						<Style TargetType="ListViewItem" BasedOn="{StaticResource MyListViewItem}" />
-					</ListView.ItemContainerStyle>-->
 
 					<ListViewItem Name="LogoutButton" VerticalAlignment="Center">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -100,15 +100,11 @@
 	</Style>
 
 	<Style x:Key="RegularDataGrid" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
-
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-
 	</Style>
 	
-	
-
 	<Style x:Key="RegularTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
 		<!--<Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="red"></Setter> this is when focused-->
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ConferenceApp.model;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
@@ -46,7 +44,7 @@ namespace ConferenceApp.view
 			{
 				Drawer_Upper_MenuListView.Items.Add(new ItemMenu("users", PackIconKind.User,
 					() => new UsersControl(this.currentUser)));
-				
+
 			}
 
 			Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
@@ -61,10 +59,9 @@ namespace ConferenceApp.view
 			try
 			{
 				string userFullName = Utils.CapitalizeFirstLetter(currentUser.FirstName) + " " +
-				                      Utils.CapitalizeFirstLetter(currentUser.LastName);
+									  Utils.CapitalizeFirstLetter(currentUser.LastName);
 				HeaderUserChip.Content = userFullName;
-				HeaderUserChip.Icon = currentUser.FirstName.Substring(0, 1).ToUpper() +
-				                      currentUser.LastName.Substring(0, 1).ToUpper();
+				HeaderUserChip.Icon = currentUser.FirstName.Substring(0, 1).ToUpper();
 			}
 			catch (Exception)
 			{

@@ -194,7 +194,7 @@ namespace ConferenceApp.view.usercontrol
                 userGatheringRoleDao.insertUserConferenceConferenceRole(currentUser, conference,
                     GatheringRoleEnum.Visitor, transaction);
                 transaction.Commit();
-                
+
                 loadData();
             }
             catch (Exception)
@@ -219,32 +219,32 @@ namespace ConferenceApp.view.usercontrol
             return (Conference)item.SelectedCells[0].Item;
         }
 
-        // // Not Implemented
-        // private void Join_RowButton_Clicked(object sender, RoutedEventArgs e)
-        // {
-        // 	for (var vis = sender as Visual; vis != null; vis = VisualTreeHelper.GetParent(vis) as Visual)
-        // 		if (vis is DataGridRow)
-        // 		{
-        // 			var row = (DataGridRow)vis;
-        // 			var conference = row.DataContext;
-        // 			row.DetailsVisibility =
-        // 			row.DetailsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-        // 			break;
-        // 		}
-        // }
-
-        private void ContextMenuItems_OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void ConferenceDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            Conference conference = getSelectedConference(sender);
+            DataGridRow selectedRow = conferenceDataGrid.ItemContainerGenerator
+                .ContainerFromItem(conferenceDataGrid.SelectedItem) as DataGridRow;
+            if (selectedRow == null)
+                return;
 
-            var ima = conference.Users.FirstOrDefault(u => u.Id == currentUser.Id);
-            if (ima != null)
-            {
-                Console.WriteLine("ima ");
-            }
-            else
-            {
-                Console.WriteLine("nema");
-            }        }
+            Conference rowData = selectedRow.Item as Conference;
+            if (rowData == null)
+                return;
+
+            var isAdmin = currentUser.isAdmin();
+            var joined = rowData.Users.Where(u => u.Id == currentUser.Id).ToArray();
+            var isModerator = joined.Any(userDto =>
+                string.Equals(GatheringRoleEnum.Moderator.ToString(), userDto.conferenceRole, StringComparison.OrdinalIgnoreCase));
+            EditMenuItem.Visibility = isAdmin || isModerator ? Visibility.Visible : Visibility.Collapsed;
+            DeleteMenuItem.Visibility = isAdmin || isModerator ? Visibility.Visible : Visibility.Collapsed;
+
+            JoinMenuItem.Visibility = joined.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+            LeaveMenuItem.Visibility = joined.Length != 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void LeaveMenuItem_OnClick_MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            //TODO: implement me
+            throw new NotImplementedException();
+        }
     }
 }

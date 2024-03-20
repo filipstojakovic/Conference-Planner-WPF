@@ -12,7 +12,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto"  />
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Margin="10,5">
@@ -44,15 +44,17 @@
                       VerticalScrollBarVisibility="Auto"
                       CanUserAddRows="True"
                       ItemsSource="{Binding conferenceBindingList}"
+                      ContextMenuOpening="ConferenceDataGrid_OnContextMenuOpening"
                       IsReadOnly="True">
                 <DataGrid.ContextMenu>
                     <!--right click context menu-->
-                    <ContextMenu x:Name="ContextMenuItems" >
-                        <MenuItem x:Name="JoinLeaveMenuItem" Header="Join conference" Click="Join_MenuItem_OnClick" />
+                    <ContextMenu>
+                        <MenuItem x:Name="JoinMenuItem" Header="Join conference" Click="Join_MenuItem_OnClick" />
+                        <MenuItem x:Name="LeaveMenuItem" Header="Leave conference" Click="LeaveMenuItem_OnClick_MenuItem_OnClick" Visibility="Collapsed" />
                         <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
                         <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                        <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
-                        <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+                        <MenuItem x:Name="EditMenuItem" Header="Edit" Click="Edit_MenuItem_OnClick" />
+                        <MenuItem x:Name="DeleteMenuItem" Header="Delete" Click="Delete_MenuItem_OnClick" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 
@@ -78,11 +80,14 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+        <!--MaxWidth="400"--> 
+		<Viewbox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" 
+        >
             <Calendar x:Name="calendar"
                       SelectionMode="MultipleRange"
                       FirstDayOfWeek="Monday"
                       Margin="0,0,5,0"
+                      
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
                       DisplayDateChanged="calendar_DisplayDateChanged">
                 <Calendar.CalendarDayButtonStyle>

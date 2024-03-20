@@ -144,8 +144,8 @@
   <data name="default" xml:space="preserve">
     <value>Podrazumjevana</value>
   </data>
-  <data name="invert" xml:space="preserve">
-    <value>Invertovano</value>
+  <data name="purple" xml:space="preserve">
+    <value>Ljubičasta</value>
   </data>
   <data name="register" xml:space="preserve">
     <value>Registracija</value>

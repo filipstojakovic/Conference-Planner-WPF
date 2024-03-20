@@ -144,8 +144,8 @@
   <data name="default" xml:space="preserve">
     <value>Default</value>
   </data>
-  <data name="invert" xml:space="preserve">
-    <value>Invert</value>
+  <data name="purple" xml:space="preserve">
+    <value>Purple</value>
   </data>
   <data name="register" xml:space="preserve">
     <value>Register</value>

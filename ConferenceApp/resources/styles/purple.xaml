@@ -17,24 +17,5 @@
     <system:Double x:Key="MediumFontSize">22</system:Double>
 
 
-    <!-- ~1~ COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS @1@ -->
-    <!--    <SolidColorBrush x:Key="DarkGray" Color="Red"></SolidColorBrush> -->
-    <!--    ~1~ pozadina prozora @1@ -->
-    <!--    <SolidColorBrush x:Key="LightGray" Color="Purple"></SolidColorBrush> -->
-    <!--    ~1~ pozadina polja @1@ -->
-    <!-- -->
-    <!--    <SolidColorBrush x:Key="CustomDarkBlue" Color="#16375f"></SolidColorBrush> -->
-    <!--    <SolidColorBrush x:Key="CustomLightBlue" Color="Green"></SolidColorBrush> -->
-    <!--     -->
-    <!--    <SolidColorBrush x:Key="BackgroundColor" Color="Red"></SolidColorBrush> -->
-    <!-- -->
-    <!--    <SolidColorBrush x:Key="CalendarSelection" Color="Red"></SolidColorBrush> -->
-    <!-- -->
-    <!-- -->
-    <!--    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="RoyalBlue" /> -->
-    <!--    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="RoyalBlue" /> -->
-    <!--    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="RoyalBlue" /> -->
-    <!--    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="RoyalBlue" /> -->
-
 
 </ResourceDictionary>
