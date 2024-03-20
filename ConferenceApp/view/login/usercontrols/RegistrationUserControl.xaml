@@ -33,7 +33,11 @@
 			<Label Margin="0,5,0,0" Content="{hm:Lang confirmPassword}" Foreground="White" />
 			<PasswordBox MinWidth="300" Name="txtRePassword" Style="{StaticResource LoginPasswordBoxStyle}" Foreground="white" BorderBrush="White" Padding="5" />
 
-			<Button Name="btnSubmit" Style="{StaticResource ButtonStyle}" Click="Register_Click" Content="{hm:Lang submit}" Margin="60 20"/>
+			<Button Name="btnSubmit" Style="{StaticResource LoginButtonStyle}" 
+			Click="Register_Click"
+			BorderBrush="{StaticResource TextBoxBackground}"
+			Content="{hm:Lang submit}" 
+			Margin="60 20"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

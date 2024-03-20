@@ -223,9 +223,48 @@
     <value>Kreiraj sesiju</value>
   </data>
   <data name="create_event" xml:space="preserve">
-    <value>Kreiraj Događaj</value>
+    <value>Kreiraj događaj</value>
   </data>
   <data name="about" xml:space="preserve">
     <value>O aplikaciji</value>
+  </data>
+  <data name="conf_filter" xml:space="preserve">
+    <value>Filtriraj konferencije</value>
+  </data>
+  <data name="conf_name" xml:space="preserve">
+    <value>Ime konferencije</value>
+  </data>
+  <data name="conf_desc" xml:space="preserve">
+    <value>Opis konferencije</value>
+  </data>
+  <data name="moderator" xml:space="preserve">
+    <value>Moderator</value>
+  </data>
+  <data name="conf_moderator" xml:space="preserve">
+    <value>Moderator konferencije</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Otkaži</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Sačuvaj</value>
+  </data>
+  <data name="ses_name" xml:space="preserve">
+    <value>Ime sesije</value>
+  </data>
+  <data name="copy" xml:space="preserve">
+    <value>Kopiraj</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edituj</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Obriši</value>
+  </data>
+  <data name="conf_select" xml:space="preserve">
+    <value>Odaberi konferenciju</value>
+  </data>
+  <data name="join" xml:space="preserve">
+    <value>Pridružen</value>
   </data>
 </root>

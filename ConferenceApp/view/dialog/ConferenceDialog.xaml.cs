@@ -6,6 +6,7 @@ using ConferenceApp.model;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
+using Haley.Utils;
 
 namespace ConferenceApp.view.dialog;
 
@@ -30,8 +31,8 @@ public partial class ConferenceDialog : Window
 		this.conferenceListForChecking = conferenceListForChecking;
 		userDao = new UserDao();
 
-		Button.Content = edit ? "Save" : "Create";
-		this.Title = (edit ? "Save" : "Create") + " conference";
+		Button.Content = edit ? LangUtils.Translate("save") : LangUtils.Translate("create");
+		this.Title = (edit ? LangUtils.Translate("save") : LangUtils.Translate("create")) + " " + LangUtils.Translate("conference");
 
 		var userList = userDao.findAllUsersAndRoles();
 		ConferenceModel = new ConferenceModel(userList);
@@ -84,12 +85,6 @@ public partial class ConferenceDialog : Window
 				Utils.ErrorBox("Already have conference in that time period!");
 				return;
 			}
-		}
-
-		if (currentUser.Username == ConferenceModel.SelectedUser.Username)
-		{
-			Utils.ErrorBox("Organizer and Moderator are the same person");
-			return;
 		}
 
 		DialogResult = true;

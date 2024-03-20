@@ -30,7 +30,6 @@ namespace ConferenceApp.database
                     initDatabase(connection, databaseName);
                     connection.ChangeDatabase(databaseName);
                     initData(connection, databaseName);
-                    initTriggersAndProcedures(connection, databaseName);
                 }
                 else
                 {
@@ -42,13 +41,6 @@ namespace ConferenceApp.database
 
             return mySqlSingleton;
         }
-
-        private static void initTriggersAndProcedures(MySqlConnection mySqlConnection, string databaseName)
-        {
-            var triggersAndProcedures = ConfigurationManager.AppSettings["triggersAndProcedures"];
-            executeScript(triggersAndProcedures, mySqlConnection, databaseName);
-        }
-
 
         private static void initData(MySqlConnection mySqlConnection, string databaseName)
         {

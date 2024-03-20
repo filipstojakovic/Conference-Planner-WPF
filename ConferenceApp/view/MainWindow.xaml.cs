@@ -42,14 +42,11 @@ namespace ConferenceApp.view
 			Drawer_Upper_MenuListView.Items.Add(new ItemMenu("events", PackIconKind.ViewHeadline,
 				() => new EventControl(this.currentUser)));
 
-			//TODO: admin user controls
-			//if user has admin role
-			if (currentUser.Roles.Any(role => role.Name.ToLower() == UserRoleEnum.admin.ToString()))
+			if (currentUser.isAdmin())
 			{
-				// Drawer_Upper_MenuListView.Items.Add(new ItemMenu(LangUtils.Translate("locations"), PackIconKind.Map,
-				//     () => new LocationControl()));
 				Drawer_Upper_MenuListView.Items.Add(new ItemMenu("users", PackIconKind.User,
 					() => new UsersControl(this.currentUser)));
+				
 			}
 
 			Drawer_Upper_MenuListView.SelectedIndex = 0; // select first menu item by default
@@ -63,10 +60,11 @@ namespace ConferenceApp.view
 		{
 			try
 			{
-				string userFullName = currentUser.getFullName();
-				string[] fullName = userFullName.Split(' ');
-				HeaderUserText.Text = Utils.CapitalizeFirstLetter(fullName[0]) + " " +
-									  Utils.CapitalizeFirstLetter(fullName[1]);
+				string userFullName = Utils.CapitalizeFirstLetter(currentUser.FirstName) + " " +
+				                      Utils.CapitalizeFirstLetter(currentUser.LastName);
+				HeaderUserChip.Content = userFullName;
+				HeaderUserChip.Icon = currentUser.FirstName.Substring(0, 1).ToUpper() +
+				                      currentUser.LastName.Substring(0, 1).ToUpper();
 			}
 			catch (Exception)
 			{

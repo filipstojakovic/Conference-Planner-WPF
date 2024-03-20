@@ -9,22 +9,22 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-                Style="{StaticResource MaterialDesignWindow}"
+        Style="{StaticResource MaterialDesignWindow}"
 
         Width="500">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
-			<RowDefinition Height="10" />
-			<RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
 
-		</Grid.RowDefinitions>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -59,6 +59,7 @@
 
             <Label Grid.Row="0" Grid.Column="0" Content="Start Date:" Margin="5" />
             <DatePicker Grid.Row="0" Grid.Column="1"
+                        x:Name="startDatePicker"
                         xml:lang="en-GB"
                         Padding="5"
                         SelectedDate="{Binding StartDate}"
@@ -67,7 +68,7 @@
             <Label Grid.Column="2" Content="Start time:" Margin="5" />
             <materialDesign:TimePicker Grid.Column="3"
                                        xml:lang="en-GB"
-                                                               Padding="5"
+                                       Padding="5"
 
                                        Is24Hours="True"
                                        Margin="5"
@@ -76,16 +77,15 @@
             <Label Grid.Row="1" Grid.Column="0" Content="End Date:" Margin="5" />
             <DatePicker Grid.Row="1" Grid.Column="1"
                         xml:lang="en-GB"
-                                                Padding="5"
-
+                        x:Name="endDatePicker"
+                        Padding="5"
                         SelectedDate="{Binding EndDate}"
                         Margin="5" />
 
             <Label Grid.Row="1" Grid.Column="2" Content="Start time:" Margin="5" />
             <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
                                        xml:lang="en-GB"
-                                                               Padding="5"
-
+                                       Padding="5"
                                        Is24Hours="True"
                                        Margin="5"
                                        SelectedTime="{Binding EndDate}" />
@@ -94,7 +94,7 @@
 
         <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+            <Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
             <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
         </StackPanel>
     </Grid>

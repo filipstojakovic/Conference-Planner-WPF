@@ -21,7 +21,11 @@
 			<PasswordBox MinWidth="300" Name="txtPassword" Style="{DynamicResource LoginPasswordBoxStyle}"  
 			Foreground="white" BorderBrush="White" Padding="5"  PreviewKeyUp="TextBox_PreviewKeyUp"/>
 
-			<Button Name="btnSubmit" Style="{StaticResource ButtonStyle}" Click="Login_Click" Content="{hm:Lang submit}" Margin="60 20"/>
+			<Button Name="btnSubmit" Style="{DynamicResource LoginButtonStyle}" 
+			Click="Login_Click"
+			BorderBrush="{StaticResource TextBoxBackground}"
+			Content="{hm:Lang submit}" 
+			Margin="60 20"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

@@ -105,9 +105,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Remove="resources\scripts\triggersAndProcedures.sql" />
-    <Content Include="resources\scripts\triggersAndProcedures.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="resources\scripts\data.sql" />
     <Content Include="resources\scripts\data.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

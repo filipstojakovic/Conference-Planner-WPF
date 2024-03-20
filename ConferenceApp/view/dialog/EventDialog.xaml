@@ -4,17 +4,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter="clr-namespace:ConferenceApp.converter"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-                Style="{StaticResource MaterialDesignWindow}"
-
+        Style="{StaticResource MaterialDesignWindow}"
         Width="500">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
+	<Window.Resources>
+		<converter:BoolToInverseBoolConverter x:Key="BoolToInverseBoolConverter"/>
+	</Window.Resources>
+
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="10" />
 			<RowDefinition Height="Auto" />
@@ -29,20 +31,22 @@
 			<RowDefinition Height="10" />
 			<RowDefinition Height="Auto" />
 
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Event name:" />
-        <TextBox Grid.Row="0" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Event name:" />
+		<TextBox Grid.Row="0" Grid.Column="1"
+                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                  Margin="5"
-                 Text="{Binding LiveEventDialog.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding EventDialog.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Event type:" />
-        <ComboBox Grid.Row="2" Grid.Column="1"
+		<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Event type:" />
+		<ComboBox Grid.Row="2" Grid.Column="1"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                   Name="ComboBox"
                   Margin="5"
                   Padding="5"
@@ -50,17 +54,18 @@
                   IsEditable="False"
                   materialDesign:HintAssist.Hint="Select event type"
                   IsSynchronizedWithCurrentItem="True"
-                  SelectedItem="{Binding LiveEventDialog.EventType, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Label Grid.Row="4" Grid.Column="0" Content="Description:" Margin="5" />
-        <TextBox Grid.Row="4" Grid.Column="1"
+                  SelectedItem="{Binding EventDialog.EventType, UpdateSourceTrigger=PropertyChanged}">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+		<Label Grid.Row="4" Grid.Column="0" Content="Description:" Margin="5" />
+		<TextBox Grid.Row="4" Grid.Column="1"
+                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{DynamicResource RegularTextBoxStyle}"
-                 Text="{Binding LiveEventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding EventDialog.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
@@ -68,73 +73,103 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Grid Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+		<Grid Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
 
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Column="0" Content="Start date:" Margin="5" />
-            <DatePicker Grid.Column="1"
+			<Label Grid.Column="0" Grid.RowSpan="2" Content="Start date:" Margin="5" />
+			<DatePicker Grid.Column="1" Grid.RowSpan="2"
+                        x:Name="startDatePicker"
                         xml:lang="en-GB"
-                                                Padding="5"
-
-                        SelectedDate="{Binding LiveEventDialog.StartDate}"
-                        Margin="5" />
-            <Label Grid.Column="2" Content="Start time:" Margin="5" />
-            <materialDesign:TimePicker Grid.Column="3"
-                                       xml:lang="en-GB"
-                                       Is24Hours="True"
-                                       Padding="5"
-                                       Margin="5"
-                                       SelectedTime="{Binding LiveEventDialog.StartDate}" />
-
-            <Label Grid.Column="0" Grid.Row="1" Content="End date:" Margin="5" />
-            <DatePicker Grid.Column="1" Grid.Row="1"
-                        xml:lang="en-GB"
-                        SelectedDate="{Binding LiveEventDialog.EndDate}"
                         Padding="5"
+                        SelectedDate="{Binding EventDialog.StartDate}"
                         Margin="5" />
-            <Label Grid.Column="2" Grid.Row="1" Content="End time:" Margin="5" />
-            <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+			<Label Grid.Column="2" Content="Start time:" Margin="5" />
+			<materialDesign:TimePicker Grid.Column="3"
+                                       xml:lang="en-GB"
+                                       Is24Hours="True"
+                                       Padding="5"
+                                       Margin="5"
+                                       SelectedTime="{Binding EventDialog.StartDate}" />
+
+			<Label Grid.Column="2" Grid.Row="1" Content="End time:" Margin="5" />
+			<materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
                                        xml:lang="en-GB"
                                        Is24Hours="True"
                                        Margin="5"
                                        Padding="5"
-                                       SelectedTime="{Binding LiveEventDialog.EndDate}" />
-        </Grid>
+                                       SelectedTime="{Binding EventDialog.EndDate}" />
+		</Grid>
 
-        <Label Grid.Row="8" Grid.Column="0" Margin="5" Content="City:" />
-        <TextBox Grid.Row="8" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
-                 Margin="5"
-                 Text="{Binding LiveEventDialog.Room.Location.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		<StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
+			<Label Content="Live"
+                   Margin="5,0,10,0"
+                   VerticalAlignment="Center" />
+			<ToggleButton x:Name="isLiveToggleButton"
+                          IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
+						  IsChecked="{Binding IsLive, Converter={StaticResource BoolToInverseBoolConverter}}"
+                          Click="isLiveToggleButtonClicked" />
+			<Label Content="Online"
+                   Margin="10,0,0,0"
+                   VerticalAlignment="Center" />
+		</StackPanel>
 
-        <Label Grid.Row="10" Grid.Column="0" Margin="5" Content="Street name:" />
-        <TextBox Grid.Row="10" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
-                 Margin="5"
-                 Text="{Binding LiveEventDialog.Room.Location.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		<Grid x:Name="OnlineGrid" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Link:" />
+			<TextBox Grid.Row="0" Grid.Column="1"
+                     Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
+                     IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5"
+                     Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		</Grid>
 
-        <Label Grid.Row="12" Grid.Column="0" Margin="5" Content="Room number:" />
-        <TextBox Grid.Row="12" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
-                 Margin="5"
-                 Text="{Binding LiveEventDialog.Room.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		<Grid x:Name="LiveGrid" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="City:" />
+			<TextBox Grid.Row="0" Grid.Column="1"
+                     IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
+                     Margin="5"
+                     Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <StackPanel Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+			<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Address:" />
+			<TextBox Grid.Row="2" Grid.Column="1"
+                     IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
+                     Margin="5"
+                     Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		</Grid>
+
+		<StackPanel Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click"
+                    Margin="12" MinWidth="80" />
 			<Button Content="Create" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
-        </StackPanel>
-    </Grid>
+		</StackPanel>
+	</Grid>
 
 </Window>

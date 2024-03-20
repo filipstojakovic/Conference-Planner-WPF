@@ -9,86 +9,93 @@
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="800">
 
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="auto" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
 
-		<StackPanel Orientation="Vertical" Margin="0,0,10,0">
-			<TextBox Style="{StaticResource RegularTextBoxStyle}"
-                     Margin="0,0,0,10"
+        <StackPanel Orientation="Vertical" Margin="10,5">
+            <TextBox Style="{StaticResource RegularTextBoxStyle}"
+                     Margin="0,0,10,10"
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      Name="txtFilter" TextChanged="txtFilter_TextChanged">
-				<materialDesign:HintAssist.Hint>
-					<StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
-						<materialDesign:PackIcon Kind="Search" VerticalAlignment="Center" />
-						<TextBlock Text="Filter conference" />
-					</StackPanel>
-				</materialDesign:HintAssist.Hint>
-			</TextBox>
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Search" VerticalAlignment="Center" />
+                        <TextBlock Text="{hm:Lang conf_filter}" />
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
 
-			<Button Name="Create_Button" Click="Create_Button_Click" MinWidth="80" Margin="0,0,0,10">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<materialDesign:PackIcon Kind="Add" Width="19" Height="19" 
+            <Button Name="Create_Button" Click="Create_Button_Click" MinWidth="80" Margin="0,0,10,10">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Add" Width="19" Height="19"
                                              VerticalAlignment="Stretch" Margin="0,0,2,0" />
-					<TextBlock Text="{hm:Lang create_conference}" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
+                    <TextBlock Text="{hm:Lang create_conference}" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
 
-			<DataGrid Name="conferenceDataGrid"
+            <DataGrid Name="conferenceDataGrid"
+                      Margin="0,0,10,0"
                       AutoGenerateColumns="False"
                       ColumnWidth="*"
-					  Style="{DynamicResource RegularDataGrid}"
+                      Style="{DynamicResource RegularDataGrid}"
                       VerticalScrollBarVisibility="Auto"
                       CanUserAddRows="True"
-                ItemsSource="{Binding conferenceBindingList}"
+                      ItemsSource="{Binding conferenceBindingList}"
                       IsReadOnly="True">
-				<DataGrid.ContextMenu>
-					<!--right click context menu-->
-					<ContextMenu>
-						<MenuItem Header="Join conference" Click="Join_MenuItem_OnClick" />
-						<MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
-						<MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-						<MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
-						<MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
-					</ContextMenu>
-				</DataGrid.ContextMenu>
-				<!--table data-->
-				<DataGrid.Columns>
-					<materialDesign:DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-					<DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-					<DataGridTextColumn Header="Start date"
+                <DataGrid.ContextMenu>
+                    <!--right click context menu-->
+                    <ContextMenu x:Name="ContextMenuItems" >
+                        <MenuItem x:Name="JoinLeaveMenuItem" Header="Join conference" Click="Join_MenuItem_OnClick" />
+                        <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+                        <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+                        <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                
+
+                <!--table data-->
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="{hm:Lang join}" Width="auto"
+                                            Binding="{Binding IsJoined, UpdateSourceTrigger=PropertyChanged}">
+                    </DataGridCheckBoxColumn>
+                    <materialDesign:DataGridTextColumn Header="{hm:Lang name}" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="{hm:Lang desc}" Binding="{Binding Description}" />
+                    <DataGridTextColumn Header="{hm:Lang start_date}"
                                         Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" />
-					<DataGridTextColumn Header="End date"
+                    <DataGridTextColumn Header="{hm:Lang end_date}"
                                         Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" />
-					<!--<DataGridTemplateColumn>
+                    <!--<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<Button Click="Join_RowButton_Clicked">Join</Button>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>-->
-				</DataGrid.Columns>
-			</DataGrid>
-		</StackPanel>
-		<Viewbox Grid.Column="1" HorizontalAlignment="Right">
-			<Calendar x:Name="calendar"
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+            <Calendar x:Name="calendar"
                       SelectionMode="MultipleRange"
                       FirstDayOfWeek="Monday"
+                      Margin="0,0,5,0"
                       SelectedDatesChanged="calendar_SelectedDatesChanged"
                       DisplayDateChanged="calendar_DisplayDateChanged">
-				<Calendar.CalendarDayButtonStyle>
-					<Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
-						<Style.Triggers>
-							<Trigger Property="IsBlackedOut" Value="True">
-								<Setter Property="Background" Value="{DynamicResource CalendarDisabledDays}" />
-								<Setter Property="Cursor" Value="Hand" />
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</Calendar.CalendarDayButtonStyle>
-			</Calendar>
-		</Viewbox>
-	</Grid>
+                <Calendar.CalendarDayButtonStyle>
+                    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                        <Style.Triggers>
+                            <Trigger Property="IsBlackedOut" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource CalendarDisabledDays}" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Calendar.CalendarDayButtonStyle>
+            </Calendar>
+        </Viewbox>
+    </Grid>
 </UserControl>

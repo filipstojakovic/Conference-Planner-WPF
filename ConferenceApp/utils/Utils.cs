@@ -53,7 +53,7 @@ namespace ConferenceApp.utils
 
         public static bool isColumnNull(MySqlDataReader reader, string columnName)
         {
-            var columnOrdinal = reader.GetOrdinal("columnName");
+            var columnOrdinal = reader.GetOrdinal(columnName);
             return reader.IsDBNull(columnOrdinal);
         }
 

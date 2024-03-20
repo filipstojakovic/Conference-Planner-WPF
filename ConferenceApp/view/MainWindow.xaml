@@ -37,7 +37,14 @@
 			<Grid>
 				<TextBlock Style="{DynamicResource SectionTitle}" x:Name="HeaderBar"/>
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-					<TextBlock x:Name="HeaderUserText" Style="{DynamicResource SectionTitle}" />
+					<materialDesign:Chip
+						x:Name="HeaderUserChip"
+						ClickMode="Release"
+						Content="test test"
+						Margin="0,0,5,0"
+						Style="{DynamicResource SectionTitleAccount}"
+						Icon="T" />
+					<!-- <TextBlock x:Name="HeaderUserText"  /> -->
 				</StackPanel>
 			</Grid>
 		</materialDesign:ColorZone>

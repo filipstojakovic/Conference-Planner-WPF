@@ -1,61 +1,87 @@
-﻿using ConferenceApp.model.entity;
+﻿using System;
+using System.Collections.Generic;
+using ConferenceApp.model.entity;
+using ConferenceApp.utils;
 using MySql.Data.MySqlClient;
+
 
 namespace ConferenceApp.model.dao;
 
-public abstract class EventDao : BaseDao
+public class EventDao : BaseDao
 {
-    protected EventTypeDao eventTypeDao;
+    protected EventTypeDao eventTypeDao = new();
 
-    protected EventDao()
+    public List<Event> findBySessionId(int? sessionId)
     {
-        eventTypeDao = new EventTypeDao();
+        // var sql =  $"SELECT * FROM view_live_event WHERE session_id={sessionId}";
+        const string sql = $@"
+                    SELECT e.*
+                         , et.name    as event_type_name
+                         , le.city as city
+                         , le.address as address
+                         , oe.url     as url
+                    FROM event e
+                             JOIN event_type et on e.event_type_id = et.id
+                             LEFT JOIN live_event le on e.id = le.event_id
+                             Left JOIN online_event oe on e.id = oe.event_id
+                WHERE session_id=@sessionId";
+        List<Event> events;
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("@sessionId", sessionId);
+            events = extractEventData(command);
+        }
+
+        return events;
     }
 
-    protected LiveEvent insertEvent(LiveEvent liveEvent, MySqlTransaction transaction)
+    public Event findByEventId(int? eventId)
+    {
+        Event result = null;
+        const string sql = $@"
+                    SELECT e.*
+                         , et.name    as event_type_name
+                         , le.city as city
+                         , le.address as address
+                         , oe.url     as url
+                    FROM event e
+                             JOIN event_type et on e.event_type_id = et.id
+                             LEFT JOIN live_event le on e.id = le.event_id
+                             Left JOIN online_event oe on e.id = oe.event_id
+                WHERE e.id=@eventId";
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("@eventId", eventId);
+            result = extractEventData(command)[0];
+        }
+
+        return result;
+    }
+
+
+    protected Event insertEvent(Event _event, MySqlTransaction transaction)
     {
         var sql = @"INSERT INTO event(session_id, event_type_id, name, description, start_date, end_date)
                     VALUES (@sessionId, @eventTypeId, @name,@description,@startDate,@endDate)";
 
         using (var command = new MySqlCommand(sql, connection, transaction))
         {
-            command.Parameters.AddWithValue("@sessionId", liveEvent.SessionId);
-            command.Parameters.AddWithValue("@eventTypeId", liveEvent.EventType.Id);
-            command.Parameters.AddWithValue("@name", liveEvent.Name);
-            command.Parameters.AddWithValue("@description", liveEvent.Description);
-            command.Parameters.AddWithValue("@startDate", liveEvent.StartDate);
-            command.Parameters.AddWithValue("@endDate", liveEvent.EndDate);
+            addEventParameters(_event, command);
             command.ExecuteNonQuery();
-            liveEvent.Id = (int)command.LastInsertedId;
+            _event.Id = (int)command.LastInsertedId;
         }
 
-        return liveEvent;
+        return _event;
     }
 
-    protected LiveEvent updateEvent(LiveEvent liveEvent, MySqlTransaction transaction)
+    private void addEventParameters(Event _event, MySqlCommand command)
     {
-        var sql = @"UPDATE event SET 
-                 session_id = @sessionId,
-                event_type_id = @eventTypeId, 
-                name = @name, 
-                description = @description, 
-                start_date = @startDate, 
-                end_date = @endDate
-            WHERE id = @eventId";
-        
-        using (var command = new MySqlCommand(sql, connection, transaction))
-        {
-            command.Parameters.AddWithValue("@eventId", liveEvent.Id);
-            command.Parameters.AddWithValue("@sessionId", liveEvent.SessionId);
-            command.Parameters.AddWithValue("@eventTypeId", liveEvent.EventType.Id);
-            command.Parameters.AddWithValue("@name", liveEvent.Name);
-            command.Parameters.AddWithValue("@description", liveEvent.Description);
-            command.Parameters.AddWithValue("@startDate", liveEvent.StartDate);
-            command.Parameters.AddWithValue("@endDate", liveEvent.EndDate);
-            command.ExecuteNonQuery();
-        }
-
-        return liveEvent;
+        command.Parameters.AddWithValue("@sessionId", _event.SessionId);
+        command.Parameters.AddWithValue("@eventTypeId", _event.EventType.Id);
+        command.Parameters.AddWithValue("@name", _event.Name);
+        command.Parameters.AddWithValue("@description", _event.Description);
+        command.Parameters.AddWithValue("@startDate", _event.StartDate);
+        command.Parameters.AddWithValue("@endDate", _event.EndDate);
     }
 
     public void deleteEvent(int? eventId)
@@ -67,5 +93,71 @@ public abstract class EventDao : BaseDao
             command.Parameters.AddWithValue("@eventId", eventId);
             command.ExecuteNonQuery();
         }
+    }
+
+    private List<Event> extractEventData(MySqlCommand command)
+    {
+        List<Event> list = new List<Event>();
+        using (var reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                var id = Utils.readerGetValue<int>(reader, "id");
+                var sessionId = Utils.readerGetValue<int>(reader, "session_id");
+                var name = Utils.readerGetValue<string>(reader, "name");
+                var desc = Utils.readerGetValue<string?>(reader, "description");
+                var start = Utils.readerGetValue<DateTime>(reader, "start_date");
+                var end = Utils.readerGetValue<DateTime>(reader, "end_date");
+
+                var eventTypeId = Utils.readerGetValue<int>(reader, "event_type_id");
+                var eventTypeName = Utils.readerGetValue<string>(reader, "event_type_name");
+
+                if (!reader.IsDBNull(reader.GetOrdinal("url")))
+                {
+                    string url = Utils.readerGetValue<string>(reader, "url");
+                    OnlineEvent onlineEvent = new OnlineEvent()
+                    {
+                        Id = id,
+                        SessionId = sessionId,
+                        Name = name,
+                        Description = desc,
+                        StartDate = start,
+                        EndDate = end,
+                        EventType = new EventType
+                        {
+                            Id = eventTypeId,
+                            Name = eventTypeName
+                        },
+                        Url = url
+                    };
+                    list.Add(onlineEvent);
+                }
+                else
+                {
+                    var city = Utils.readerGetValue<string>(reader, "city");
+                    var address = Utils.readerGetValue<string>(reader, "address");
+                    LiveEvent liveEvent = new LiveEvent()
+                    {
+                        Id = id,
+                        SessionId = sessionId,
+                        Name = name,
+                        Description = desc,
+                        StartDate = start,
+                        EndDate = end,
+                        EventType = new EventType
+                        {
+                            Id = eventTypeId,
+                            Name = eventTypeName
+                        },
+                        City = city,
+                        Address = address
+                        
+                    };
+                    list.Add(liveEvent);
+                }
+            }
+        }
+
+        return list;
     }
 }

@@ -52,6 +52,8 @@
 	<system:Double x:Key="SmallFontSize">14</system:Double>
 	<system:Double x:Key="MediumFontSize">16</system:Double>
 	<system:Double x:Key="LargeFontSize">18</system:Double>
+	<system:Double x:Key="LargerFontSize">24</system:Double>
+
 
 	<!-- Text Font -->
 	<Style x:Key="MaterialDesignWindow" TargetType="Window">
@@ -83,7 +85,17 @@
 
 	<Style x:Key="SectionTitle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline5TextBlock}">
 		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="Padding" Value="5" />
+		<Setter Property="Padding" Value="10,5" />
+		<!-- <Setter Property="FontFamily" Value="{DynamicResource MyFont}" /> -->
+		<!-- <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter> -->
+	</Style>
+	
+	<Style x:Key="SectionTitleAccount" TargetType="materialDesign:Chip" BasedOn="{StaticResource MaterialDesignOutlineChip}">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Padding" Value="10,5" />
+		<!-- <Setter Property="FontFamily" Value="{DynamicResource MyFont}" /> -->
+		<Setter Property="FontSize" Value="{DynamicResource LargeFontSize}"></Setter>
+		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
 
 	</Style>
 
@@ -94,6 +106,7 @@
 	<Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
 
 	</Style>
+	
 	
 
 	<Style x:Key="RegularTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
@@ -132,15 +145,17 @@
 	<Style TargetType="materialDesign:TimePicker" BasedOn="{StaticResource MaterialDesignOutlinedTimePicker}">
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
 		<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>
-
 	</Style>
 
 
 	<Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-		<!--<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>-->
-		<!--<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>-->
-		<!--<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />-->
-		<!--<Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"></Setter>-->
+	</Style>
+	
+	<Style x:Key="LoginButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+		<Setter Property="Background" Value="{DynamicResource TextBoxBackground}"></Setter>
+		<Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"></Setter>
+		<!-- <Setter Property="FontFamily" Value="{DynamicResource MyFont}" /> -->
+		<!-- <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}"></Setter> -->
 	</Style>
 
 	<Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
@@ -181,20 +196,20 @@
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
 	</Style>
 
-	<Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
+	<!--<Style x:Key="MyListViewItem" TargetType="{x:Type ListViewItem}">
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListViewItem}">
 					<Border x:Name="Bd"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-						<!--MenuItem Content presenter-->
+						--><!--MenuItem Content presenter--><!--
 						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 					</Border>
 					<ControlTemplate.Triggers>
-						<!--MouseOver menu item-->
+						--><!--MouseOver menu item--><!--
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
 								<Condition Property="Selector.IsSelectionActive" Value="False" />
@@ -204,7 +219,7 @@
 
 						</MultiTrigger>
 
-						<!--Selected menu item-->
+						--><!--Selected menu item--><!--
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
 								<Condition Property="Selector.IsSelectionActive" Value="True" />
@@ -217,5 +232,5 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 </ResourceDictionary>

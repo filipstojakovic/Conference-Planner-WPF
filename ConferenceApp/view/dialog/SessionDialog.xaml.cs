@@ -21,6 +21,11 @@ public partial class SessionDialog : Window
         this.Title = (edit ? "Save" : "Create") + " conference";
         SessionDao sessionDao = new SessionDao();
         allSessions = sessionDao.findByConferenceId(conference.Id);
+        startDatePicker.DisplayDateStart = conference.StartDate;
+        startDatePicker.DisplayDateEnd = conference.EndDate;
+
+        endDatePicker.DisplayDateStart = conference.StartDate;
+        endDatePicker.DisplayDateEnd = conference.EndDate;
 
         if (sessionDialogData == null)
         {
@@ -68,7 +73,7 @@ public partial class SessionDialog : Window
         {
             var sessionEvents = new LiveEventDao().findBySessionId(SessionDialogData.Id);
             areAllEventsInDateRange = sessionEvents
-                .All(liveEvent => SessionDialogData.StartDate >= liveEvent.StartDate 
+                .All(liveEvent => SessionDialogData.StartDate >= liveEvent.StartDate
                                   && liveEvent.EndDate >= SessionDialogData.EndDate);
 
             if (!areAllEventsInDateRange)

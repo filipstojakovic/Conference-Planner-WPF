@@ -7,12 +7,11 @@
              xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600">
-    <StackPanel>
+	<StackPanel Margin="10,0">
         <ComboBox Name="ComboBox"
-                  Margin="10,5"
+                  Margin="0,5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
-                  FontSize="18"
                   materialDesign:HintAssist.Hint="Select session"
                   IsSynchronizedWithCurrentItem="True"
                   SelectionChanged="ComboBox_OnSelectionChanged"
@@ -33,7 +32,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Name="Create_Button" Click="Create_Button_Click" Margin="10,5" MinWidth="80">
+        <Button Name="Create_Button" Click="Create_Button_Click" Margin="0,5" MinWidth="80">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
                                          VerticalAlignment="Stretch" Margin="0,0,2,0" />
@@ -51,7 +50,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
+                    <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
                     <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
@@ -62,8 +61,6 @@
                                     Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                 <DataGridTextColumn Header="End date"
                                     Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
-                <DataGridTextColumn Header="Street" Binding="{Binding Room.Location.Street,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Room number" Binding="{Binding Room.RoomNumber,Mode=TwoWay}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:ConferenceApp.view.dialog"
+        xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
         mc:Ignorable="d"
         SizeToContent="Height"
         Style="{StaticResource MaterialDesignWindow}"
@@ -31,18 +32,18 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Name:" />
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang name}" />
 		<TextBox Grid.Row="0" Grid.Column="1"
         Style="{DynamicResource RegularTextBoxStyle}" 
 				Padding="5"
-                materialDesign:HintAssist.Hint="Conference name"
+                materialDesign:HintAssist.Hint="{hly:Lang conf_name}"
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-		<Label Grid.Row="2" Grid.Column="0" Content="Description:" Margin="5" />
+		<Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" />
 		<TextBox Grid.Row="2" Grid.Column="1"
 		Style="{DynamicResource RegularTextBoxStyle}" 
-        materialDesign:HintAssist.Hint="Conference description"
+        materialDesign:HintAssist.Hint="{hly:Lang conf_desc}"
                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
 				 Margin="5"
                  TextWrapping="Wrap"
@@ -51,27 +52,27 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-		<Label Grid.Row="4" Grid.Column="0" Content="Start Date:" Margin="5" />
+		<Label Grid.Row="4" Grid.Column="0" Content="{hly:Lang start_date}" Margin="5" />
 		<DatePicker Grid.Row="4" Grid.Column="1"
 		Padding="5"
                     xml:lang="en-GB"
                     SelectedDate="{Binding StartDate}"
                     Margin="5" />
 
-		<Label Grid.Row="6" Grid.Column="0" Content="End Date:" Margin="5" />
+		<Label Grid.Row="6" Grid.Column="0" Content="{hly:Lang end_date}" Margin="5" />
 		<DatePicker Grid.Row="6" Grid.Column="1"
 		Padding="5"
                     xml:lang="en-GB"
                     SelectedDate="{Binding EndDate}"
                     Margin="5" />
 
-		<Label Grid.Row="8" Grid.Column="0" Margin="5" Content="Moderator:" />
+		<Label Grid.Row="8" Grid.Column="0" Margin="5" Content="{hly:Lang moderator}" />
 		<ComboBox Grid.Row="8" Grid.Column="1"
                   Name="ComboBox"
 				  Padding="5"
                   Margin="5"
                   IsEditable="False"
-                  materialDesign:HintAssist.Hint="Select conference moderator"
+                  materialDesign:HintAssist.Hint="{hly:Lang conf_moderator}"
                   ItemsSource="{Binding UsersModel, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}"
                   >
@@ -91,8 +92,8 @@
 
 		<StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
-			<Button Content="Create" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="{hly:Lang create}" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
 		</StackPanel>
 	</Grid>
 

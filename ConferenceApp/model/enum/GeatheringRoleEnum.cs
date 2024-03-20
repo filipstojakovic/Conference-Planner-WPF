@@ -5,6 +5,5 @@
 		Organizer,
 		Visitor,
 		Moderator,
-		Presenter
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace ConferenceApp.model.entity
@@ -30,6 +31,11 @@ namespace ConferenceApp.model.entity
         public string getFullName()
         {
             return $@"{FirstName} {LastName}";
+        }
+
+        public bool isAdmin()
+        {
+            return Roles.Any(role => string.Equals(UserRoleEnum.admin.ToString(), role.Name, StringComparison.OrdinalIgnoreCase));
         }
 
         public void copy(User user)
