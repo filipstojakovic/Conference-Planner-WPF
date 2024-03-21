@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Conference planner" FontSize="14"
         WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource MaterialDesignWindow}"
         Height="600"
         Width="1000"
         MinHeight="600"

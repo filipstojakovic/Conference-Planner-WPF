@@ -10,11 +10,12 @@ namespace ConferenceApp.view.dialog;
 
 public partial class SessionDialog : Window
 {
-    public Session SessionDialogData { get; set; }
+    public SessionModel SessionModel { get; set; }
+    private Session SessionDialogData { get; set; }
     private List<Session> allSessions;
     private bool areAllEventsInDateRange;
 
-    public SessionDialog(Conference conference, Session sessionDialogData = null, bool edit = false)
+    public SessionDialog(Conference conference, Session sessionDialogData = null, bool edit = false, bool isReadOnly = false)
     {
         InitializeComponent();
         Button.Content = edit ? "Save" : "Create";
@@ -32,8 +33,8 @@ public partial class SessionDialog : Window
             sessionDialogData = new Session
             {
                 GatheringId = conference.Id,
-                StartDate = conference.StartDate,
-                EndDate = conference.StartDate
+                StartDate = conference.StartDate.AddMinutes(1),
+                EndDate = conference.StartDate.AddMinutes(5)
             };
         }
         else
@@ -42,6 +43,11 @@ public partial class SessionDialog : Window
         }
 
         this.SessionDialogData = sessionDialogData;
+        this.SessionModel = new SessionModel
+        {
+            Session = sessionDialogData,
+            IsReadOnly = isReadOnly
+        };
         DataContext = sessionDialogData;
     }
 

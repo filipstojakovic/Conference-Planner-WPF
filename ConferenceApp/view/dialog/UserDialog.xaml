@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converter="clr-namespace:ConferenceApp.converter"
+        xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-        Style="{StaticResource MaterialDesignWindow}"
+        Style="{DynamicResource MaterialDesignWindow}"
         Width="400"
         >
 
@@ -35,29 +36,29 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" MinWidth="200" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="First Name:" />
+        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang firstName}" ContentStringFormat='{}{0}:'/>
         <TextBox Grid.Row="0" Grid.Column="1"
         Style="{StaticResource RegularTextBoxStyle}"
         Padding="5"
                  Margin="5"
                  Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Last Name:" Margin="5" />
+        <Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang lastName}" Margin="5" ContentStringFormat='{}{0}:'/>
         <TextBox Grid.Row="2" Grid.Column="1"
                 Style="{StaticResource RegularTextBoxStyle}"
                 Padding="5"
                  Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-        <Label Grid.Row="4" Grid.Column="0" Content="Username:" Margin="5" />
+        <Label Grid.Row="4" Grid.Column="0" Content="{hly:Lang username}" Margin="5" ContentStringFormat='{}{0}:'/>
         <TextBox Grid.Row="4" Grid.Column="1"
                 Style="{StaticResource RegularTextBoxStyle}"
                 Padding="5"
                  Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-        <Label Grid.Row="6" Grid.Column="0" Content="Email:" Margin="5" />
+        <Label Grid.Row="6" Grid.Column="0" Content="{hly:Lang email}" Margin="5" ContentStringFormat='{}{0}:'/>
         <TextBox Grid.Row="6" Grid.Column="1"
                 Style="{StaticResource RegularTextBoxStyle}"
                 Padding="5"
         Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5" />
-        <Label Grid.Row="8" Grid.Column="0" Content="Role:" Margin="5" />
+        <Label Grid.Row="8" Grid.Column="0" Content="{hly:Lang role}" Margin="5" ContentStringFormat='{}{0}:'/>
         <ComboBox Grid.Row="8" Grid.Column="1"
                   Name="RoleComboBox"
                   IsTextSearchEnabled="False"
@@ -77,8 +78,8 @@
 
         <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
-            <Button Name="Button" Content="Create" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+            <Button Name="Button" Content="{hly:Lang create}" Click="Button_Click" Margin="12" MinWidth="80" />
 
             <!-- <Button Content="Edit" -->
             <!--         x:Name="editBtn" -->

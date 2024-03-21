@@ -25,6 +25,7 @@ namespace ConferenceApp.view.usercontrol
         private BindingList<Conference> conferenceBindingList;
         private readonly User currentUser;
         private readonly ConferenceDao conferenceDao;
+        private readonly UserGatheringRoleDao userGatheringRoleDao;
 
         public ConferenceControl(User currentUser)
         {
@@ -33,6 +34,7 @@ namespace ConferenceApp.view.usercontrol
 
             this.currentUser = currentUser;
             conferenceDao = new ConferenceDao();
+            userGatheringRoleDao = new UserGatheringRoleDao();
             loadData();
         }
 
@@ -119,6 +121,7 @@ namespace ConferenceApp.view.usercontrol
                     conferenceBindingList.Add(conference);
                     CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
                     ConferenceBindingListOnListChanged(null, null);
+                    loadData();
                 }
                 catch (Exception exception)
                 {
@@ -150,6 +153,7 @@ namespace ConferenceApp.view.usercontrol
                     transaction.Commit();
                     conference.copy(dialog.ConferenceDialogData);
                     CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
+                    loadData();
                 }
                 catch (Exception)
                 {
@@ -165,7 +169,7 @@ namespace ConferenceApp.view.usercontrol
             Conference conference = getSelectedConference(sender);
             try
             {
-                var yes = Utils.confirmAction($"Are you sure you want to delete {conference.Name}");
+                var yes = Utils.confirmAction(LangUtils.Translate("conf_confirm_delete") + ": " + conference.Name + "?");
                 if (!yes)
                     return;
                 conferenceDao.deleteConference(conference.Id);
@@ -182,7 +186,7 @@ namespace ConferenceApp.view.usercontrol
         private void Join_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Conference conference = getSelectedConference(sender);
-            if (!Utils.confirmAction("Are you sure you wanna join " + conference.Name + " conference"))
+            if (!Utils.confirmAction(LangUtils.Translate("conf_confirm_join") + " " + conference.Name))
             {
                 return;
             }
@@ -231,20 +235,37 @@ namespace ConferenceApp.view.usercontrol
                 return;
 
             var isAdmin = currentUser.isAdmin();
-            var joined = rowData.Users.Where(u => u.Id == currentUser.Id).ToArray();
-            var isModerator = joined.Any(userDto =>
-                string.Equals(GatheringRoleEnum.Moderator.ToString(), userDto.conferenceRole, StringComparison.OrdinalIgnoreCase));
-            EditMenuItem.Visibility = isAdmin || isModerator ? Visibility.Visible : Visibility.Collapsed;
-            DeleteMenuItem.Visibility = isAdmin || isModerator ? Visibility.Visible : Visibility.Collapsed;
+            var isOrganizerOrModerator = rowData.isOrganizerOrModeratorUserId(currentUser.Id);
+            EditMenuItem.Visibility = isAdmin || isOrganizerOrModerator ? Visibility.Visible : Visibility.Collapsed;
+            DeleteMenuItem.Visibility = isAdmin || isOrganizerOrModerator ? Visibility.Visible : Visibility.Collapsed;
 
-            JoinMenuItem.Visibility = joined.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
-            LeaveMenuItem.Visibility = joined.Length != 0 ? Visibility.Visible : Visibility.Collapsed;
+            if (isAdmin || isOrganizerOrModerator)
+            {
+                JoinMenuItem.Visibility = Visibility.Collapsed;
+                LeaveMenuItem.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var joined = rowData.Users.Where(u => u.Id == currentUser.Id).ToArray();
+                JoinMenuItem.Visibility = joined.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+                LeaveMenuItem.Visibility = joined.Length != 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         private void LeaveMenuItem_OnClick_MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO: implement me
-            throw new NotImplementedException();
+            Conference conference = getSelectedConference(sender);
+            var users = conference.Users.Where(u => u.Id == currentUser.Id);
+            var isOrganizerOrModerator = users.Any(u => u.conferenceRole == GatheringRoleEnum.Moderator.ToString()
+                                                        || u.conferenceRole == GatheringRoleEnum.Organizer.ToString());
+            if (isOrganizerOrModerator)
+            {
+                Utils.ErrorBox(LangUtils.Translate("conf_error_admin_mod"));
+                return;
+            }
+
+            userGatheringRoleDao.deleteUserGatherRole(conference.Id, currentUser.Id);
+            loadData();
         }
     }
 }

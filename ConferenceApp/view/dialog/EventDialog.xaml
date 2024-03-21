@@ -5,10 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converter="clr-namespace:ConferenceApp.converter"
+        xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         SizeToContent="Height"
-        Style="{StaticResource MaterialDesignWindow}"
+        Style="{DynamicResource MaterialDesignWindow}"
         Width="500">
 
 	<Window.Resources>
@@ -37,14 +38,14 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Event name:" />
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang ev_name}" ContentStringFormat='{}{0}:'/>
 		<TextBox Grid.Row="0" Grid.Column="1"
                  IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                  Margin="5"
                  Text="{Binding EventDialog.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-		<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Event type:" />
+		<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="{hly:Lang ev_type}" ContentStringFormat='{}{0}:'/>
 		<ComboBox Grid.Row="2" Grid.Column="1"
                     IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                   Name="ComboBox"
@@ -52,7 +53,7 @@
                   Padding="5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
-                  materialDesign:HintAssist.Hint="Select event type"
+                  materialDesign:HintAssist.Hint="{hly:Lang ev_type_select}"
                   IsSynchronizedWithCurrentItem="True"
                   SelectedItem="{Binding EventDialog.EventType, UpdateSourceTrigger=PropertyChanged}">
 			<ComboBox.ItemTemplate>
@@ -61,7 +62,7 @@
 				</DataTemplate>
 			</ComboBox.ItemTemplate>
 		</ComboBox>
-		<Label Grid.Row="4" Grid.Column="0" Content="Description:" Margin="5" />
+		<Label Grid.Row="4" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" />
 		<TextBox Grid.Row="4" Grid.Column="1"
                  IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{DynamicResource RegularTextBoxStyle}"
@@ -86,14 +87,14 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<Label Grid.Column="0" Grid.RowSpan="2" Content="Start date:" Margin="5" />
+			<Label Grid.Column="0" Grid.RowSpan="2" Content="{hly:Lang start_date}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<DatePicker Grid.Column="1" Grid.RowSpan="2"
                         x:Name="startDatePicker"
                         xml:lang="en-GB"
                         Padding="5"
                         SelectedDate="{Binding EventDialog.StartDate}"
                         Margin="5" />
-			<Label Grid.Column="2" Content="Start time:" Margin="5" />
+			<Label Grid.Column="2" Content="{hly:Lang start_time}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<materialDesign:TimePicker Grid.Column="3"
                                        xml:lang="en-GB"
                                        Is24Hours="True"
@@ -101,7 +102,7 @@
                                        Margin="5"
                                        SelectedTime="{Binding EventDialog.StartDate}" />
 
-			<Label Grid.Column="2" Grid.Row="1" Content="End time:" Margin="5" />
+			<Label Grid.Column="2" Grid.Row="1" Content="{hly:Lang end_time}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
                                        xml:lang="en-GB"
                                        Is24Hours="True"
@@ -111,14 +112,14 @@
 		</Grid>
 
 		<StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
-			<Label Content="Live"
+			<Label Content="{hly:Lang live}"
                    Margin="5,0,10,0"
                    VerticalAlignment="Center" />
 			<ToggleButton x:Name="isLiveToggleButton"
                           IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
 						  IsChecked="{Binding IsLive, Converter={StaticResource BoolToInverseBoolConverter}}"
                           Click="isLiveToggleButtonClicked" />
-			<Label Content="Online"
+			<Label Content="{hly:Lang online}"
                    Margin="10,0,0,0"
                    VerticalAlignment="Center" />
 		</StackPanel>
@@ -149,14 +150,14 @@
 				<ColumnDefinition Width="auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="City:" />
+			<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang city}" ContentStringFormat='{}{0}:'/>
 			<TextBox Grid.Row="0" Grid.Column="1"
                      IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                      Margin="5"
                      Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Address:" />
+			<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="{hly:Lang address}" ContentStringFormat='{}{0}:'/>
 			<TextBox Grid.Row="2" Grid.Column="1"
                      IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
@@ -166,9 +167,9 @@
 
 		<StackPanel Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-			<Button Content="Cancel" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click"
+			<Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click"
                     Margin="12" MinWidth="80" />
-			<Button Content="Create" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="{hly:Lang create}" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
 		</StackPanel>
 	</Grid>
 

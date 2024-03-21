@@ -15,23 +15,24 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="5" />
 			<ColumnDefinition Width="auto" MinWidth="120" />
 		</Grid.ColumnDefinitions>
 
 
-		<Label Margin="0,0,0,8" FontSize="16" Grid.Row="0" Grid.Column="0" Content="{hly:Lang lang}" 
-               ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
+		<Label Grid.Row="0" Grid.Column="0" Content="{hly:Lang lang}" 
+               ContentStringFormat='{}{0}:'>
 		</Label>
-		<ComboBox x:Name="langComboBox" Grid.Row="0" Grid.Column="1" 
+		<ComboBox x:Name="langComboBox" Grid.Row="0" Grid.Column="2" 
 		Padding="10"
                   SelectionChanged="LangComboBox_OnSelectionChanged">
 			<ComboBoxItem x:Name="en" Content="{hly:Lang en}"></ComboBoxItem>
 			<ComboBoxItem x:Name="sr" Content="{hly:Lang sr}"></ComboBoxItem>
 		</ComboBox>
-		<Label FontSize="16" Grid.Row="2" Grid.Column="0" Content="{hly:Lang theme}" 
+		<Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang theme}" 
                ContentStringFormat='{}{0}:' VerticalContentAlignment="Center">
 		</Label>
-		<ComboBox x:Name="themeComboBox" Margin="0,8,0,0" MinWidth="120"  Grid.Row="2" Grid.Column="1" 
+		<ComboBox x:Name="themeComboBox" MinWidth="120"  Grid.Row="2" Grid.Column="2" 
 		Padding="10"
                   SelectionChanged="ThemeComboBox_OnSelectionChanged">
 			<ComboBoxItem x:Name="default" Content="{hly:Lang light}"></ComboBoxItem>

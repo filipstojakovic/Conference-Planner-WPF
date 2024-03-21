@@ -85,7 +85,7 @@ namespace ConferenceApp.view
 			var itemMenu = selectedItem as ItemMenu;
 			if (itemMenu == null)
 			{
-				var result = Utils.confirmAction("Are you sure you want to log out?");
+				var result = Utils.confirmAction(LangUtils.Translate("confirm_logout"));
 				if (result)
 				{
 					AppSettings.getInstance().SettingsEntity = new SettingsEntity();

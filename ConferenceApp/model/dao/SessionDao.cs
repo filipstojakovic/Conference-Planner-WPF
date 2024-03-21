@@ -20,6 +20,21 @@ public class SessionDao : BaseDao
         return list;
     }
 
+    public List<Session> findAllWithUserId(int? userId)
+    {
+        var sql = "SELECT * FROM session s " +
+                  "JOIN user_gathering_role ugr ON ugr.gathering_id=s.gathering_id " +
+                  "WHERE ugr.user_id=@userId";
+        List<Session> list;
+        using (var command = new MySqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("@userId", userId);
+            list = extractSessionData(command);
+        }
+
+        return list;
+    }
+
     public List<Session> findByConferenceId(int? gatheringId)
     {
         var sql = "SELECT * FROM session WHERE gathering_id = @gatheringId";

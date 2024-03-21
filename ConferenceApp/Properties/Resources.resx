@@ -265,6 +265,75 @@
     <value>Select conference</value>
   </data>
   <data name="join" xml:space="preserve">
-    <value>Participate</value>
+    <value>Participates</value>
+  </data>
+  <data name="organizer" xml:space="preserve">
+    <value>Organizer</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="ev_name" xml:space="preserve">
+    <value>Event name</value>
+  </data>
+  <data name="ev_type" xml:space="preserve">
+    <value>Event type</value>
+  </data>
+  <data name="ses_select" xml:space="preserve">
+    <value>Select session</value>
+  </data>
+  <data name="user_filter" xml:space="preserve">
+    <value>Filter users</value>
+  </data>
+  <data name="roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="start_time" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="end_time" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ev_type_select" xml:space="preserve">
+    <value>Select event type</value>
+  </data>
+  <data name="conf_join" xml:space="preserve">
+    <value>Join conference</value>
+  </data>
+  <data name="conf_leave" xml:space="preserve">
+    <value>Leave conference</value>
+  </data>
+  <data name="role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="confirm_logout" xml:space="preserve">
+    <value>Are you sure you want to log out?</value>
+  </data>
+  <data name="confirm_delete" xml:space="preserve">
+    <value>Are you sure you want to delete</value>
+  </data>
+  <data name="conf_confirm_join" xml:space="preserve">
+    <value>Are you sure you wanna join conference: </value>
+  </data>
+  <data name="conf_confirm_delete" xml:space="preserve">
+    <value>Are you sure you want to delete conference</value>
+  </data>
+  <data name="conf_error_admin_mod" xml:space="preserve">
+    <value>Organizer and moderator can't leave conference</value>
   </data>
 </root>

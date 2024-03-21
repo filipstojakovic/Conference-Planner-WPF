@@ -45,12 +45,14 @@
                   AutoGenerateColumns="False"
                   ColumnWidth="*"
                   VerticalScrollBarVisibility="Auto"
+                  ContextMenuOpening="SessionDataGrid_OnContextMenuOpening"
                   IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="{hm:Lang info}" Click="Info_MenuItem_OnClick" />
                     <MenuItem Header="{hm:Lang copy}" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="{hm:Lang edit}" Click="Edit_MenuItem_OnClick" />
-                    <MenuItem Header="{hm:Lang delete}" Click="Delete_MenuItem_OnClick" />
+                    <MenuItem x:Name="EditMenuItem" Header="{hm:Lang edit}" Click="Edit_MenuItem_OnClick" />
+                    <MenuItem x:Name="DeleteMenuItem" Header="{hm:Lang delete}" Click="Delete_MenuItem_OnClick" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>

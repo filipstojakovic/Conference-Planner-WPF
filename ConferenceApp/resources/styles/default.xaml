@@ -59,7 +59,6 @@
 	<Style x:Key="MaterialDesignWindow" TargetType="Window">
 		<Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
 		<Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
-		<Setter Property="TextElement.FontWeight" Value="Regular" />
 		<Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
 		<Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
 		<Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
@@ -103,6 +102,7 @@
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
 	
 	<Style x:Key="RegularTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
@@ -144,7 +144,7 @@
 	</Style>
 
 
-	<Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+	<Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
 	</Style>
 	
 	<Style x:Key="LoginButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">

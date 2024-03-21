@@ -27,6 +27,27 @@ namespace ConferenceApp.model.dao
 
             return list;
         }
+        
+        public List<Conference> findAllWithUserId(int? userId)
+        {
+            var sql = @"
+				SELECT *, gr.name as gr_name FROM conference c
+                  JOIN gathering g ON g.id = c.gathering_id
+                  LEFT JOIN user_gathering_role ugr ON g.id = ugr.gathering_id
+                  LEFT JOIN user u ON ugr.user_id = u.id
+                  LEFT JOIN gathering_role gr ON ugr.gathering_role_id=gr.id
+				WHERE ugr.user_id=@userId
+				";
+
+            List<Conference> list;
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@userId", userId);
+                list = extractConferenceData(command);
+            }
+
+            return list;
+        }
 
         private List<Conference> extractConferenceData(MySqlCommand command)
         {

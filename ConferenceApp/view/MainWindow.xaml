@@ -12,7 +12,7 @@
         Height="600" Width="1300"
         MinHeight="600"
         MinWidth="1000"
-		Style="{StaticResource MaterialDesignWindow}"
+		Style="{DynamicResource MaterialDesignWindow}"
         WindowStartupLocation="CenterScreen">
 
 	<Window.Resources>

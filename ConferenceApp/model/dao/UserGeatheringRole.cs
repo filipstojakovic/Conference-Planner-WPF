@@ -52,6 +52,19 @@ namespace ConferenceApp.model.dao
             return userGatheringRole;
         }
 
+        public void deleteUserGatherRole(int? gatherId, int? userId)
+        {
+            var sql =
+                @"DELETE FROM user_gathering_role WHERE gathering_id=@gatherId AND user_id=@userId";
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@gatherId", gatherId);
+                command.Parameters.AddWithValue("@userId", userId);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         public void deleteConferenceModerator(Conference conference, MySqlTransaction transaction)
         {
             var gatheringRole = gatheringRoleDao.findByName(GatheringRoleEnum.Moderator.ToString());

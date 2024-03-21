@@ -49,12 +49,12 @@
                 <DataGrid.ContextMenu>
                     <!--right click context menu-->
                     <ContextMenu>
-                        <MenuItem x:Name="JoinMenuItem" Header="Join conference" Click="Join_MenuItem_OnClick" />
-                        <MenuItem x:Name="LeaveMenuItem" Header="Leave conference" Click="LeaveMenuItem_OnClick_MenuItem_OnClick" Visibility="Collapsed" />
-                        <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
-                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                        <MenuItem x:Name="EditMenuItem" Header="Edit" Click="Edit_MenuItem_OnClick" />
-                        <MenuItem x:Name="DeleteMenuItem" Header="Delete" Click="Delete_MenuItem_OnClick" />
+                        <MenuItem x:Name="JoinMenuItem" Header="{hm:Lang conf_join}" Click="Join_MenuItem_OnClick" />
+                        <MenuItem x:Name="LeaveMenuItem" Header="{hm:Lang conf_leave}" Click="LeaveMenuItem_OnClick_MenuItem_OnClick" Visibility="Collapsed" />
+                        <MenuItem Header="{hm:Lang info}" Click="Info_MenuItem_OnClick" />
+                        <MenuItem Header="{hm:Lang copy}" Command="ApplicationCommands.Copy" />
+                        <MenuItem x:Name="EditMenuItem" Header="{hm:Lang edit}" Click="Edit_MenuItem_OnClick" />
+                        <MenuItem x:Name="DeleteMenuItem" Header="{hm:Lang delete}" Click="Delete_MenuItem_OnClick" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 

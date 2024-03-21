@@ -7,6 +7,7 @@ using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
 using ConferenceApp.view.dialog;
+using Haley.Utils;
 
 namespace ConferenceApp.view.usercontrol;
 
@@ -30,10 +31,6 @@ public partial class EventControl : UserControl
 		liveEventDao = new LiveEventDao();
 		onlineEventDao = new OnlineEventDao();
 		loadData();
-		// if (sessionBindingList.Count > 0)
-		// {
-		//     ComboBox.SelectedIndex = 0;
-		// }
 	}
 
 	private void loadData()
@@ -42,6 +39,9 @@ public partial class EventControl : UserControl
 		sessionBindingList = new BindingList<Session>(sessions);
 		ComboBox.DataContext = sessionBindingList;
 		ComboBox.ItemsSource = sessions;
+		
+		if (sessionBindingList.Count == 0)
+			Create_Button.IsEnabled = false;
 	}
 
 	private void ComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,6 +67,8 @@ public partial class EventControl : UserControl
 	private void Create_Button_Click(object sender, RoutedEventArgs e)
 	{
 		Session session = (Session)ComboBox.SelectedItem;
+		if (session == null)
+			return;
 		var dialog = new EventDialog(session);
 		if (dialog.ShowDialog() == true)
 		{
@@ -104,39 +106,16 @@ public partial class EventControl : UserControl
 		var dialog = new EventDialog(session, isReadOnly, selectedLiveEvent);
 		if (dialog.ShowDialog() == true)
 		{
-			Console.WriteLine();
+			//TODO: only ok button should be inside dialog
+			// Console.WriteLine();
 
 		}
 	}
 
-	// private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)
-	// {
-	// Session session = (Session)ComboBox.SelectedItem;
-	// LiveEvent selectedLiveEvent = getSelectedEvent(sender);
-	// LiveEvent copy = new LiveEvent(selectedLiveEvent);
-	// var dialog = new EventDialog(session, copy);
-	// if (dialog.ShowDialog() == true)
-	// {
-	//     var transaction = liveEventDao.startTransaction();
-	//     try
-	//     {
-	//         liveEventDao.updateLiveEvent(copy, transaction);
-	//         selectedLiveEvent.copy(copy);
-	//         transaction.Commit();
-	//         CollectionViewSource.GetDefaultView(EventDataGrid.ItemsSource).Refresh();
-	//     }
-	//     catch (Exception)
-	//     {
-	//         transaction.Rollback();
-	//         Utils.ErrorBox("Unable to update event");
-	//     }
-	// }
-	// }
-
 	private void Delete_MenuItem_OnClick(object sender, RoutedEventArgs e)
 	{
 		Event liveEventDataGrid = getSelectedEvent(sender);
-		var result = Utils.confirmAction("Are you sure you want to delete " + liveEventDataGrid.Name);
+		var result = Utils.confirmAction(LangUtils.Translate("confirm_delete") + " " + liveEventDataGrid.Name);
 		if (!result)
 			return;
 		try
@@ -146,7 +125,7 @@ public partial class EventControl : UserControl
 		}
 		catch (Exception)
 		{
-			Utils.ErrorBox("Uaable to delete event");
+			Utils.ErrorBox("Unable to delete event");
 		}
 	}
 

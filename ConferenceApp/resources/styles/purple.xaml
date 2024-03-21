@@ -16,6 +16,17 @@
     <FontFamily x:Key="MyFont">Times New Roman</FontFamily>
     <system:Double x:Key="MediumFontSize">22</system:Double>
 
-
+    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    
+    <Style x:Key="MaterialDesignWindow" TargetType="Window">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+        <Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+        <Setter Property="TextElement.FontWeight" Value="Bold" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
+    </Style>
 
 </ResourceDictionary>

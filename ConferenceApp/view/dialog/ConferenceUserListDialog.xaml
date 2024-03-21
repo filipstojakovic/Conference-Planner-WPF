@@ -4,49 +4,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ConferenceApp.view.dialog"
+        xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
         mc:Ignorable="d"
-        Title="ConferenceUserListDialog" 
+        Title="ConferenceUserListDialog"
         Width="600"
         SizeToContent="Height"
         MinHeight="500"
-                Style="{StaticResource MaterialDesignWindow}"
+        Style="{DynamicResource MaterialDesignWindow}"
 
         MaxHeight="800">
-	<Grid Margin="10">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Conference name:" VerticalAlignment="Center" />
-		<TextBox Grid.Row="0" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
+        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang conf_name}" VerticalAlignment="Center"
+               ContentStringFormat='{}{0}:' />
+        <TextBox Grid.Row="0" Grid.Column="1"
+                 Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                  Margin="5"
                  IsReadOnly="True"
                  Name="ConferenceName" />
 
-		<Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Organizer:" VerticalAlignment="Center" />
-		<TextBox Grid.Row="1" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="{hly:Lang organizer}" VerticalAlignment="Center"
+               ContentStringFormat='{}{0}:' />
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                  Margin="5"
                  IsReadOnly="True"
                  Name="OrganizerName" />
-		<Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Moderator:" VerticalAlignment="Center"/>
-		<TextBox Grid.Row="2" Grid.Column="1"
-        Style="{DynamicResource RegularTextBoxStyle}" Padding="5" 
+        <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="{hly:Lang conf_moderator}" VerticalAlignment="Center"
+               ContentStringFormat='{}{0}:' />
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Style="{DynamicResource RegularTextBoxStyle}" Padding="5"
                  Margin="5"
                  IsReadOnly="True"
                  Name="ModeratorName" />
 
-		<DataGrid Name="conferenceDataGrid"
+        <DataGrid Name="conferenceDataGrid"
                   Margin="0,5"
-                  Grid.Row="3" 
+                  Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   AutoGenerateColumns="False"
@@ -54,12 +58,12 @@
                   VerticalScrollBarVisibility="Auto"
                   ItemsSource="{Binding Visitors}"
                   IsReadOnly="True">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
-				<DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
-				<DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-			</DataGrid.Columns>
-		</DataGrid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{hly:Lang firstName}" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="{hly:Lang lastName}" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="{hly:Lang email}" Binding="{Binding Email}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
-	</Grid>
+    </Grid>
 </Window>

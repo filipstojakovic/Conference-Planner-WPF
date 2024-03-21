@@ -9,7 +9,7 @@
         xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
         mc:Ignorable="d"
         SizeToContent="Height"
-        Style="{StaticResource MaterialDesignWindow}"
+        Style="{DynamicResource MaterialDesignWindow}"
         Width="500">
 
 	<Grid Margin="10">
@@ -32,7 +32,7 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang name}" />
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang name}" ContentStringFormat='{}{0}:'/>
 		<TextBox Grid.Row="0" Grid.Column="1"
         Style="{DynamicResource RegularTextBoxStyle}" 
 				Padding="5"
@@ -40,7 +40,7 @@
                  Margin="5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" />
+		<Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" ContentStringFormat='{}{0}:'/>
 		<TextBox Grid.Row="2" Grid.Column="1"
 		Style="{DynamicResource RegularTextBoxStyle}" 
         materialDesign:HintAssist.Hint="{hly:Lang conf_desc}"
@@ -52,21 +52,21 @@
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-		<Label Grid.Row="4" Grid.Column="0" Content="{hly:Lang start_date}" Margin="5" />
+		<Label Grid.Row="4" Grid.Column="0" Content="{hly:Lang start_date}" Margin="5" ContentStringFormat='{}{0}:'/>
 		<DatePicker Grid.Row="4" Grid.Column="1"
 		Padding="5"
                     xml:lang="en-GB"
                     SelectedDate="{Binding StartDate}"
                     Margin="5" />
 
-		<Label Grid.Row="6" Grid.Column="0" Content="{hly:Lang end_date}" Margin="5" />
+		<Label Grid.Row="6" Grid.Column="0" Content="{hly:Lang end_date}" Margin="5" ContentStringFormat='{}{0}:'/>
 		<DatePicker Grid.Row="6" Grid.Column="1"
 		Padding="5"
                     xml:lang="en-GB"
                     SelectedDate="{Binding EndDate}"
                     Margin="5" />
 
-		<Label Grid.Row="8" Grid.Column="0" Margin="5" Content="{hly:Lang moderator}" />
+		<Label Grid.Row="8" Grid.Column="0" Margin="5" Content="{hly:Lang moderator}" ContentStringFormat='{}{0}:'/>
 		<ComboBox Grid.Row="8" Grid.Column="1"
                   Name="ComboBox"
 				  Padding="5"

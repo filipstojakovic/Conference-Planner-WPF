@@ -12,7 +12,7 @@
                   Margin="0,5"
                   IsTextSearchEnabled="False"
                   IsEditable="False"
-                  materialDesign:HintAssist.Hint="Select session"
+                  materialDesign:HintAssist.Hint="{hm:Lang ses_select}"
                   IsSynchronizedWithCurrentItem="True"
                   SelectionChanged="ComboBox_OnSelectionChanged"
                   ItemsSource="{Binding sessionBindingList}"
@@ -34,9 +34,9 @@
 
         <Button Name="Create_Button" Click="Create_Button_Click" Margin="0,5" MinWidth="80">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Add" Width="19" Height="19" Foreground="White"
+                <materialDesign:PackIcon Kind="Add" Width="19" Height="19"
                                          VerticalAlignment="Stretch" Margin="0,0,2,0" />
-                <TextBlock Text="{hm:Lang create_event}" />
+				<TextBlock Text="{hm:Lang create_event}" VerticalAlignment="Center"/>
             </StackPanel>
         </Button>
 
@@ -49,17 +49,17 @@
                   IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="Info" Click="Info_MenuItem_OnClick" />
-                    <MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+                    <MenuItem Header="{hm:Lang copy}" Command="ApplicationCommands.Copy" />
+                    <MenuItem Header="{hm:Lang info}" Click="Info_MenuItem_OnClick" />
+                    <MenuItem Header="{hm:Lang delete}" Click="Delete_MenuItem_OnClick" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Event name" Binding="{Binding Name,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Event type" Binding="{Binding EventType.Name,Mode=TwoWay}" />
-                <DataGridTextColumn Header="Start date"
+                <DataGridTextColumn Header="{hm:Lang ev_name}" Binding="{Binding Name,Mode=TwoWay}" />
+                <DataGridTextColumn Header="{hm:Lang ev_type}" Binding="{Binding EventType.Name,Mode=TwoWay}" />
+                <DataGridTextColumn Header="{hm:Lang start_date}"
                                     Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
-                <DataGridTextColumn Header="End date"
+                <DataGridTextColumn Header="{hm:Lang end_date}"
                                     Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
             </DataGrid.Columns>
         </DataGrid>

@@ -21,6 +21,15 @@
 
 	<FontFamily x:Key="MyFont">Comic Sans MS</FontFamily>
 	<system:Double x:Key="MediumFontSize">22</system:Double>
+    
+    <Style x:Key="MaterialDesignWindow" TargetType="Window">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+        <Setter Property="FontFamily" Value="{DynamicResource MyFont}" />
+        <Setter Property="TextElement.FontWeight" Value="Regular" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
+    </Style>
 
 
 	<!-- COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS COLORS -->

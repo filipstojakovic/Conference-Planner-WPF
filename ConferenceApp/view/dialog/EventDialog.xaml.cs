@@ -11,7 +11,7 @@ public partial class EventDialog : Window
 	public EventDialogModel EventDialogModel { get; set; }
 
 	private EventTypeDao eventTypeDao;
-	private Session _session;
+	private readonly Session _session;
 
 	public EventDialog(Session session, bool isReadOnly = false, Event myEvent = null)
 	{
@@ -43,7 +43,7 @@ public partial class EventDialog : Window
 		{
 			myEvent = new Event
 			{
-				StartDate = session.StartDate,
+				StartDate = session.StartDate.AddMinutes(1),
 				EndDate = session.StartDate.AddMinutes(5),
 			};
 

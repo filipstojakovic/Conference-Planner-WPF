@@ -256,7 +256,7 @@
     <value>Kopiraj</value>
   </data>
   <data name="edit" xml:space="preserve">
-    <value>Edituj</value>
+    <value>Izmjeni</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Obriši</value>
@@ -266,5 +266,74 @@
   </data>
   <data name="join" xml:space="preserve">
     <value>Pridružen</value>
+  </data>
+  <data name="organizer" xml:space="preserve">
+    <value>Organizator</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Detaljnije</value>
+  </data>
+  <data name="ev_name" xml:space="preserve">
+    <value>Ime događaja</value>
+  </data>
+  <data name="ev_type" xml:space="preserve">
+    <value>Tip događaja</value>
+  </data>
+  <data name="ses_select" xml:space="preserve">
+    <value>Odaberi sesiju</value>
+  </data>
+  <data name="user_filter" xml:space="preserve">
+    <value>Filtriraj korisnike</value>
+  </data>
+  <data name="roles" xml:space="preserve">
+    <value>Uloge</value>
+  </data>
+  <data name="start_time" xml:space="preserve">
+    <value>Vrijeme početka</value>
+  </data>
+  <data name="end_time" xml:space="preserve">
+    <value>Vrijeme završetka</value>
+  </data>
+  <data name="live" xml:space="preserve">
+    <value>Uživo</value>
+  </data>
+  <data name="online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="ev_type_select" xml:space="preserve">
+    <value>Odaberi tip događaja</value>
+  </data>
+  <data name="conf_join" xml:space="preserve">
+    <value>Učestvuj u konferenciji</value>
+  </data>
+  <data name="conf_leave" xml:space="preserve">
+    <value>Napusti konferenciju</value>
+  </data>
+  <data name="role" xml:space="preserve">
+    <value>Uloga</value>
+  </data>
+  <data name="confirm_logout" xml:space="preserve">
+    <value>Da li sigurno želite da se odjavite?</value>
+  </data>
+  <data name="confirm_delete" xml:space="preserve">
+    <value>Da li sigurno želite da obrišete</value>
+  </data>
+  <data name="conf_confirm_join" xml:space="preserve">
+    <value>Da li sigurno želite da se učestvujete u konferenciji:</value>
+  </data>
+  <data name="conf_confirm_delete" xml:space="preserve">
+    <value>Da li sigurno želite da obrišete konferenciju</value>
+  </data>
+  <data name="conf_error_admin_mod" xml:space="preserve">
+    <value>Organizator i moderator ne mogu napustiti konferenciju</value>
   </data>
 </root>

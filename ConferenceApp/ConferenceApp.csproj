@@ -69,9 +69,6 @@
     <Page Update="view\login\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="view\usercontrol\MenuControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Update="view\usercontrol\SettingsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

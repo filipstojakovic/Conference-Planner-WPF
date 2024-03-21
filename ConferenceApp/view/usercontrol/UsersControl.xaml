@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hly="http://schemas.hpod9.com/haley/mvvm"
              mc:Ignorable="d">
 
 	<UserControl.Resources>
@@ -22,7 +23,7 @@
 			<materialDesign:HintAssist.Hint>
 				<StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
 					<materialDesign:PackIcon Kind="Search" VerticalAlignment="Center"/>
-					<TextBlock Text="Filter users" />
+					<TextBlock Text="{hly:Lang user_filter}" />
 				</StackPanel>
 			</materialDesign:HintAssist.Hint>
 		</TextBox>
@@ -35,16 +36,16 @@
 			<!-- DockPanel.Dock="Bottom" -->
 			<DataGrid.ContextMenu>
 				<ContextMenu>
-					<MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-					<MenuItem Header="Edit" Click="Edit_MenuItem_OnClick" />
-					<MenuItem Header="Delete" Click="Delete_MenuItem_OnClick" />
+					<MenuItem Header="{hly:Lang copy}" Command="ApplicationCommands.Copy" />
+					<MenuItem Header="{hly:Lang edit}" Click="Edit_MenuItem_OnClick" />
+					<MenuItem Header="{hly:Lang delete}" Click="Delete_MenuItem_OnClick" />
 				</ContextMenu>
 			</DataGrid.ContextMenu>
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="First Name" Binding="{Binding FirstName,Mode=TwoWay}" />
-				<DataGridTextColumn Header="Last Name" Binding="{Binding LastName,Mode=TwoWay}" />
-				<DataGridTextColumn Header="Email" Binding="{Binding Email,Mode=TwoWay}" />
-				<DataGridTextColumn Header="Roles"
+				<DataGridTextColumn Header="{hly:Lang firstName}" Binding="{Binding FirstName,Mode=TwoWay}" />
+				<DataGridTextColumn Header="{hly:Lang lastName}" Binding="{Binding LastName,Mode=TwoWay}" />
+				<DataGridTextColumn Header="{hly:Lang email}" Binding="{Binding Email,Mode=TwoWay}" />
+				<DataGridTextColumn Header="{hly:Lang roles}"
                                     Binding="{Binding Roles,Mode=TwoWay, Converter={StaticResource listToString}}" />
 			</DataGrid.Columns>
 		</DataGrid>
