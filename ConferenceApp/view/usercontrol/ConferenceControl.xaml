@@ -58,7 +58,6 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 
-
                 <!--table data-->
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="{hm:Lang join}" Width="auto"

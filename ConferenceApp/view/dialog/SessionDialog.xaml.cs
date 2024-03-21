@@ -37,7 +37,7 @@ public partial class SessionDialog : Window
             sessionDialogData = new Session
             {
                 GatheringId = conference.Id,
-                StartDate = conference.StartDate.AddMinutes(1),
+                StartDate = conference.StartDate,
                 EndDate = conference.StartDate.AddMinutes(5)
             };
         }
@@ -80,10 +80,10 @@ public partial class SessionDialog : Window
 
         if (SessionModel.Session.Id != null)
         {
-            var sessionEvents = new LiveEventDao().findBySessionId(SessionModel.Session.Id);
-            areAllEventsInDateRange = sessionEvents
-                .All(liveEvent => SessionModel.Session.StartDate >= liveEvent.StartDate
-                                  && liveEvent.EndDate >= SessionModel.Session.EndDate);
+            //if editing check if there are events that are not in that time period
+            var eventsFromSession = new EventDao().findBySessionId(SessionModel.Session.Id);
+            areAllEventsInDateRange = eventsFromSession.All(_event => SessionModel.Session.StartDate >= _event.StartDate
+                                                                      && _event.EndDate >= SessionModel.Session.EndDate);
 
             if (!areAllEventsInDateRange)
             {

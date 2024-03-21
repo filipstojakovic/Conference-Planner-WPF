@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
@@ -12,22 +14,22 @@ public partial class EventDialog : Window
     public EventDialogModel EventDialogModel { get; set; }
 
     private EventTypeDao eventTypeDao;
-    private readonly Session _session;
+    private readonly Session SelectedSession;
 
-    public EventDialog(Session session, bool isReadOnly = false, Event myEvent = null)
+    public EventDialog(Session selectedSession, bool isReadOnly = false, Event myEvent = null)
     {
         InitializeComponent();
-        _session = session;
+        SelectedSession = selectedSession;
         eventTypeDao = new EventTypeDao();
-        startDatePicker.DisplayDateStart = session.StartDate;
-        startDatePicker.DisplayDateEnd = session.EndDate;
+        startDatePicker.DisplayDateStart = selectedSession.StartDate;
+        startDatePicker.DisplayDateEnd = selectedSession.EndDate;
 
         var saveOrCreate = myEvent != null ? LangUtils.Translate("save") : LangUtils.Translate("create");
         Button.Content = saveOrCreate;
         this.Title = saveOrCreate + " " + LangUtils.Translate("event");
         Button.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
 
-        EventDialogModel = createEventDialogModel(session, isReadOnly, myEvent);
+        EventDialogModel = createEventDialogModel(selectedSession, isReadOnly, myEvent);
         DataContext = EventDialogModel;
 
         var eventTypes = eventTypeDao.findAll();
@@ -36,6 +38,10 @@ public partial class EventDialog : Window
         {
             var index = eventTypes.FindIndex(x => x.Id == myEvent.EventType.Id);
             ComboBox.SelectedIndex = index;
+        }
+        else
+        {
+            EventDialogModel.EventDialog.EventType = (EventType)ComboBox.SelectedItem;
         }
     }
 
@@ -46,7 +52,7 @@ public partial class EventDialog : Window
         {
             myEvent = new Event
             {
-                StartDate = session.StartDate.AddMinutes(1),
+                StartDate = session.StartDate,
                 EndDate = session.StartDate.AddMinutes(5),
             };
 
@@ -73,8 +79,14 @@ public partial class EventDialog : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        if (!(_session.StartDate <= EventDialogModel.EventDialog.StartDate
-              && _session.EndDate >= EventDialogModel.EventDialog.EndDate))
+        if (EventDialogModel.EventDialog.StartDate > EventDialogModel.EventDialog.EndDate)
+        {
+            Utils.ErrorBox("Event start time is after end time");
+            return;
+        }
+
+        if (!(SelectedSession.StartDate <= EventDialogModel.EventDialog.StartDate
+              && SelectedSession.EndDate >= EventDialogModel.EventDialog.EndDate))
         {
             Utils.ErrorBox("Event is outside session start/end range");
             return;
@@ -89,6 +101,18 @@ public partial class EventDialog : Window
         if (EventDialogModel.EventDialog.EventType.Id == null)
         {
             Utils.ErrorBox("Event type is missing");
+            return;
+        }
+        
+        var eventsFromSession = new EventDao().findBySessionId(SelectedSession.Id);
+        var hasEventOverLap = eventsFromSession.Any(_event =>
+            _event.Id != EventDialogModel.EventDialog.Id
+            && Utils.DateRangesOverlap(_event.StartDate, _event.EndDate, EventDialogModel.EventDialog.StartDate,
+                EventDialogModel.EventDialog.EndDate));
+
+        if (hasEventOverLap)
+        {
+            Utils.ErrorBox("Event is overlapping with another event");
             return;
         }
 

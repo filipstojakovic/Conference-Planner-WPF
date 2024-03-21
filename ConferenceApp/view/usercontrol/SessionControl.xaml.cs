@@ -81,20 +81,20 @@ public partial class SessionControl : UserControl
             return;
         }
 
-        try
+        var dialog = new SessionDialog(SelectedConference);
+        if (dialog.ShowDialog() == true)
         {
-            var dialog = new SessionDialog(SelectedConference);
-            if (dialog.ShowDialog() == true)
+            try
             {
-                var sessionDialogData = dialog.SessionModel.Session;
+                var sessionDialogData = dialog.SessionModel.getDialogResult();
                 var session = sessionDao.insertSession(sessionDialogData);
                 sessionBindingList.Add(session);
                 CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
             }
-        }
-        catch (Exception)
-        {
-            Utils.ErrorBox("Unable to add session");
+            catch (Exception)
+            {
+                Utils.ErrorBox("Unable to add session");
+            }
         }
     }
 
@@ -109,19 +109,19 @@ public partial class SessionControl : UserControl
     {
         var selectedSession = getSelectedConference(sender);
         var dialog = new SessionDialog(SelectedConference, selectedSession, true);
-        try
+        if (dialog.ShowDialog() == true)
         {
-            if (dialog.ShowDialog() == true)
+            try
             {
-                Session session = dialog.SessionModel.Session;
+                Session session = dialog.SessionModel.getDialogResult();
                 sessionDao.updateSession(session);
                 selectedSession.copy(session);
                 CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
             }
-        }
-        catch (Exception)
-        {
-            Utils.ErrorBox("Unable to update session");
+            catch (Exception)
+            {
+                Utils.ErrorBox("Unable to update session");
+            }
         }
     }
 

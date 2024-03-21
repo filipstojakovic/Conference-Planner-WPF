@@ -51,6 +51,11 @@ namespace ConferenceApp.utils
             return false;
         }
 
+        public static DateTime combineDateAndTime(DateTime date , DateTime time )
+        {
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+        }
+
         public static bool isColumnNull(MySqlDataReader reader, string columnName)
         {
             var columnOrdinal = reader.GetOrdinal(columnName);

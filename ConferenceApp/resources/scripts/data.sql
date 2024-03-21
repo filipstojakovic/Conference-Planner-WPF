@@ -38,6 +38,7 @@ CREATE TABLE `conference` (
 
 LOCK TABLES `conference` WRITE;
 /*!40000 ALTER TABLE `conference` DISABLE KEYS */;
+INSERT INTO `conference` VALUES (1,'2024-03-02 00:00:00','2024-03-08 00:00:00','c1'),(2,'2024-03-18 00:00:00','2024-03-24 00:00:00','c2');
 /*!40000 ALTER TABLE `conference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +62,7 @@ CREATE TABLE `event` (
                          KEY `fk_EVENT_SESSION1_idx` (`session_id`),
                          CONSTRAINT `fk_EVENT_EVENT_TYPE1` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`) ON DELETE RESTRICT,
                          CONSTRAINT `fk_EVENT_SESSION1` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +71,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
+INSERT INTO `event` VALUES (1,1,1,'e1_s1_c1_live','event 1 on session 1 from conference 1','2024-03-02 13:00:00','2024-03-02 14:00:00'),(3,1,3,'e2_s1_c1_online','event 2','2024-03-02 15:00:00','2024-03-02 16:10:00'),(4,2,2,'e1_s2_c1_live','event 1 on session 2 from conference 1','2024-03-04 14:10:00','2024-03-04 15:15:00'),(5,3,1,'e1_s1_c2','event 1','2024-03-18 14:00:00','2024-03-18 14:05:00'),(6,4,2,'e2_s2_c2','event 2 ','2024-03-21 12:00:00','2024-03-21 12:05:00');
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +111,7 @@ CREATE TABLE `gathering` (
                              `id` int NOT NULL AUTO_INCREMENT,
                              `description` varchar(255) DEFAULT NULL,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,6 +120,7 @@ CREATE TABLE `gathering` (
 
 LOCK TABLES `gathering` WRITE;
 /*!40000 ALTER TABLE `gathering` DISABLE KEYS */;
+INSERT INTO `gathering` VALUES (1,'conference 1'),(2,'conference 2');
 /*!40000 ALTER TABLE `gathering` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,6 +171,7 @@ CREATE TABLE `live_event` (
 
 LOCK TABLES `live_event` WRITE;
 /*!40000 ALTER TABLE `live_event` DISABLE KEYS */;
+INSERT INTO `live_event` VALUES (1,'Banja Luka','Patre 5'),(4,'Banja Luka','Trg Krajine'),(6,'Prnjavor','ne znam ulice');
 /*!40000 ALTER TABLE `live_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,6 +196,7 @@ CREATE TABLE `online_event` (
 
 LOCK TABLES `online_event` WRITE;
 /*!40000 ALTER TABLE `online_event` DISABLE KEYS */;
+INSERT INTO `online_event` VALUES (3,'www.google.com'),(5,'www.google.com');
 /*!40000 ALTER TABLE `online_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +242,7 @@ CREATE TABLE `session` (
                            PRIMARY KEY (`id`),
                            KEY `fk_SESSION_CONFERENCE1_idx` (`gathering_id`),
                            CONSTRAINT `fk_SESSION_CONFERENCE1` FOREIGN KEY (`gathering_id`) REFERENCES `conference` (`gathering_id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +251,7 @@ CREATE TABLE `session` (
 
 LOCK TABLES `session` WRITE;
 /*!40000 ALTER TABLE `session` DISABLE KEYS */;
+INSERT INTO `session` VALUES (1,1,'2024-03-02 13:00:00','2024-03-03 15:00:00','s1_c1','session 1 from conference 1'),(2,1,'2024-03-04 14:10:00','2024-03-06 14:00:00','s2_c1','session 2 conference 1'),(3,2,'2024-03-18 14:00:00','2024-03-20 16:05:00','s1_c2','session 1 from conference 2'),(4,2,'2024-03-21 12:00:00','2024-03-22 12:00:00','s2_c2','session 2 from conference 2');
 /*!40000 ALTER TABLE `session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +277,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'en','default');
+INSERT INTO `settings` VALUES (1,'en','default'),(2,'en','default'),(4,'en','default'),(5,'en','default');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +298,7 @@ CREATE TABLE `user` (
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `username_UNIQUE` (`username`),
                         UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +307,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','YWRtaW4=','admin','admin','a@a.com'),(2,'user','dXNlcg==','user','user','b@b.com');
+INSERT INTO `user` VALUES (1,'admin','YWRtaW4=','admin','admin','admin@a.com'),(2,'user','dXNlcg==','user','user','user@b.com'),(4,'user1','dXNlcjE=','Userko1','Userić1','user1@gmail.com'),(5,'user2','dXNlcjI=','Usef2','Usefić2','user2@gmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,6 +338,7 @@ CREATE TABLE `user_gathering_role` (
 
 LOCK TABLES `user_gathering_role` WRITE;
 /*!40000 ALTER TABLE `user_gathering_role` DISABLE KEYS */;
+INSERT INTO `user_gathering_role` VALUES (1,1,1),(2,1,1),(1,2,3),(2,4,3);
 /*!40000 ALTER TABLE `user_gathering_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +366,7 @@ CREATE TABLE `user_has_role` (
 
 LOCK TABLES `user_has_role` WRITE;
 /*!40000 ALTER TABLE `user_has_role` DISABLE KEYS */;
-INSERT INTO `user_has_role` VALUES (1,4),(1,5),(2,5);
+INSERT INTO `user_has_role` VALUES (1,4),(1,5),(2,5),(4,5),(5,5);
 /*!40000 ALTER TABLE `user_has_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-21 20:09:03
+-- Dump completed on 2024-03-21 22:14:13
