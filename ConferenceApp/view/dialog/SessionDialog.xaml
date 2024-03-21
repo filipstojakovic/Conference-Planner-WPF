@@ -13,90 +13,99 @@
         Style="{DynamicResource MaterialDesignWindow}"
         Width="500">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="Auto" />
+	<Window.Resources>
+		<converter:BoolToInverseBoolConverter x:Key="BoolToInverseBoolConverter"/>
+	</Window.Resources>
 
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="10" />
+			<RowDefinition Height="Auto" />
 
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang ses_name}" ContentStringFormat='{}{0}:' />
-        <TextBox Style="{DynamicResource RegularTextBoxStyle}" Padding="5" Grid.Row="0" Grid.Column="1"
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Label Grid.Row="0" Grid.Column="0" Margin="5" Content="{hly:Lang ses_name}" ContentStringFormat='{}{0}:' />
+		<TextBox Style="{DynamicResource RegularTextBoxStyle}" Padding="5" Grid.Row="0" Grid.Column="1"
+                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="5"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Session.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" ContentStringFormat='{}{0}:' />
-        <TextBox Grid.Row="2" Grid.Column="1"
+		<Label Grid.Row="2" Grid.Column="0" Content="{hly:Lang desc}" Margin="5" ContentStringFormat='{}{0}:' />
+		<TextBox Grid.Row="2" Grid.Column="1"
+                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                 Text="{Binding Session.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
                  TextWrapping="Wrap"
                  MaxHeight="400"
                  MaxLength="255"
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Visible" />
 
-        <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+		<Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="{hly:Lang start_date}" Margin="5" ContentStringFormat='{}{0}:' />
-            <DatePicker Grid.Row="0" Grid.Column="1"
+			<Label Grid.Row="0" Grid.Column="0" Content="{hly:Lang start_date}" Margin="5" ContentStringFormat='{}{0}:' />
+			<DatePicker Grid.Row="0" Grid.Column="1"
                         x:Name="startDatePicker"
+                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                         xml:lang="en-GB"
                         Padding="5"
-                        SelectedDate="{Binding StartDate}"
+                        SelectedDate="{Binding Session.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="5" />
 
-            <Label Grid.Column="2" Content="{hly:Lang start_time}" Margin="5" ContentStringFormat='{}{0}:' />
-            <materialDesign:TimePicker Grid.Column="3"
+			<Label Grid.Column="2" Content="{hly:Lang start_time}" Margin="5" ContentStringFormat='{}{0}:' />
+			<materialDesign:TimePicker Grid.Column="3"
                                        xml:lang="en-GB"
+                                       IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                                        Padding="5"
-
                                        Is24Hours="True"
                                        Margin="5"
-                                       SelectedTime="{Binding StartDate}" />
+                                       SelectedTime="{Binding Session.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="1" Grid.Column="0" Content="{hly:Lang end_date}" Margin="5" ContentStringFormat='{}{0}:' />
-            <DatePicker Grid.Row="1" Grid.Column="1"
+			<Label Grid.Row="1" Grid.Column="0" Content="{hly:Lang end_date}" Margin="5" ContentStringFormat='{}{0}:' />
+			<DatePicker Grid.Row="1" Grid.Column="1"
+                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                         xml:lang="en-GB"
                         x:Name="endDatePicker"
                         Padding="5"
-                        SelectedDate="{Binding EndDate}"
-                        Margin="5" />
+                        SelectedDate="{Binding Session.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="5,5,5,0" VerticalAlignment="Top" />
 
-            <Label Grid.Row="1" Grid.Column="2" Content="{hly:Lang end_time}" Margin="5" ContentStringFormat='{}{0}:' />
-            <materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+			<Label Grid.Row="1" Grid.Column="2" Content="{hly:Lang end_time}" Margin="5" ContentStringFormat='{}{0}:' />
+			<materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+                                       IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                                        xml:lang="en-GB"
                                        Padding="5"
                                        Is24Hours="True"
                                        Margin="5"
-                                       SelectedTime="{Binding EndDate}" />
+                                       SelectedTime="{Binding Session.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        </Grid>
+		</Grid>
 
-        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
-            <Button Name="Button" Content="{hly:Lang create}" Click="Button_Click" Margin="12" MinWidth="80" />
-        </StackPanel>
-    </Grid>
+			<Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click" Margin="12" MinWidth="80" />
+			<Button Name="Button" Content="{hly:Lang create}" Click="Button_Click" Margin="12" MinWidth="80" />
+		</StackPanel>
+	</Grid>
 
 </Window>

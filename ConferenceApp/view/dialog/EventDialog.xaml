@@ -89,6 +89,7 @@
 
 			<Label Grid.Column="0" Grid.RowSpan="2" Content="{hly:Lang start_date}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<DatePicker Grid.Column="1" Grid.RowSpan="2"
+			            IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                         x:Name="startDatePicker"
                         xml:lang="en-GB"
                         Padding="5"
@@ -96,6 +97,7 @@
                         Margin="5" />
 			<Label Grid.Column="2" Content="{hly:Lang start_time}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<materialDesign:TimePicker Grid.Column="3"
+			                           IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                                        xml:lang="en-GB"
                                        Is24Hours="True"
                                        Padding="5"
@@ -104,6 +106,7 @@
 
 			<Label Grid.Column="2" Grid.Row="1" Content="{hly:Lang end_time}" Margin="5" ContentStringFormat='{}{0}:'/>
 			<materialDesign:TimePicker Grid.Column="3" Grid.Row="1"
+			                           IsEnabled="{Binding IsReadOnly, Converter={StaticResource BoolToInverseBoolConverter}}"
                                        xml:lang="en-GB"
                                        Is24Hours="True"
                                        Margin="5"
@@ -169,7 +172,11 @@
                     HorizontalAlignment="Center">
 			<Button Content="{hly:Lang cancel}" Style="{DynamicResource CancelButtonStyle}" Click="Cancel_Button_Click"
                     Margin="12" MinWidth="80" />
-			<Button Content="{hly:Lang create}" Name="Button" Click="Button_Click" Margin="12" MinWidth="80" />
+			<Button Content="{hly:Lang create}" 
+			        Name="Button"
+			        Click="Button_Click" 
+			        Margin="12" 
+			        MinWidth="80" />
 		</StackPanel>
 	</Grid>
 

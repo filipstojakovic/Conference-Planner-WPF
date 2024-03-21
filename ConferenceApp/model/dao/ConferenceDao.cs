@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConferenceApp.model.dto;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
@@ -26,6 +27,27 @@ namespace ConferenceApp.model.dao
             }
 
             return list;
+        }
+
+        public Conference findById(int? gatherId)
+        {
+            List<Conference> conferences = new List<Conference>();
+            var sql = @"
+				SELECT *, gr.name as gr_name FROM conference c
+                  JOIN gathering g ON g.id = c.gathering_id
+                  LEFT JOIN user_gathering_role ugr ON g.id = ugr.gathering_id
+                  LEFT JOIN user u ON ugr.user_id = u.id
+                  LEFT JOIN gathering_role gr ON ugr.gathering_role_id=gr.id
+				WHERE g.id=@gatherId;
+				";
+            using (var command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@gatherId", gatherId);
+                conferences = extractConferenceData(command);
+                
+            }
+
+            return conferences.First();
         }
         
         public List<Conference> findAllWithUserId(int? userId)

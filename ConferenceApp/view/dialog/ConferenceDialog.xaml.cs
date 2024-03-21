@@ -41,7 +41,7 @@ public partial class ConferenceDialog : Window
 		if (conference != null)
 		{
 			ConferenceDialogData = new Conference(conference);
-			var previousModerator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator)[0];
+			var previousModerator = userDao.findUserByGatherAndRole(conference, GatheringRoleEnum.Moderator).First();
 			ConferenceModel.SelectedUser = previousModerator;
 			var index = userList.FindIndex(x => x.Username == previousModerator.Username);
 			ComboBox.SelectedIndex = index;
@@ -76,8 +76,7 @@ public partial class ConferenceDialog : Window
 
 		if (conferenceListForChecking != null)
 		{
-			var hasOverLap = conferenceListForChecking.Any(conference =>
-				ConferenceDialogData.Id != conference.Id
+			var hasOverLap = conferenceListForChecking.Any(conference => ConferenceDialogData.Id != conference.Id
 				&& Utils.DateRangesOverlap(conference.StartDate, conference.EndDate, ConferenceDialogData.StartDate,
 					ConferenceDialogData.EndDate));
 			if (hasOverLap)

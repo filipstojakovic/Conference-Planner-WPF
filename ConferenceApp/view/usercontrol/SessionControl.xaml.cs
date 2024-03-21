@@ -97,25 +97,12 @@ public partial class SessionControl : UserControl
             Utils.ErrorBox("Unable to add session");
         }
     }
-    
+
     private void Info_MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var selectedSession = getSelectedConference(sender);
-        var dialog = new SessionDialog(SelectedConference, selectedSession, true);
-        // try
-        // {
-        //     if (dialog.ShowDialog() == true)
-        //     {
-        //         Session session = dialog.SessionDialogData;
-        //         sessionDao.updateSession(session);
-        //         selectedSession.copy(session);
-        //         CollectionViewSource.GetDefaultView(SessionDataGrid.ItemsSource).Refresh();
-        //     }
-        // }
-        // catch (Exception)
-        // {
-        //     Utils.ErrorBox("Unable to update session");
-        // }
+        var dialog = new SessionDialog(SelectedConference, selectedSession, true, true);
+        dialog.ShowDialog();
     }
 
     private void Edit_MenuItem_OnClick(object sender, RoutedEventArgs e)

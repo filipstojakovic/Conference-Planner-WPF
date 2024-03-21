@@ -49,8 +49,8 @@
                   IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{hm:Lang copy}" Command="ApplicationCommands.Copy" />
                     <MenuItem Header="{hm:Lang info}" Click="Info_MenuItem_OnClick" />
+                    <MenuItem Header="{hm:Lang copy}" Command="ApplicationCommands.Copy" />
                     <MenuItem Header="{hm:Lang delete}" Click="Delete_MenuItem_OnClick" />
                 </ContextMenu>
             </DataGrid.ContextMenu>

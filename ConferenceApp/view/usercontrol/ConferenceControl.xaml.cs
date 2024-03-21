@@ -155,7 +155,7 @@ namespace ConferenceApp.view.usercontrol
                     CollectionViewSource.GetDefaultView(conferenceDataGrid.ItemsSource).Refresh();
                     loadData();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     var message = LangUtils.Translate("error_update_conference");

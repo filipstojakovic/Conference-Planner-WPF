@@ -5,21 +5,25 @@ using System.Windows;
 using ConferenceApp.model.dao;
 using ConferenceApp.model.entity;
 using ConferenceApp.utils;
+using Haley.Utils;
 
 namespace ConferenceApp.view.dialog;
 
 public partial class SessionDialog : Window
 {
     public SessionModel SessionModel { get; set; }
-    private Session SessionDialogData { get; set; }
     private List<Session> allSessions;
     private bool areAllEventsInDateRange;
 
     public SessionDialog(Conference conference, Session sessionDialogData = null, bool edit = false, bool isReadOnly = false)
     {
         InitializeComponent();
-        Button.Content = edit ? "Save" : "Create";
-        this.Title = (edit ? "Save" : "Create") + " conference";
+        
+        Button.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
+        var saveOrCreate = edit ? LangUtils.Translate("save") : LangUtils.Translate("create");
+        Button.Content =  saveOrCreate;
+        this.Title = saveOrCreate + " " + LangUtils.Translate("conference");
+        
         SessionDao sessionDao = new SessionDao();
         allSessions = sessionDao.findByConferenceId(conference.Id);
         startDatePicker.DisplayDateStart = conference.StartDate;
@@ -42,45 +46,44 @@ public partial class SessionDialog : Window
             sessionDialogData = new Session(sessionDialogData);
         }
 
-        this.SessionDialogData = sessionDialogData;
-        this.SessionModel = new SessionModel
+        SessionModel = new SessionModel
         {
             Session = sessionDialogData,
             IsReadOnly = isReadOnly
         };
-        DataContext = sessionDialogData;
+        DataContext = SessionModel;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        if (SessionDialogData.Name == "")
+        if (SessionModel.Session.Name == "")
         {
             Utils.ErrorBox("Please give session a name");
             return;
         }
 
-        if (SessionDialogData.StartDate >= SessionDialogData.EndDate)
+        if (SessionModel.Session.StartDate >= SessionModel.Session.EndDate)
         {
             Utils.ErrorBox("End date must be after start date!");
             return;
         }
 
         var hasSessionOverLap = allSessions.Any(session =>
-            session.Id != SessionDialogData.Id
-            && Utils.DateRangesOverlap(session.StartDate, session.EndDate, SessionDialogData.StartDate,
-                SessionDialogData.EndDate));
+            session.Id != SessionModel.Session.Id
+            && Utils.DateRangesOverlap(session.StartDate, session.EndDate, SessionModel.Session.StartDate,
+                SessionModel.Session.EndDate));
         if (hasSessionOverLap)
         {
             Utils.ErrorBox("Already have session in that time period!");
             return;
         }
 
-        if (SessionDialogData.Id != null)
+        if (SessionModel.Session.Id != null)
         {
-            var sessionEvents = new LiveEventDao().findBySessionId(SessionDialogData.Id);
+            var sessionEvents = new LiveEventDao().findBySessionId(SessionModel.Session.Id);
             areAllEventsInDateRange = sessionEvents
-                .All(liveEvent => SessionDialogData.StartDate >= liveEvent.StartDate
-                                  && liveEvent.EndDate >= SessionDialogData.EndDate);
+                .All(liveEvent => SessionModel.Session.StartDate >= liveEvent.StartDate
+                                  && liveEvent.EndDate >= SessionModel.Session.EndDate);
 
             if (!areAllEventsInDateRange)
             {
